@@ -1,0 +1,34 @@
+
+SYSTEM: SoulInPsyAbstract
+ENVIRONMENT: UserLAnd (Linux on Android)
+DATE: 2026-01-24
+TIME: 23:07
+TZ: Asia/Jerusalem
+
+MODE: LEGAL · DECLARATIVE · FORENSIC
+EXECUTION_CONTEXT=USERLAND
+RUNTIME=ACTIVE
+CLAIMS=NONE
+
+PERIOD CLOSED:
+FROM: 2026-01-24 08:00
+TO:   2026-01-24 23:07
+(TZ: Asia/Jerusalem)
+
+FACTS CONFIRMED:
+1. Canonical runtime active:
+   ~/RUNTIME_ONLY/AUTONOMOUS_RUNTIME.sh
+2. Runtime control governed via:
+   ~/RUNTIME_ONLY/runtime_ctl.sh
+3. Single audit stream:
+   CORE_V2/AUDIT.log
+4. HUB logic authority fixed and recorded.
+5. No parallel runtimes detected.
+6. No unauthorized execution detected.
+
+LEGAL EFFECT:
+- Operational day is CLOSED.
+- State is CONSISTENT.
+- This declaration is FINAL for the stated period.
+
+END

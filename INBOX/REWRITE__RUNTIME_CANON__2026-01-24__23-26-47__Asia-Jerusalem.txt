@@ -1,0 +1,16 @@
+SYSTEM: SoulInPsyAbstract
+ENVIRONMENT: UserLAnd (Linux on Android)
+TS: 2026-01-24__23-26-47__Asia-Jerusalem
+TIME: 2026-01-24 23:26:47 Asia/Jerusalem
+
+MODE: LEGAL · DECLARATIVE · GOVERNANCE
+EXECUTION_CONTEXT=NONE
+RUNTIME=NONE
+CLAIMS=NONE
+
+REWRITE:
+- Canonical runtime entrypoint: ~/RUNTIME_ONLY/AUTONOMOUS_RUNTIME.sh
+- Canonical audit stream: CORE_V2/AUDIT.log
+- No parallel runtimes are valid unless explicitly re-declared.
+
+END
