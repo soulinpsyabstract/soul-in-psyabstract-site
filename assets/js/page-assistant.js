@@ -21,7 +21,7 @@
     const q = question.toLowerCase();
 
     if (text.includes(q)) {
-      return "Yes. This page covers that. Scroll — it’s already here.";
+      return "This page covers that. Scroll — it is already here.";
     }
 
     return "This page does not contain information about that.";
