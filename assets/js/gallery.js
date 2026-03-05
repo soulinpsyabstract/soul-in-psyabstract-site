@@ -25,6 +25,18 @@
     img.src = `/assets/img/${String(i).padStart(2,'0')}.jpg`;
     img.alt = `Art #${i}`;
     img.onerror = () => { img.style.objectFit = 'contain'; img.alt = 'image placeholder'; };
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => {
+      const ov = document.createElement('div');
+      ov.className = 'img-zoom-overlay';
+      const zi = document.createElement('img');
+      zi.src = img.src; zi.alt = img.alt;
+      const zc = document.createElement('button');
+      zc.className = 'img-zoom-close'; zc.textContent = '×';
+      ov.appendChild(zi); ov.appendChild(zc);
+      document.body.appendChild(ov);
+      ov.addEventListener('click', () => ov.remove());
+    });
     const meta = document.createElement('div');
     meta.className = 'meta';
 
@@ -70,14 +82,13 @@
   }
   mount.appendChild(grid);
 
-  // minimal buy modal shim
+  // buy modal shim — use PSA.openBuyModal if available
   window.openBuy = function(idx, basePrice, title){
-    const titleLine = title ? `\n"${title}"\n` : '';
-    const exclusive = confirm((window.__LANG==='en'?'Add exclusive rights +$200?':'Добавить эксклюзивные права +$200?'));
-    const shipping = prompt(window.__LANG==='en'?'Shipping (150/200/300):':'Доставка (150/200/300):','150');
-    const total = basePrice + (exclusive?200:0) + (parseInt(shipping||'0',10)||0);
-    alert(titleLine + (window.__LANG==='en'?'Total: $':'Итого: $') + total + '\n' + (window.__LANG==='en'?'PayPal link will open now.':'Сейчас откроется ссылка PayPal.'));
-    // open PayPal.me fast link with amount
-    window.open('https://paypal.me/SoulInPsyAbstract/' + total, '_blank');
+    const psa = window.PSA;
+    if(psa && psa.openBuyModal){
+      psa.openBuyModal({id:idx, price:basePrice, title:title});
+    } else {
+      window.open('https://paypal.me/SoulInPsyAbstract/' + basePrice, '_blank');
+    }
   };
 })();

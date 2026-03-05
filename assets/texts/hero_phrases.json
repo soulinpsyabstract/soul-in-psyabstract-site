@@ -1,20 +1,10 @@
-{
-  "en": [
-    "In the moment of panic, she still does the right thing.",
-    "I draw chaos before it becomes form.",
-    "UV reveals what daylight hides."
-  ],
-  "ru": [
-    "В момент паники она всё равно делает правильное.",
-    "Я рисую хаос, пока он не стал формой.",
-    "Под UV проявляется то, что прячет дневной свет."
-  ],
-  "kid_en": [
-    "Hi. I’m the kid. I like glowing art.",
-    "I count hearts and spirals. Do you?"
-  ],
-  "kid_ru": [
-    "Привет. Я ребёнок. Мне нравится, когда искусство светится.",
-    "Я считаю сердечки и завитки. А ты?"
-  ]
-}
+[
+  {"ru":"В момент паники она всё равно делает правильное.","en":"In the moment of panic, she still does the right thing."},
+  {"ru":"Я рисую хаос, пока он не стал формой.","en":"I draw chaos before it becomes form."},
+  {"ru":"Под UV проявляется то, что прячет дневной свет.","en":"UV reveals what daylight hides."},
+  {"ru":"Честность важнее идеальности.","en":"Honesty over perfection."},
+  {"ru":"Каждая линия — это нерв, а не украшение.","en":"Every line is a nerve, not decoration."},
+  {"ru":"Сердце в центре каждой работы — не символ, это адрес.","en":"The heart in every work is not a symbol. It is an address."},
+  {"ru":"Хаос — это честность материала.","en":"Chaos is the honesty of the material."},
+  {"ru":"Двойная реальность: при свете и в темноте под UV.","en":"Dual reality: daylight and UV glow."}
+]

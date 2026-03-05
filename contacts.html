@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -14,7 +14,7 @@
       <div class="brand">
         <div>
           <h1>Soul In PsyAbstract</h1>
-          <div class="tag">SIPA · pages connected · no 404 drama</div>
+          <div class="tag">Marina · hearts · spirals · UV neon · abstract line art</div>
           <div class="small" id="hero-rotator"></div>
         </div>
         <div class="tools">
@@ -55,5 +55,29 @@
   </script>
 <script src="/assets/js/page-assistant.js"></script>
 <script>console.log("SIPA assistant ready");</script>
+<script>
+(function(){
+  const CONTACTS = [
+    {label:'Instagram', value:'@soul.in.psyabstract', href:'https://www.instagram.com/soul.in.psyabstract'},
+    {label:'Telegram', value:'@messycketch', href:'https://t.me/messycketch'},
+    {label:'TikTok', value:'@soul.in.psyabstract', href:'https://www.tiktok.com/@soul.in.psyabstract'},
+    {label:'Threads', value:'@soul.in.psyabstract', href:'https://www.threads.net/@soul.in.psyabstract'},
+    {label:'WhatsApp', value:'+972 52-507-4743', href:'https://wa.me/972525074743'},
+    {label:'Rarible', value:'NFT коллекция', href:'https://og.rarible.com/soulinpsyabstract'},
+    {label:'Zora', value:'NFT', href:'https://zora.co/@soulinpsyabstract'},
+    {label:'PayPal', value:'PayPal.me', href:'https://paypal.me/SoulInPsyAbstract?locale.x=en_US'},
+    {label:'Email', value:'soulinpsyabstract@gmail.com', href:'mailto:soulinpsyabstract@gmail.com'},
+  ];
+  const ETH = '0x2a7fFb7B3174fcA16CD2476a55E39f9Ea2d04073';
+  document.addEventListener('DOMContentLoaded', function(){
+    const root = document.getElementById('contacts-root');
+    if(!root) return;
+    root.innerHTML = '<div class="contact-links">' +
+      CONTACTS.map(c=>`<a class="contact-link" href="${c.href}" target="_blank" rel="noopener"><span class="label">${c.label}</span><span class="value">${c.value}</span></a>`).join('') +
+    '</div>' +
+    `<div class="eth-row" style="margin-top:14px"><span class="label">ETH:</span><span class="addr" id="c-eth">${ETH}</span><button onclick="navigator.clipboard.writeText('${ETH}').then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='Copy',1500)})" style="cursor:pointer;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;border-radius:8px;padding:4px 12px;font-size:12px">Copy</button></div>`;
+  });
+})();
+</script>
 </body>
 </html>

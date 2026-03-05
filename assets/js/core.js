@@ -344,5 +344,7 @@
     injectTawk();
   }
 
+  PSA.openBuyModal = openBuyModal;
+
   document.addEventListener('DOMContentLoaded', boot);
 })();
