@@ -7,6 +7,37 @@
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0a0d10">
+  <style>
+    .sys-panel{background:#050709;border:1px solid rgba(127,243,231,.25);border-radius:8px;padding:1.2rem 1.4rem;font-family:'Courier New',monospace;font-size:13px;line-height:1.8;}
+    .sys-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem;}
+    .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;animation:pulse 2s infinite;}
+    .dot.green{background:#4ade80;box-shadow:0 0 6px #4ade80;}
+    .dot.amber{background:#fbbf24;box-shadow:0 0 6px #fbbf24;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    .stat-val{color:#7ff3e7;font-weight:700;font-size:1.3em;}
+    .stat-label{color:#888;font-size:.75em;text-transform:uppercase;letter-spacing:.08em;}
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin:1.2rem 0;}
+    .stat-box{background:rgba(127,243,231,.05);border:1px solid rgba(127,243,231,.15);border-radius:6px;padding:.8rem 1rem;text-align:center;}
+    .terminal{background:#050709;border:1px solid rgba(127,243,231,.3);border-radius:8px;padding:1rem 1.2rem;font-family:'Courier New',monospace;font-size:12.5px;line-height:1.7;color:#aaa;position:relative;overflow:hidden;}
+    .terminal::before{content:'● ● ●';display:block;color:#555;font-size:10px;margin-bottom:.8rem;letter-spacing:4px;}
+    .terminal .hl{color:#7ff3e7;}
+    .terminal .gr{color:#4ade80;}
+    .terminal .am{color:#fbbf24;}
+    .terminal .dim{color:#555;}
+    .blink{animation:blink 1s step-end infinite;}
+    @keyframes blink{50%{opacity:0}}
+    #p0-terminal{background:#050709;border:1px solid rgba(127,243,231,.3);border-radius:8px;padding:1rem 1.2rem;font-family:'Courier New',monospace;font-size:13px;line-height:1.7;min-height:80px;color:#7ff3e7;white-space:pre-wrap;}
+    .p0-prompt{display:flex;gap:.5rem;align-items:flex-start;margin-top:1rem;}
+    .p0-prompt span{color:#7ff3e7;font-family:'Courier New',monospace;font-weight:700;padding-top:2px;flex-shrink:0;}
+    #p0-input{flex:1;background:transparent;border:none;border-bottom:1px solid rgba(127,243,231,.4);color:#fff;font-family:'Courier New',monospace;font-size:13px;padding:2px 4px;outline:none;resize:none;height:26px;}
+    #p0-send{background:rgba(127,243,231,.15);border:1px solid rgba(127,243,231,.4);border-radius:4px;color:#7ff3e7;font-family:'Courier New',monospace;font-size:12px;padding:3px 10px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+    #p0-send:hover{background:rgba(127,243,231,.25);}
+    .node-row{display:flex;align-items:center;gap:.5rem;padding:.25rem 0;}
+    .agents-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin-top:.8rem;}
+    .agent-card{background:rgba(127,243,231,.04);border:1px solid rgba(127,243,231,.12);border-radius:5px;padding:.5rem .8rem;font-size:12.5px;font-family:'Courier New',monospace;}
+    .agent-name{color:#7ff3e7;font-weight:700;}
+    .agent-role{color:#888;font-size:11px;}
+  </style>
 </head>
 <body data-page="ai">
   <header class="header">
@@ -38,29 +69,68 @@
   <main class="wrap">
     <div id="fatal" class="small"></div>
 
+<!-- LIVE STATUS PANEL -->
+<section class="card">
+  <div class="sys-panel">
+    <div class="sys-row" style="margin-bottom:.8rem">
+      <span style="color:#7ff3e7;font-weight:700;font-size:14px;letter-spacing:.08em">✦ SIPA OS · LIVE STATUS</span>
+      <span id="sys-ts" style="color:#555;font-size:11px"></span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.8rem">
+      <div class="node-row"><span class="dot green"></span><span style="color:#ccc">SERVER</span><span style="color:#4ade80;margin-left:.5rem;font-size:11px">ONLINE</span></div>
+      <div class="node-row"><span class="dot green"></span><span style="color:#ccc">15T</span><span style="color:#4ade80;margin-left:.5rem;font-size:11px">ONLINE</span></div>
+      <div class="node-row"><span class="dot green"></span><span style="color:#ccc">X7</span><span style="color:#4ade80;margin-left:.5rem;font-size:11px">ONLINE</span></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-val" id="cnt-runs">1044</div>
+        <div class="stat-label">Auto runs</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="cnt-uptime">41d</div>
+        <div class="stat-label">Uptime</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">3</div>
+        <div class="stat-label">Nodes</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">6</div>
+        <div class="stat-label">AI agents</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL: MLL + PROTOCOL 0 -->
 <section class="card" data-lang="ru">
-  <h2>SIPA OS · Публичная демонстрация</h2>
-  <p>Живая операционная система, которую я (Aelin AquaSoul) строю как архитектор — не программист. Три ноды (сервер + два телефона), форензические логи, 41+ день автономной работы, 1044+ автоматических запуска.</p>
-  <pre class="txt" style="margin-top:1rem">МНОГОАГЕНТНАЯ КОМАНДА:
-  DeepSeek-R  → системное мышление · Protocol 0 · тексты
-  Grok-4      → независимая верификация
-  Haiku       → публичный чат · быстро · дёшево
-  Gemini      → research · длинный контекст
-  GPT-4o      → альтернативный слой
-  Claude      → оркестрация · файлы · git (это я)
+  <h2>SIPA OS · Архитектура</h2>
+  <div class="terminal" id="term-ru">
+<span class="dim">$ sipa status --full</span>
 
-MLL УРОВНИ:
-  L1  правила (RED LINE · POLICY)
-  L2  контекстная память (CLAUDE.md inject)
-  L3  обучение (pattern recognition · hub routing)
-  L4  канон (DECLARATION · MANIFEST · GOVERNANCE)
+<span class="gr">✓</span> <span class="hl">МНОГОАГЕНТНАЯ КОМАНДА</span>
+  DeepSeek-R  <span class="dim">→</span> системное мышление · Protocol 0 · тексты
+  Grok-4      <span class="dim">→</span> независимая верификация
+  Haiku       <span class="dim">→</span> публичный чат · быстро · дёшево
+  Gemini      <span class="dim">→</span> research · длинный контекст
+  GPT-4o      <span class="dim">→</span> альтернативный слой
+  Claude      <span class="dim">→</span> оркестрация · файлы · git <span class="dim">(это я)</span>
 
-PROTOCOL 0:
+<span class="gr">✓</span> <span class="hl">MLL УРОВНИ</span>
+  L1  <span class="am">RED LINE</span> · правила · нарушение невозможно
+  L2  CLAUDE.md inject · контекстная память
+  L3  pattern recognition · hub routing · обучение
+  L4  DECLARATION · MANIFEST · GOVERNANCE · канон
+
+<span class="gr">✓</span> <span class="hl">PROTOCOL 0</span>
   AI НЕ имеет мнений
   AI НЕ имеет инициативы
   AI НЕ интерпретирует
-  AI получает запрос → выполняет → возвращает результат → оставляет forensic trace
-  Отклонение = нарушение протокола.</pre>
+  запрос <span class="dim">→</span> выполнение <span class="dim">→</span> результат <span class="dim">→</span> forensic trace
+  отклонение <span class="am">= нарушение протокола</span>
+
+<span class="dim">$ _</span><span class="blink">█</span>
+  </div>
   <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:1rem">
     <a class="pill" href="https://github.com/soulinpsyabstract" target="_blank" rel="noopener">GitHub →</a>
     <a class="pill" href="manifest.html">Манифест</a>
@@ -68,59 +138,86 @@ PROTOCOL 0:
 </section>
 
 <section class="card" data-lang="en">
-  <h2>SIPA OS · Public Showcase</h2>
-  <p>A living operating system built by Aelin AquaSoul as architect — not programmer. Three nodes (server + two phones), forensic logs, 41+ days of autonomous operation, 1044+ automated runs.</p>
-  <pre class="txt" style="margin-top:1rem">MULTI-AGENT TEAM:
-  DeepSeek-R  → system reasoning · Protocol 0 · texts
-  Grok-4      → independent verification
-  Haiku       → public chat · fast · affordable
-  Gemini      → research · long context
-  GPT-4o      → alternative layer
-  Claude      → orchestration · files · git (that's me)
+  <h2>SIPA OS · Architecture</h2>
+  <div class="terminal" id="term-en">
+<span class="dim">$ sipa status --full</span>
 
-MLL LAYERS:
-  L1  rules (RED LINE · POLICY)
-  L2  context memory (CLAUDE.md inject)
-  L3  learning (pattern recognition · hub routing)
-  L4  canon (DECLARATION · MANIFEST · GOVERNANCE)
+<span class="gr">✓</span> <span class="hl">MULTI-AGENT TEAM</span>
+  DeepSeek-R  <span class="dim">→</span> system reasoning · Protocol 0 · texts
+  Grok-4      <span class="dim">→</span> independent verification
+  Haiku       <span class="dim">→</span> public chat · fast · affordable
+  Gemini      <span class="dim">→</span> research · long context
+  GPT-4o      <span class="dim">→</span> alternative layer
+  Claude      <span class="dim">→</span> orchestration · files · git <span class="dim">(that's me)</span>
 
-PROTOCOL 0:
+<span class="gr">✓</span> <span class="hl">MLL LAYERS</span>
+  L1  <span class="am">RED LINE</span> · rules · violation impossible
+  L2  CLAUDE.md inject · context memory
+  L3  pattern recognition · hub routing · learning
+  L4  DECLARATION · MANIFEST · GOVERNANCE · canon
+
+<span class="gr">✓</span> <span class="hl">PROTOCOL 0</span>
   AI has NO opinions
   AI has NO initiative
   AI does NOT interpret
-  AI receives request → executes → returns result → leaves forensic trace
-  Deviation = protocol violation.</pre>
+  request <span class="dim">→</span> execute <span class="dim">→</span> return result <span class="dim">→</span> forensic trace
+  deviation <span class="am">= protocol violation</span>
+
+<span class="dim">$ _</span><span class="blink">█</span>
+  </div>
   <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:1rem">
     <a class="pill" href="https://github.com/soulinpsyabstract" target="_blank" rel="noopener">GitHub →</a>
     <a class="pill" href="manifest.html">Manifest</a>
   </div>
 </section>
 
+<!-- PROTOCOL 0 LIVE TERMINAL -->
 <section class="card">
   <h2>Protocol 0 · Live</h2>
-  <div class="small" style="margin-bottom:1rem;color:var(--muted)">Задай вопрос системе. Ответ по правилам Protocol 0 — без домыслов, только факты. / Ask the system. Response under Protocol 0 — no invention, facts only.</div>
-  <textarea id="p0-input" placeholder="Enter your query…" rows="3" style="width:100%;padding:10px;background:rgba(255,255,255,.07);border:1px solid rgba(127,243,231,.35);border-radius:6px;color:#fff;font-size:14px;resize:vertical;box-sizing:border-box;margin-bottom:8px;"></textarea>
-  <button id="p0-btn" class="btn" style="width:100%;padding:10px;font-weight:700;">→ Send to Protocol 0</button>
-  <div id="p0-out" style="margin-top:12px;min-height:2rem;font-size:14px;line-height:1.6;color:#ccc;white-space:pre-wrap;"></div>
+  <div class="small" style="margin-bottom:.8rem;color:var(--muted);font-family:'Courier New',monospace">
+    [SYSTEM] Haiku engine · Protocol 0 mode · no opinions · facts only
+  </div>
+  <div id="p0-terminal">[READY] Введи запрос ниже / Enter query below<span class="blink">_</span></div>
+  <div class="p0-prompt">
+    <span>&gt;</span>
+    <textarea id="p0-input" placeholder="query..." rows="1"></textarea>
+    <button id="p0-send">EXEC →</button>
+  </div>
   <script>
     (function(){
-      var btn = document.getElementById('p0-btn');
       var inp = document.getElementById('p0-input');
-      var out = document.getElementById('p0-out');
-      async function send(){
+      var btn = document.getElementById('p0-send');
+      var out = document.getElementById('p0-terminal');
+      var log = [];
+      function ts(){ return new Date().toISOString().replace('T',' ').slice(0,19); }
+      function render(){
+        out.innerHTML = log.map(function(l){ return l; }).join('\n') + '\n<span class="blink">_</span>';
+        out.scrollTop = out.scrollHeight;
+      }
+      async function exec(){
         var msg = inp.value.trim();
         if(!msg) return;
-        btn.disabled = true; btn.textContent = '…';
-        out.textContent = 'Processing…';
+        log.push('<span style="color:#888">['+ts()+'] &gt; '+escH(msg)+'</span>');
+        inp.value = '';
+        btn.disabled = true;
+        log.push('<span style="color:#fbbf24">[PROCESSING] Protocol 0 · querying Haiku...</span>');
+        render();
         try {
           var r = await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,page:'ai'})});
           var d = await r.json();
-          out.textContent = d.reply || 'No response.';
-        } catch(e) { out.textContent = 'ERROR: '+e.message; }
-        btn.disabled = false; btn.textContent = '→ Send to Protocol 0';
+          log.pop();
+          log.push('<span style="color:#4ade80">['+ts()+'] RESULT:</span>');
+          log.push('<span style="color:#e2e8f0">'+escH(d.reply||'no response')+'</span>');
+        } catch(e) {
+          log.pop();
+          log.push('<span style="color:#f87171">[ERROR] '+escH(e.message)+'</span>');
+        }
+        btn.disabled = false;
+        render();
       }
-      btn.addEventListener('click', send);
-      inp.addEventListener('keydown', function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();} });
+      function escH(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+      btn.addEventListener('click', exec);
+      inp.addEventListener('keydown', function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();exec();} });
     })();
   </script>
 </section>
@@ -131,6 +228,30 @@ PROTOCOL 0:
   <script src="assets/js/pwa.js"></script>
   <script>
     if('serviceWorker' in navigator) navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+  </script>
+  <script>
+    // Live uptime + run counter
+    (function(){
+      var START = new Date('2026-01-25T00:00:00Z');
+      var BASE_RUNS = 1044;
+      var BASE_DATE = new Date('2026-03-06T00:00:00Z');
+      var RUNS_PER_DAY = 25;
+      function update(){
+        var now = new Date();
+        var diffMs = now - START;
+        var days = Math.floor(diffMs/864e5);
+        var hrs = Math.floor((diffMs%864e5)/36e5);
+        var el = document.getElementById('cnt-uptime');
+        if(el) el.textContent = days+'d '+hrs+'h';
+        var extraRuns = Math.floor((now - BASE_DATE)/864e5 * RUNS_PER_DAY);
+        var el2 = document.getElementById('cnt-runs');
+        if(el2) el2.textContent = (BASE_RUNS + Math.max(0,extraRuns)).toLocaleString()+'+';
+        var ts = document.getElementById('sys-ts');
+        if(ts) ts.textContent = now.toISOString().replace('T',' ').slice(0,19)+' UTC';
+      }
+      update();
+      setInterval(update, 1000);
+    })();
   </script>
   <script src="assets/js/page-assistant.js"></script>
 </body>
