@@ -41,9 +41,45 @@
   <main class="wrap">
     <div id="fatal" class="small"></div>
     
-<section class="card">
-  <h2>Contacts</h2>
+<section class="card" data-lang="ru">
+  <h2>Контакты и связь</h2>
+  <p class="small" style="margin-bottom:14px">Всегда на связи — выбери удобный способ.</p>
   <div id="contacts-root"></div>
+</section>
+<section class="card" data-lang="en">
+  <h2>Contacts &amp; Connect</h2>
+  <p class="small" style="margin-bottom:14px">Reach me anywhere — pick what's convenient.</p>
+  <div id="contacts-root-en"></div>
+</section>
+
+<section class="card">
+  <h2 style="font-size:18px;margin-bottom:12px">QR</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center">
+      <img src="assets/img/qr_instagram.jpg" alt="Instagram QR" style="width:120px;border-radius:8px;background:#fff">
+      <div class="small">Instagram<br>@soul.in.psyabstract</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center">
+      <img src="assets/img/qr_whatsapp.jpg" alt="WhatsApp QR" style="width:120px;border-radius:8px;background:#fff">
+      <div class="small">WhatsApp<br>+972 52-507-4743</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center">
+      <img src="assets/img/qr_telegram_personal.jpg" alt="Telegram QR" style="width:120px;border-radius:8px;background:#fff">
+      <div class="small">Telegram<br>@messycketch</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center">
+      <img src="assets/img/qr_telegram_soulinpsyabstract_art.jpg" alt="Telegram Channel QR" style="width:120px;border-radius:8px;background:#fff">
+      <div class="small">Telegram канал<br>@SoulInPsyAbstract</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center">
+      <img src="assets/img/qr_tiktok.jpg" alt="TikTok QR" style="width:120px;border-radius:8px;background:#fff">
+      <div class="small">TikTok<br>@soul.in.psyabstract</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center">
+      <img src="assets/img/qr_theat.jpg" alt="Threads QR" style="width:120px;border-radius:8px;background:#fff">
+      <div class="small">Threads<br>@soul.in.psyabstract</div>
+    </div>
+  </div>
 </section>
 
     <div class="footer">Aelin AquaSoul · Soul In PsyAbstract · “In the moment of panic, she still does the right thing.”</div>
@@ -59,24 +95,30 @@
 <script>
 (function(){
   const CONTACTS = [
-    {label:'Instagram', value:'@soul.in.psyabstract', href:'https://www.instagram.com/soul.in.psyabstract'},
+    {label:'WhatsApp чат', value:'+972 52-507-4743', href:'https://wa.me/972525074743'},
+    {label:'WhatsApp каталог', value:'wa.me/c/972...', href:'https://wa.me/c/972525074743'},
     {label:'Telegram', value:'@messycketch', href:'https://t.me/messycketch'},
+    {label:'Telegram канал', value:'@SoulInPsyAbstract', href:'https://t.me/SoulInPsyAbstract'},
+    {label:'Instagram', value:'@soul.in.psyabstract', href:'https://www.instagram.com/soul.in.psyabstract'},
     {label:'TikTok', value:'@soul.in.psyabstract', href:'https://www.tiktok.com/@soul.in.psyabstract'},
     {label:'Threads', value:'@soul.in.psyabstract', href:'https://www.threads.net/@soul.in.psyabstract'},
-    {label:'WhatsApp', value:'+972 52-507-4743', href:'https://wa.me/972525074743'},
     {label:'Rarible', value:'NFT коллекция', href:'https://og.rarible.com/soulinpsyabstract'},
     {label:'Zora', value:'NFT', href:'https://zora.co/@soulinpsyabstract'},
     {label:'PayPal', value:'PayPal.me', href:'https://paypal.me/SoulInPsyAbstract?locale.x=en_US'},
     {label:'Email', value:'soulinpsyabstract@gmail.com', href:'mailto:soulinpsyabstract@gmail.com'},
   ];
   const ETH = '0x2a7fFb7B3174fcA16CD2476a55E39f9Ea2d04073';
-  document.addEventListener('DOMContentLoaded', function(){
-    const root = document.getElementById('contacts-root');
+  function buildContacts(rootId){
+    const root = document.getElementById(rootId);
     if(!root) return;
     root.innerHTML = '<div class="contact-links">' +
       CONTACTS.map(c=>`<a class="contact-link" href="${c.href}" target="_blank" rel="noopener"><span class="label">${c.label}</span><span class="value">${c.value}</span></a>`).join('') +
     '</div>' +
-    `<div class="eth-row" style="margin-top:14px"><span class="label">ETH:</span><span class="addr" id="c-eth">${ETH}</span><button onclick="navigator.clipboard.writeText('${ETH}').then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='Copy',1500)})" style="cursor:pointer;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;border-radius:8px;padding:4px 12px;font-size:12px">Copy</button></div>`;
+    `<div class="eth-row" style="margin-top:14px"><span class="label">ETH:</span><span class="addr">${ETH}</span><button onclick="navigator.clipboard.writeText('${ETH}').then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='Copy',1500)})" style="cursor:pointer;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;border-radius:8px;padding:4px 12px;font-size:12px">Copy</button></div>`;
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    buildContacts('contacts-root');
+    buildContacts('contacts-root-en');
   });
 })();
 </script>
