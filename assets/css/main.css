@@ -349,8 +349,10 @@ pre.txt{
 .eth-row .addr { color: var(--muted); word-break: break-all; }
 
 /* ── lang sections ───────────────────────────────────────── */
-[data-lang] { display: none; }
+[data-lang="en"] { display: none; }
+[data-lang="ru"] { display: block; }
 [data-lang].show { display: block; }
+[data-lang="ru"]:not(.show) { display: none; }
 
 /* ── art title ───────────────────────────────────────────── */
 .art-title {
