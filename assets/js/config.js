@@ -2,7 +2,7 @@
   "version": "1.0",
   "project": {
     "name": "Soul in PsyAbstract",
-    "owner": "Marina Saponenko",
+    "owner": "Aelin AquaSoul",
     "canonical": "https://soulinpsyabstract.com/",
     "languages": ["ru", "en"],
     "default_lang": "ru",
@@ -50,12 +50,12 @@
     "prefers_reduced_motion": true
   },
   "seo": {
-    "title": "Soul in PsyAbstract — Marina | messy sketch · hearts · spirals · neon · acrylic",
+    "title": "Soul in PsyAbstract — Aelin AquaSoul | messy sketch · hearts · spirals · neon · acrylic",
     "description": {
       "ru": "Честность души в линиях хаоса. Сердца и спирали. Оригиналы, принты, on-chain (NFT), заказы.",
       "en": "Soul honesty in lines of chaos. Hearts & spirals. Originals, prints, on-chain (NFT), commissions."
     },
-    "keywords_en": "soul in psyabstract, abstract line art, hearts and spirals, neon acrylic, Marina Saponenko, original drawings, buy abstract art, Rarible NFT",
+    "keywords_en": "soul in psyabstract, abstract line art, hearts and spirals, neon acrylic, Aelin AquaSoul, original drawings, buy abstract art, Rarible NFT",
     "og": { "image": "/assets/img/og_cover.jpg", "type": "website" },
     "meta": { "theme_color": "#0b0d10" },
     "json_ld": {
@@ -136,7 +136,7 @@
     },
     "meta_titles": {
       "ru": {
-        "index": "Soul in PsyAbstract — Marina | messy sketch · hearts · spirals · neon · acrylic",
+        "index": "Soul in PsyAbstract — Aelin AquaSoul | messy sketch · hearts · spirals · neon · acrylic",
         "gallery": "Галерея — Soul in PsyAbstract",
         "nft": "NFT — Soul in PsyAbstract",
         "manifest": "Манифест — Soul in PsyAbstract",
@@ -146,7 +146,7 @@
         "contacts": "Контакты — Soul in PsyAbstract"
       },
       "en": {
-        "index": "Soul in PsyAbstract — Marina | messy sketch · hearts · spirals · neon · acrylic",
+        "index": "Soul in PsyAbstract — Aelin AquaSoul | messy sketch · hearts · spirals · neon · acrylic",
         "gallery": "Gallery — Soul in PsyAbstract",
         "nft": "NFT — Soul in PsyAbstract",
         "manifest": "Manifest — Soul in PsyAbstract",
