@@ -615,6 +615,14 @@ footer .ft-brand{
   </div>
 </div>
 
+<!-- ── SHIPPING ── -->
+<div style="text-align:center;padding:14px 20px;font-size:12px;letter-spacing:.06em;color:#00f5ff66;border-top:1px solid rgba(0,245,255,.1);font-family:Raleway,sans-serif;">
+  <span data-ru>Доставляем по Израилю. За рубеж — уточните в Telegram.</span>
+  <span data-en style="display:none">We deliver within Israel. For abroad — check via Telegram.</span>
+  <span data-he style="display:none">אנחנו מספקים משלוחים בישראל. לחו"ל — בדקו בטלגרם.</span>
+  <br><a href="https://t.me/messycketch" style="color:#00f5ff88;text-decoration:none;" target="_blank">Telegram →</a>
+</div>
+
 <!-- ── FOOTER ── -->
 <footer>
   <p>soulinpsyabstract.store · Eilat, Israel</p>
@@ -650,7 +658,7 @@ const PRODUCT_IMAGES = {
 const PRODUCTS = {
   // CANDLES
   'neon-spiral': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#4488ff',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#4488ff',
     RU:{ name:'Neon Spiral Shield', cat:'ЗАЩИТА',
       intention:'Моё пространство вращается в спирали неуязвимого света, отталкивая любое чужое влияние.',
       composition:'Воск красный 250г · Лаванда 5к · Розмарин 5к · Pine 3к · Травы: листья оливы, шалфей · Камень: лабрадорит · Декор: сердечко',
@@ -665,7 +673,7 @@ const PRODUCTS = {
       tags:['הגנה','מחסום אנרגטי','לברדוריט','גבולות'] }
   },
   'love-flow': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#ff44aa',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#ff44aa',
     RU:{ name:'PsyAbstract Love Flow', cat:'ЛЮБОВЬ',
       intention:'Я открываю сердце вселенскому потоку, позволяя любви входить и изливаться легко и свободно.',
       composition:'Воск розовый 250г · Rose 4к · Ylang-ylang 3к · Ваниль крем 3к · Травы: лепестки роз, пионы · Камень: розовый кварц · Декор: пучок роз',
@@ -680,7 +688,7 @@ const PRODUCTS = {
       tags:['אהבה','משיכה','קוורץ ורוד','צ׳אקרת הלב'] }
   },
   'labyrinth': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#44ff88',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#44ff88',
     RU:{ name:'Labyrinth of Success', cat:'УСПЕХ',
       intention:'Я с лёгкостью нахожу путь в самом сердце лабиринта, и каждая дверь открывается к моему процветанию.',
       composition:'Воск зелёный 250г · Bergamot 5к · Апельсин 3к · Sandalwood 2к · Травы: лавровый лист, green ball · Камень: авантюрин',
@@ -695,7 +703,7 @@ const PRODUCTS = {
       tags:['הצלחה','שגשוג','אוונטורין','זרם פיננסי'] }
   },
   'aquasoul': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aaaaaa',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#aaaaaa',
     RU:{ name:'AquaSoul Cleanse', cat:'ЧИСТКА',
       intention:'Как чистая вода омывает камень, так этот свет смывает с моего пространства все тяжёлые следы.',
       composition:'Воск белый ваниль 250г · Lemon 5к · Эвкалипт 5к · Lemongrass 3к · Травы: snow lotus, globe amaranth · Камень: горный хрусталь',
@@ -710,7 +718,7 @@ const PRODUCTS = {
       tags:['טיהור','ניקוי','קוורץ שקוף','חידוש'] }
   },
   'heartwave': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aa44ff',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#aa44ff',
     RU:{ name:'Heartwave Abundance', cat:'ГАРМОНИЯ / ПРОДАЖА',
       intention:'Волна изобилия находит меня там, где царит гармония, и приносит дары, желанные моей душе.',
       composition:'Воск бежевый кофе 250г · Choco Arome 4к · Апельсин 3к · Island 3к · Травы: звёздчатый анис, лавровый лист · Камень: тигровый глаз · Декор: большое сердечко',
@@ -725,7 +733,7 @@ const PRODUCTS = {
       tags:['הרמוניה','שפע','עין הנמר','משיכת לקוחות'] }
   },
   'deep-ocean': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aa44ff',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#aa44ff',
     RU:{ name:'Deep Ocean Harmony', cat:'ГАРМОНИЯ',
       intention:'Я погружаюсь в бездонный покой океана, где все мои волны успокаиваются, а мысли становятся кристально ясными.',
       composition:'Воск белый ваниль 250г · Deep Ocean 6к · Лаванда 4к · Декор: ароматизированные камни из моря · Камень: амазонит',
@@ -740,7 +748,7 @@ const PRODUCTS = {
       tags:['הרמוניה','שלווה','אמזוניט','מדיטציה'] }
   },
   'uv-bloom': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#4488ff',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#4488ff',
     RU:{ name:'UV Bloom Protection', cat:'ЗАЩИТА / ЗДОРОВЬЕ',
       intention:'Под невидимым светом этого цветка моя аура расцветает здоровьем, отталкивая все незримые угрозы.',
       composition:'Воск белый ваниль 250г · Лаванда 4к · Lemongrass 3к · Lilac 3к · Травы: лаванда, лепестки роз, незабудка · Камень: аметист · Декор: сердечко',
@@ -755,7 +763,7 @@ const PRODUCTS = {
       tags:['הגנה','בריאות','אמטיסט','UV ריאקטיבי'] }
   },
   'cosmic-cherry': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#ff44aa',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#ff44aa',
     RU:{ name:'Cosmic Cherry Bloom', cat:'ЛЮБОВЬ К СЕБЕ',
       intention:'Я цвету, как вишня в весенней вселенной, принимая свою уникальную красоту и сладость бытия.',
       composition:'Воск розовый 250г · Cherry 5к · Жасмин 3к · Ваниль 2к · Травы: лепестки роз, незабудка, пионы · Камень: розовый кварц · Декор: пучок роз',
@@ -770,7 +778,7 @@ const PRODUCTS = {
       tags:['אהבה עצמית','קבלה','קוורץ ורוד','ביטחון'] }
   },
   'shadow-light': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aa44ff',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#aa44ff',
     RU:{ name:'Shadow & Light Balance', cat:'МЕДИТАЦИЯ / ГАРМОНИЯ',
       intention:'В танце света и тени я нахожу свою целостность, принимая все грани своей души.',
       composition:'Воск белый+красный слоями 250г · Sandalwood 4к · Royal Home 3к · Bergamot 3к · Травы: полынь, шалфей · Камень: флюорит',
@@ -785,7 +793,7 @@ const PRODUCTS = {
       tags:['מדיטציה','איזון','פלואוריט','אינטגרציה'] }
   },
   'soul-freq': {
-    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aa44ff',
+    icon:'🕯️', price:'60 / 120 / 220 ₪', price_usd:'$16.99 / $32.99 / $59.99', color:'#aa44ff',
     RU:{ name:'Soul Frequency Gratitude', cat:'БЛАГОДАРНОСТЬ / ГАРМОНИЯ',
       intention:'Моя благодарность вибрирует на частоте изобилия, и вселенная отвечает мне взаимным сиянием.',
       composition:'Воск бежевый кофе 250г · Апельсин 4к · Coffee 3к · Geranium 3к · Травы: хризантемы, звёздчатый анис · Камень: гранат · Декор: сердечко',
@@ -801,7 +809,7 @@ const PRODUCTS = {
   },
   // OILS
   'light-armor': {
-    icon:'✨', price:'90 / 220 ₪', color:'#4488ff',
+    icon:'✨', price:'90 / 220 ₪', price_usd:'$24.99 / $59.99', color:'#4488ff',
     RU:{ name:'Invisible Light Armor', cat:'ЗАЩИТА',
       intention:'Это масло — твой невидимый щит. Носи его как броню из света, сквозь которую проходит только благо.',
       composition:'База Argan 10мл · Лаванда 3к · Rosemary 2к · Pine 2к · Камень: тигровый глаз · Наносить на запястья и точки пульса',
@@ -816,7 +824,7 @@ const PRODUCTS = {
       tags:['הגנה','מגן','עין הנמר','שמן יומיומי'] }
   },
   'self-love': {
-    icon:'✨', price:'90 / 220 ₪', color:'#ff44aa',
+    icon:'✨', price:'90 / 220 ₪', price_usd:'$24.99 / $59.99', color:'#ff44aa',
     RU:{ name:'Self-Love Galaxy', cat:'ЛЮБОВЬ',
       intention:'Я — целая вселенная, достойная любви, и каждое прикосновение этого масла напоминает мне об этом.',
       composition:'База Argan 10мл · Rose 2к · Bergamot 3к · Sandalwood 1к · Камень: розовый кварц',
@@ -831,7 +839,7 @@ const PRODUCTS = {
       tags:['אהבה עצמית','קבלה','קוורץ ורוד','ערך עצמי'] }
   },
   'success-magnet': {
-    icon:'✨', price:'90 / 220 ₪', color:'#44ff88',
+    icon:'✨', price:'90 / 220 ₪', price_usd:'$24.99 / $59.99', color:'#44ff88',
     RU:{ name:'Success Magnet', cat:'УСПЕХ',
       intention:'Я намагничиваю пространство вокруг себя на удачу и лёгкие победы.',
       composition:'База Argan 10мл · Bergamot 3к · Апельсин 2к · Royal Home 1к · Камень: авантюрин',
@@ -846,7 +854,7 @@ const PRODUCTS = {
       tags:['הצלחה','מזל','אוונטורין','משא ומתן'] }
   },
   'forest': {
-    icon:'✨', price:'90 / 220 ₪', color:'#44ffee',
+    icon:'✨', price:'90 / 220 ₪', price_usd:'$24.99 / $59.99', color:'#44ffee',
     RU:{ name:'Breath of the Forest', cat:'ЗДОРОВЬЕ',
       intention:'С каждым вдохом лёгкость наполняет моё тело, а сила леса очищает и укрепляет его.',
       composition:'База Argan 10мл · Эвкалипт 3к · Лимонный эвкалипт 2к · Pine 1к · Камень: горный хрусталь',
@@ -861,7 +869,7 @@ const PRODUCTS = {
       tags:['בריאות','נשימה','קוורץ שקוף','חיסוניות'] }
   },
   'velvet-dream': {
-    icon:'✨', price:'90 / 220 ₪', color:'#aa44ff',
+    icon:'✨', price:'90 / 220 ₪', price_usd:'$24.99 / $59.99', color:'#aa44ff',
     RU:{ name:'Velvet Dream Portal', cat:'СОН / ГАРМОНИЯ',
       intention:'Я погружаюсь в бархатную глубину снов, где меня ждут исцеление и ответы.',
       composition:'База Argan 10мл · Лаванда 4к · Ylang-ylang 1к · Ваниль 1к · Камень: аметист · Наносить на виски и запястья перед сном',
@@ -877,7 +885,7 @@ const PRODUCTS = {
   },
   // SOAPS
   'dual-detox': {
-    icon:'🫧', price:'45 / 80 ₪', color:'#aaaaaa',
+    icon:'🫧', price:'45 / 80 ₪', price_usd:'$12.99 / $21.99', color:'#aaaaaa',
     RU:{ name:'Dual Reality Detox', cat:'ЧИСТКА / ДЕТОКС',
       intention:'Это мыло стирает грань между физической и энергетической тяжестью, оставляя только лёгкость.',
       composition:'Senteur de Marseille 100г · Чёрная соль 15г · Эвкалипт 5к · Lemongrass 3к · Травы внутри: крапива, шалфей · Камень: флюорит',
@@ -892,7 +900,7 @@ const PRODUCTS = {
       tags:['דטוקס','ניקוי','פלואוריט','מלח שחור'] }
   },
   'pink-nebula': {
-    icon:'🫧', price:'45 / 80 ₪', color:'#ff44aa',
+    icon:'🫧', price:'45 / 80 ₪', price_usd:'$12.99 / $21.99', color:'#ff44aa',
     RU:{ name:'Pink Nebula Tenderness', cat:'НЕЖНОСТЬ / ЛЮБОВЬ',
       intention:'Каждая пенка — это облако из розовой туманности, которое обволакивает кожу заботой и любовью.',
       composition:'Rubes Care Olive Oil 100г · Розовая соль 10г · Rose 3к · Лаванда 2к · Цветы: лепестки роз, пионы · Камень: розовый кварц',
@@ -907,7 +915,7 @@ const PRODUCTS = {
       tags:['רוך','אהבה','קוורץ ורוד','עור רגיש'] }
   },
   'solar-pulse': {
-    icon:'🫧', price:'45 / 80 ₪', color:'#ffaa00',
+    icon:'🫧', price:'45 / 80 ₪', price_usd:'$12.99 / $21.99', color:'#ffaa00',
     RU:{ name:'Solar Pulse Energy', cat:'ЭНЕРГИЯ',
       intention:'Утренний душ превращается в запуск солнечного двигателя, заряжающего меня силой на весь день.',
       composition:'Senteur de Marseille 100г · Coffee 3к · Апельсин 4к · Lemon 3к · Декор: хризантемы, green ball, звёздчатый анис · Камень: гранат',
@@ -922,7 +930,7 @@ const PRODUCTS = {
       tags:['אנרגיה','חיוניות','גרנט','הדרים'] }
   },
   'black-salt': {
-    icon:'🫧', price:'45 / 80 ₪', color:'#4488ff',
+    icon:'🫧', price:'45 / 80 ₪', price_usd:'$12.99 / $21.99', color:'#4488ff',
     RU:{ name:'Black Salt Shield', cat:'ЗАЩИТА / ЧИСТКА',
       intention:'С каждым смыванием вода уносит не только пыль дня, но и все прилипшие чужие взгляды и энергии.',
       composition:'Senteur de Marseille 100г · Чёрная соль 20г · Lemongrass 4к · Лаванда 3к · Pine 3к · Травы: чабрец, полынь · Камень: лабрадорит',
@@ -937,7 +945,7 @@ const PRODUCTS = {
       tags:['הגנה','ניקוי','לברדוריט','מלח שחור'] }
   },
   'vanilla-silk': {
-    icon:'🫧', price:'45 / 80 ₪', color:'#aa44ff',
+    icon:'🫧', price:'45 / 80 ₪', price_usd:'$12.99 / $21.99', color:'#aa44ff',
     RU:{ name:'Vanilla Silk Luxury', cat:'РОСКОШЬ / ГАРМОНИЯ',
       intention:'Этот кусочек шёлка из ароматов — твоя личная церемония роскоши, доступная здесь и сейчас.',
       composition:'Rubes Care Olive Oil 100г · Ваниль крем 5к · Sandalwood 2к · Ylang-ylang 1к · Цветы: globe amaranth, лепестки роз, магнолия · Камень: аметист',
@@ -1099,7 +1107,7 @@ function renderModal() {
   document.getElementById('modal-icon').textContent = p.icon;
   document.getElementById('modal-name').textContent = d.name;
   document.getElementById('modal-cat').textContent = d.cat;
-  document.getElementById('modal-price').textContent = p.price;
+  document.getElementById('modal-price').textContent = p.price + (p.price_usd ? ' · ' + p.price_usd : '');
   document.getElementById('modal-intention').textContent = d.intention;
   document.getElementById('modal-composition').textContent = d.composition;
   document.getElementById('lbl-intention').textContent = MODAL_LABELS.intention[currentModalLang];
