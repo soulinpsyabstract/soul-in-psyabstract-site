@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soul In PsyAbstract — Store</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Raleway:wght@300;400;600;700;800&display=swap');
+
+:root {
+  --cyan:#00f5ff; --blue:#0044ff; --gold:#ffd700;
+  --pink:#ff44cc; --green:#44ffaa; --navy:#00003a;
+  --bg:#000510; --card-bg:#000d2a;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  background:var(--bg);
+  font-family:'Raleway',sans-serif;
+  color:#e0f0ff;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── BG RINGS ── */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 20%, #00f5ff0a 0%, transparent 40%),
+    radial-gradient(circle at 85% 10%, #0044ff08 0%, transparent 35%),
+    radial-gradient(circle at 50% 60%, #00ccdd06 0%, transparent 50%),
+    radial-gradient(circle at 10% 80%, #0044ff06 0%, transparent 30%),
+    radial-gradient(circle at 90% 85%, #00f5ff05 0%, transparent 35%);
+}
+
+/* ── HEADER ── */
+header {
+  position:relative; z-index:10;
+  text-align:center;
+  padding:40px 20px 30px;
+  border-bottom:1px solid #00f5ff22;
+  background:linear-gradient(180deg, #000820 0%, transparent 100%);
+}
+
+.logo-wrap {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:80px; height:80px; border-radius:50%;
+  background:radial-gradient(circle at 40% 40%, #0044dd, #000880);
+  border:2px solid var(--cyan);
+  box-shadow:0 0 30px #00f5ff66, 0 0 60px #0044ff33;
+  margin-bottom:14px;
+  animation:logoGlow 4s ease-in-out infinite;
+}
+@keyframes logoGlow {
+  0%,100%{box-shadow:0 0 30px #00f5ff66,0 0 60px #0044ff33;}
+  50%{box-shadow:0 0 50px #00f5ffaa,0 0 90px #0044ff66;}
+}
+.logo-wrap span {
+  font-family:'Cinzel Decorative',serif;
+  font-size:32px; font-weight:900;
+  color:var(--cyan); text-shadow:0 0 20px var(--cyan);
+}
+
+.site-title {
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(18px,4vw,28px); font-weight:900;
+  color:var(--cyan);
+  text-shadow:0 0 20px #00f5ff66;
+  letter-spacing:4px; text-transform:uppercase;
+  margin-bottom:6px;
+}
+.site-sub {
+  font-size:13px; color:#6699bb;
+  letter-spacing:3px; text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+/* Lang switcher */
+.lang-bar {
+  display:inline-flex; gap:8px;
+  background:#00081a; border:1px solid #00f5ff33;
+  border-radius:30px; padding:4px;
+  margin-bottom:8px;
+}
+.lang-btn {
+  padding:6px 18px; border-radius:24px; border:none;
+  font-family:'Raleway',sans-serif; font-size:12px;
+  font-weight:700; letter-spacing:1px; cursor:pointer;
+  transition:all .2s; background:transparent; color:#4488aa;
+}
+.lang-btn.active {
+  background:var(--cyan); color:#000;
+  box-shadow:0 0 12px #00f5ff66;
+}
+.lang-btn:hover:not(.active){color:var(--cyan);}
+
+.tagline {
+  font-size:13px; color:var(--gold);
+  letter-spacing:2px; margin-top:8px;
+}
+
+/* ── NAV TABS ── */
+.nav-tabs {
+  display:flex; gap:0; justify-content:center;
+  padding:0 20px; margin-top:0;
+  border-bottom:1px solid #00f5ff22;
+  position:sticky; top:0; z-index:50;
+  background:#000820; overflow-x:auto;
+}
+.nav-tab {
+  padding:14px 22px; border:none; background:transparent;
+  color:#4488aa; font-family:'Raleway',sans-serif;
+  font-size:12px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .2s; white-space:nowrap;
+}
+.nav-tab.active { color:var(--cyan); border-bottom-color:var(--cyan); }
+.nav-tab:hover:not(.active){color:#88aacc;}
+
+/* ── MAIN ── */
+main {
+  position:relative; z-index:1;
+  max-width:1100px; margin:0 auto; padding:30px 16px 60px;
+}
+
+.section-title {
+  font-family:'Cinzel Decorative',serif;
+  font-size:11px; letter-spacing:5px;
+  color:var(--gold); text-transform:uppercase;
+  text-align:center; margin-bottom:24px;
+}
+
+.product-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap:16px; margin-bottom:40px;
+}
+
+/* ── PRODUCT CARD ── */
+.product-card {
+  background:var(--card-bg);
+  border:1px solid var(--card-border, #00f5ff33);
+  border-radius:14px; padding:20px 16px;
+  text-align:center; cursor:pointer;
+  transition:all .22s; position:relative;
+  overflow:hidden;
+}
+.product-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, var(--card-glow,#00f5ff0a) 0%, transparent 60%);
+  opacity:0; transition:opacity .22s; border-radius:14px;
+}
+.product-card:hover{
+  transform:translateY(-5px);
+  border-color:var(--card-color,var(--cyan));
+  box-shadow:0 8px 30px var(--card-shadow,#00f5ff33);
+}
+.product-card:hover::before{opacity:1;}
+
+.card-icon {font-size:32px; margin-bottom:10px; display:block;}
+.card-name {
+  font-family:'Cinzel Decorative',serif;
+  font-size:13px; font-weight:700;
+  color:var(--card-color,var(--cyan));
+  margin-bottom:6px; line-height:1.3;
+}
+.card-sub {font-size:11px; color:#4488aa; margin-bottom:10px; letter-spacing:1px;}
+.card-price {
+  font-size:16px; font-weight:800;
+  color:var(--gold);
+  display:inline-block;
+  padding:3px 12px; border:1px solid #ffd70044;
+  border-radius:12px; margin-bottom:10px;
+}
+.card-badge {
+  display:inline-block; padding:3px 10px;
+  border-radius:10px; font-size:9px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  background:var(--card-color,var(--cyan));
+  color:#000; margin-bottom:8px;
+}
+.card-open-hint {
+  font-size:10px; color:#334455; letter-spacing:1px;
+  text-transform:uppercase;
+}
+.product-card:hover .card-open-hint{color:#00f5ff77;}
+
+/* Category colors */
+.cat-protect {--card-color:#4488ff;--card-border:#4488ff44;--card-shadow:#4488ff33;--card-glow:#4488ff0a;}
+.cat-love    {--card-color:#ff44aa;--card-border:#ff44aa44;--card-shadow:#ff44aa33;--card-glow:#ff44aa0a;}
+.cat-success {--card-color:#44ff88;--card-border:#44ff8844;--card-shadow:#44ff8833;--card-glow:#44ff880a;}
+.cat-clean   {--card-color:#aaaaaa;--card-border:#aaaaaa44;--card-shadow:#aaaaaa33;--card-glow:#aaaaaa0a;}
+.cat-health  {--card-color:#44ffee;--card-border:#44ffee44;--card-shadow:#44ffee33;--card-glow:#44ffee0a;}
+.cat-harmony {--card-color:#aa44ff;--card-border:#aa44ff44;--card-shadow:#aa44ff33;--card-glow:#aa44ff0a;}
+.cat-energy  {--card-color:#ffaa00;--card-border:#ffaa0044;--card-shadow:#ffaa0033;--card-glow:#ffaa000a;}
+.cat-crystal {--card-color:#ffd700;--card-border:#ffd70044;--card-shadow:#ffd70033;--card-glow:#ffd7000a;}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0; z-index:200;
+  background:#000820ee;
+  backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; opacity:0; pointer-events:none;
+  transition:opacity .25s;
+}
+.modal-overlay.open{opacity:1; pointer-events:all;}
+
+.modal {
+  background:#000d28;
+  border:1px solid var(--modal-color,var(--cyan));
+  border-radius:20px;
+  max-width:540px; width:100%;
+  max-height:88vh; overflow-y:auto;
+  box-shadow:0 0 60px var(--modal-shadow,#00f5ff33), 0 0 120px #0044ff22;
+  transform:scale(.92) translateY(20px);
+  transition:transform .28s ease;
+  position:relative;
+}
+.modal-overlay.open .modal{transform:scale(1) translateY(0);}
+
+/* modal scrollbar */
+.modal::-webkit-scrollbar{width:4px;}
+.modal::-webkit-scrollbar-track{background:#00081a;}
+.modal::-webkit-scrollbar-thumb{background:var(--modal-color,var(--cyan));border-radius:2px;}
+
+.modal-header {
+  padding:24px 24px 16px;
+  border-bottom:1px solid var(--modal-color,#00f5ff)33;
+  position:sticky; top:0; z-index:5;
+  background:#000d28;
+}
+.modal-lang-bar {
+  display:flex; gap:6px; margin-bottom:14px;
+}
+.modal-lang-btn {
+  padding:5px 14px; border-radius:20px; border:1px solid var(--modal-color,var(--cyan));
+  background:transparent; color:var(--modal-color,var(--cyan));
+  font-family:'Raleway',sans-serif; font-size:11px; font-weight:700;
+  cursor:pointer; transition:all .18s;
+}
+.modal-lang-btn.active{background:var(--modal-color,var(--cyan));color:#000;}
+
+.modal-icon {font-size:40px; margin-bottom:8px; display:block; text-align:center;}
+.modal-name {
+  font-family:'Cinzel Decorative',serif;
+  font-size:18px; font-weight:700; text-align:center;
+  color:var(--modal-color,var(--cyan));
+  text-shadow:0 0 14px var(--modal-color,#00f5ff)66;
+  margin-bottom:4px;
+}
+.modal-cat {
+  text-align:center; font-size:11px;
+  color:var(--modal-color,var(--cyan))99;
+  letter-spacing:3px; text-transform:uppercase;
+  margin-bottom:8px;
+}
+.modal-price {
+  text-align:center; font-size:22px; font-weight:800;
+  color:var(--gold); margin-bottom:4px;
+}
+
+.modal-body {padding:16px 24px 28px;}
+
+.modal-section-label {
+  font-size:10px; font-weight:800; letter-spacing:3px;
+  text-transform:uppercase; color:var(--modal-color,var(--cyan));
+  margin-bottom:8px; margin-top:16px;
+}
+.modal-intention {
+  font-size:14px; line-height:1.7; color:#cce8ff;
+  font-style:italic; padding:12px 16px;
+  border-left:2px solid var(--modal-color,var(--cyan));
+  background:var(--modal-color,#00f5ff)08;
+  border-radius:0 8px 8px 0; margin-bottom:4px;
+}
+.modal-composition {
+  font-size:13px; line-height:1.8; color:#99bbcc;
+  padding:10px 14px;
+  background:#00081a; border-radius:8px;
+  border:1px solid var(--modal-color,#00f5ff)22;
+}
+.modal-tags {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;
+}
+.modal-tag {
+  padding:3px 10px; border-radius:10px; font-size:11px;
+  border:1px solid var(--modal-color,var(--cyan))66;
+  color:var(--modal-color,var(--cyan)); letter-spacing:.5px;
+}
+
+.modal-close {
+  position:absolute; top:16px; right:16px;
+  width:32px; height:32px; border-radius:50%;
+  border:1px solid var(--modal-color,var(--cyan))66;
+  background:transparent; color:var(--modal-color,var(--cyan));
+  font-size:16px; cursor:pointer; transition:all .18s;
+  display:flex; align-items:center; justify-content:center;
+}
+.modal-close:hover{background:var(--modal-color,var(--cyan));color:#000;}
+
+/* ── SECTION HIDDEN ── */
+.product-section{display:none;}
+.product-section.visible{display:block;}
+
+/* ── FOOTER ── */
+footer {
+  position:relative; z-index:1;
+  text-align:center; padding:30px 20px;
+  border-top:1px solid #00f5ff22;
+}
+footer p{font-size:12px; color:#334455; letter-spacing:2px; margin-bottom:6px;}
+footer .ft-brand{
+  font-family:'Cinzel Decorative',serif;
+  font-size:13px; color:var(--cyan);
+  text-shadow:0 0 10px #00f5ff44;
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <a href="index.html" style="position:absolute;top:14px;left:16px;color:#00f5ff66;font-size:12px;text-decoration:none;letter-spacing:.08em;font-family:'Courier New',monospace;" onmouseover="this.style.color='#00f5ff'" onmouseout="this.style.color='#00f5ff66'">← main site</a>
+  <div class="logo-wrap"><span>S</span></div>
+  <div class="site-title">Soul In PsyAbstract</div>
+  <div class="site-sub">Aelin AquaSoul · Eilat, Israel · Akoun Certified Artist</div>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('RU')">RU</button>
+    <button class="lang-btn" onclick="setLang('HE')">HE</button>
+    <button class="lang-btn" onclick="setLang('EN')">EN</button>
+  </div>
+  <div class="tagline" id="tagline">✦ С благим намерением ✦</div>
+</header>
+
+<!-- ── NAV ── -->
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('candles')" id="tab-candles" data-ru="Свечи" data-he="נרות" data-en="Candles">Свечи</button>
+  <button class="nav-tab" onclick="showSection('oils')" id="tab-oils" data-ru="Масла" data-he="שמנים" data-en="Oils">Масла</button>
+  <button class="nav-tab" onclick="showSection('soaps')" id="tab-soaps" data-ru="Мыло" data-he="סבונים" data-en="Soaps">Мыло</button>
+  <button class="nav-tab" onclick="showSection('crystals')" id="tab-crystals" data-ru="Кристаллы" data-he="קריסטלים" data-en="Crystals">Кристаллы</button>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <!-- CANDLES -->
+  <div class="product-section visible" id="sec-candles">
+    <div class="section-title" id="sec-title-candles">✦ Свечи ✦</div>
+    <div class="product-grid">
+
+      <div class="product-card cat-protect" onclick="openModal('neon-spiral')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">ЗАЩИТА</div>
+        <div class="card-name" id="nm-neon-spiral">Neon Spiral Shield</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-love" onclick="openModal('love-flow')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">ЛЮБОВЬ</div>
+        <div class="card-name">PsyAbstract Love Flow</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-success" onclick="openModal('labyrinth')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">УСПЕХ</div>
+        <div class="card-name">Labyrinth of Success</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-clean" onclick="openModal('aquasoul')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">ЧИСТКА</div>
+        <div class="card-name">AquaSoul Cleanse</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-harmony" onclick="openModal('heartwave')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">ГАРМОНИЯ</div>
+        <div class="card-name">Heartwave Abundance</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-harmony" onclick="openModal('deep-ocean')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">ГАРМОНИЯ</div>
+        <div class="card-name">Deep Ocean Harmony</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-protect" onclick="openModal('uv-bloom')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">ЗАЩИТА / ЗДОРОВЬЕ</div>
+        <div class="card-name">UV Bloom Protection</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-love" onclick="openModal('cosmic-cherry')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">ЛЮБОВЬ К СЕБЕ</div>
+        <div class="card-name">Cosmic Cherry Bloom</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-harmony" onclick="openModal('shadow-light')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">МЕДИТАЦИЯ</div>
+        <div class="card-name">Shadow & Light Balance</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+      <div class="product-card cat-harmony" onclick="openModal('soul-freq')">
+        <span class="card-icon">🕯️</span>
+        <div class="card-badge">БЛАГОДАРНОСТЬ</div>
+        <div class="card-name">Soul Frequency Gratitude</div>
+        <div class="card-sub">СВЕЧА · CANDLE · נר</div>
+        <div class="card-price">60–220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- OILS -->
+  <div class="product-section" id="sec-oils">
+    <div class="section-title" id="sec-title-oils">✦ Масла ✦</div>
+    <div class="product-grid">
+      <div class="product-card cat-protect" onclick="openModal('light-armor')">
+        <span class="card-icon">✨</span>
+        <div class="card-badge">ЗАЩИТА</div>
+        <div class="card-name">Invisible Light Armor</div>
+        <div class="card-sub">МАСЛО · OIL · שמן</div>
+        <div class="card-price">90 / 220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-love" onclick="openModal('self-love')">
+        <span class="card-icon">✨</span>
+        <div class="card-badge">ЛЮБОВЬ</div>
+        <div class="card-name">Self-Love Galaxy</div>
+        <div class="card-sub">МАСЛО · OIL · שמן</div>
+        <div class="card-price">90 / 220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-success" onclick="openModal('success-magnet')">
+        <span class="card-icon">✨</span>
+        <div class="card-badge">УСПЕХ</div>
+        <div class="card-name">Success Magnet</div>
+        <div class="card-sub">МАСЛО · OIL · שמן</div>
+        <div class="card-price">90 / 220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-health" onclick="openModal('forest')">
+        <span class="card-icon">✨</span>
+        <div class="card-badge">ЗДОРОВЬЕ</div>
+        <div class="card-name">Breath of the Forest</div>
+        <div class="card-sub">МАСЛО · OIL · שמן</div>
+        <div class="card-price">90 / 220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-harmony" onclick="openModal('velvet-dream')">
+        <span class="card-icon">✨</span>
+        <div class="card-badge">СОН / ГАРМОНИЯ</div>
+        <div class="card-name">Velvet Dream Portal</div>
+        <div class="card-sub">МАСЛО · OIL · שמן</div>
+        <div class="card-price">90 / 220 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOAPS -->
+  <div class="product-section" id="sec-soaps">
+    <div class="section-title" id="sec-title-soaps">✦ Мыло ✦</div>
+    <div class="product-grid">
+      <div class="product-card cat-clean" onclick="openModal('dual-detox')">
+        <span class="card-icon">🫧</span>
+        <div class="card-badge">ЧИСТКА / ДЕТОКС</div>
+        <div class="card-name">Dual Reality Detox</div>
+        <div class="card-sub">МЫЛО · SOAP · סבון</div>
+        <div class="card-price">45 / 80 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-love" onclick="openModal('pink-nebula')">
+        <span class="card-icon">🫧</span>
+        <div class="card-badge">НЕЖНОСТЬ / ЛЮБОВЬ</div>
+        <div class="card-name">Pink Nebula Tenderness</div>
+        <div class="card-sub">МЫЛО · SOAP · סבון</div>
+        <div class="card-price">45 / 80 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-energy" onclick="openModal('solar-pulse')">
+        <span class="card-icon">🫧</span>
+        <div class="card-badge">ЭНЕРГИЯ</div>
+        <div class="card-name">Solar Pulse Energy</div>
+        <div class="card-sub">МЫЛО · SOAP · סבון</div>
+        <div class="card-price">45 / 80 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-protect" onclick="openModal('black-salt')">
+        <span class="card-icon">🫧</span>
+        <div class="card-badge">ЗАЩИТА / ЧИСТКА</div>
+        <div class="card-name">Black Salt Shield</div>
+        <div class="card-sub">МЫЛО · SOAP · סבון</div>
+        <div class="card-price">45 / 80 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-harmony" onclick="openModal('vanilla-silk')">
+        <span class="card-icon">🫧</span>
+        <div class="card-badge">РОСКОШЬ / ГАРМОНИЯ</div>
+        <div class="card-name">Vanilla Silk Luxury</div>
+        <div class="card-sub">МЫЛО · SOAP · סבון</div>
+        <div class="card-price">45 / 80 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRYSTALS -->
+  <div class="product-section" id="sec-crystals">
+    <div class="section-title" id="sec-title-crystals">✦ Кристаллы ✦</div>
+    <div class="product-grid">
+      <div class="product-card cat-love" onclick="openModal('rose-quartz')">
+        <span class="card-icon">💎</span>
+        <div class="card-badge">ЛЮБОВЬ</div>
+        <div class="card-name">Розовый кварц</div>
+        <div class="card-sub">Rose Quartz · קוורץ ורוד</div>
+        <div class="card-price">30 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-harmony" onclick="openModal('amethyst')">
+        <span class="card-icon">💎</span>
+        <div class="card-badge">ЗАЩИТА</div>
+        <div class="card-name">Аметист</div>
+        <div class="card-sub">Amethyst · אמטיסט</div>
+        <div class="card-price">35 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-success" onclick="openModal('citrine')">
+        <span class="card-icon">💎</span>
+        <div class="card-badge">УСПЕХ</div>
+        <div class="card-name">Цитрин</div>
+        <div class="card-sub">Citrine · ציטרין</div>
+        <div class="card-price">45 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-crystal" onclick="openModal('fluorite')">
+        <span class="card-icon">💎</span>
+        <div class="card-badge">ГАРМОНИЯ</div>
+        <div class="card-name">Флюорит</div>
+        <div class="card-sub">Fluorite · פלואוריט</div>
+        <div class="card-price">60 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+      <div class="product-card cat-energy" onclick="openModal('orchid-calcite')">
+        <span class="card-icon">💎</span>
+        <div class="card-badge">РЕДКИЙ · RARE</div>
+        <div class="card-name">Орхидный кальцит</div>
+        <div class="card-sub">Orchid Calcite · קלציט סחלב</div>
+        <div class="card-price">55 ₪</div>
+        <div class="card-open-hint">+ tap for details</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-lang-bar">
+        <button class="modal-lang-btn active" onclick="setModalLang('RU')">RU</button>
+        <button class="modal-lang-btn" onclick="setModalLang('HE')">HE</button>
+        <button class="modal-lang-btn" onclick="setModalLang('EN')">EN</button>
+      </div>
+      <img id="modal-img" src="" alt="" style="display:none;width:100%;max-height:220px;object-fit:cover;border-radius:8px;margin-bottom:12px;border:1px solid rgba(0,245,255,.15);" onerror="this.style.display='none'">
+      <div class="modal-icon" id="modal-icon"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-cat" id="modal-cat"></div>
+      <div class="modal-price" id="modal-price"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label" id="lbl-intention">НАМЕРЕНИЕ</div>
+      <div class="modal-intention" id="modal-intention"></div>
+      <div class="modal-section-label" id="lbl-composition">СОСТАВ</div>
+      <div class="modal-composition" id="modal-composition"></div>
+      <div class="modal-section-label" id="lbl-properties">СВОЙСТВА</div>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>soulinpsyabstract.store · Eilat, Israel</p>
+  <div class="ft-brand">Soul In PsyAbstract · עם כוונה טהורה</div>
+</footer>
+
+<script>
+// ── PRODUCT IMAGES ────────────────────────────────────────────
+const PRODUCT_IMAGES = {
+  'neon-spiral':    'assets/img/products/01_candle_neon_spiral.png',
+  'love-flow':      'assets/img/products/02_candle_love_flow.png',
+  'labyrinth':      'assets/img/products/03_candle_labyrinth_of_success.png',
+  'aquasoul':       'assets/img/products/04_candle_aquasoul_cleanse.png',
+  'heartwave':      'assets/img/products/05_candle_heartwave_abundance.png',
+  'deep-ocean':     'assets/img/products/06_candle_deep_ocean_harmony.png',
+  'uv-bloom':       'assets/img/products/07_candle_uv_bloom_protection.png',
+  'cosmic-cherry':  'assets/img/products/08_candle_cosmic_cherry_bloom.png',
+  'shadow-light':   'assets/img/products/09_candle_shadow_light_balance.png',
+  'soul-freq':      'assets/img/products/10_candle_soul_frequency_gratitude.png',
+  'light-armor':    'assets/img/products/11_oil_invisible_light_armor.png',
+  'self-love':      'assets/img/products/12_oil_self_love_galaxy.png',
+  'success-magnet': 'assets/img/products/13_oil_success_magnet.png',
+  'forest':         'assets/img/products/14_oil_breath_of_forest.png',
+  'velvet-dream':   'assets/img/products/15_oil_velvet_dream_portal.png',
+  'dual-detox':     'assets/img/products/16_soap_dual_reality_detox.png',
+  'pink-nebula':    'assets/img/products/17_soap_pink_nebula_tenderness.png',
+  'solar-pulse':    'assets/img/products/18_soap_solar_pulse_energy.png',
+  'black-salt':     'assets/img/products/19_soap_black_salt_shield.png',
+  'vanilla-silk':   'assets/img/products/20_soap_vanilla_silk_luxury.png',
+};
+
+// ── PRODUCT DATA ─────────────────────────────────────────────
+const PRODUCTS = {
+  // CANDLES
+  'neon-spiral': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#4488ff',
+    RU:{ name:'Neon Spiral Shield', cat:'ЗАЩИТА',
+      intention:'Моё пространство вращается в спирали неуязвимого света, отталкивая любое чужое влияние.',
+      composition:'Воск красный 250г · Лаванда 5к · Розмарин 5к · Pine 3к · Травы: листья оливы, шалфей · Камень: лабрадорит · Декор: сердечко',
+      tags:['Защита','Барьер','Энергетический щит','Лабрадорит'] },
+    EN:{ name:'Neon Spiral Shield', cat:'PROTECTION',
+      intention:'My space spins in a spiral of invincible light, repelling any foreign influence.',
+      composition:'Red soy wax 250g · Lavender 5d · Rosemary 5d · Pine 3d · Herbs: olive leaves, sage · Crystal: labradorite · Decor: wooden heart',
+      tags:['Protection','Energy Shield','Labradorite','Boundaries'] },
+    HE:{ name:'מגן ספירלה נאון', cat:'הגנה',
+      intention:'המרחב שלי מסתחרר בספירלה של אור בלתי-פגיע, דוחה כל השפעה זרה.',
+      composition:'שעוות סויה אדומה 250גר · לבנדר · רוזמרין · אורן · עשבים: עלי זית, מרווה · קריסטל: לברדוריט',
+      tags:['הגנה','מחסום אנרגטי','לברדוריט','גבולות'] }
+  },
+  'love-flow': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#ff44aa',
+    RU:{ name:'PsyAbstract Love Flow', cat:'ЛЮБОВЬ',
+      intention:'Я открываю сердце вселенскому потоку, позволяя любви входить и изливаться легко и свободно.',
+      composition:'Воск розовый 250г · Rose 4к · Ylang-ylang 3к · Ваниль крем 3к · Травы: лепестки роз, пионы · Камень: розовый кварц · Декор: пучок роз',
+      tags:['Любовь','Притяжение','Розовый кварц','Сердечная чакра'] },
+    EN:{ name:'PsyAbstract Love Flow', cat:'LOVE',
+      intention:'I open my heart to the universal flow, allowing love to enter and pour freely.',
+      composition:'Pink soy wax 250g · Rose 4d · Ylang-ylang 3d · Vanilla cream 3d · Herbs: rose petals, peonies · Crystal: rose quartz · Decor: rose bunch',
+      tags:['Love','Attraction','Rose Quartz','Heart Chakra'] },
+    HE:{ name:'זרימת אהבה', cat:'אהבה',
+      intention:'אני פותחת את לבי לזרם הקוסמי, מאפשרת לאהבה לזרום בחופשיות.',
+      composition:'שעוות סויה ורודה 250גר · ורד · ילנג-ילנג · וניל · עלי ורד, פרחי אדמונית · קוורץ ורוד',
+      tags:['אהבה','משיכה','קוורץ ורוד','צ׳אקרת הלב'] }
+  },
+  'labyrinth': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#44ff88',
+    RU:{ name:'Labyrinth of Success', cat:'УСПЕХ',
+      intention:'Я с лёгкостью нахожу путь в самом сердце лабиринта, и каждая дверь открывается к моему процветанию.',
+      composition:'Воск зелёный 250г · Bergamot 5к · Апельсин 3к · Sandalwood 2к · Травы: лавровый лист, green ball · Камень: авантюрин',
+      tags:['Успех','Процветание','Авантюрин','Финансовый поток'] },
+    EN:{ name:'Labyrinth of Success', cat:'SUCCESS',
+      intention:'I easily find my way through the labyrinth, every door opens to my prosperity.',
+      composition:'Green soy wax 250g · Bergamot 5d · Orange 3d · Sandalwood 2d · Herbs: bay leaf, green ball · Crystal: aventurine',
+      tags:['Success','Prosperity','Aventurine','Financial Flow'] },
+    HE:{ name:'מבוך ההצלחה', cat:'הצלחה',
+      intention:'אני מוצאת את דרכי בלב המבוך, וכל דלת נפתחת לשגשוגי.',
+      composition:'שעוות סויה ירוקה 250גר · ברגמוט · תפוז · סנדלווד · עלה דפנה, green ball · אוונטורין',
+      tags:['הצלחה','שגשוג','אוונטורין','זרם פיננסי'] }
+  },
+  'aquasoul': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aaaaaa',
+    RU:{ name:'AquaSoul Cleanse', cat:'ЧИСТКА',
+      intention:'Как чистая вода омывает камень, так этот свет смывает с моего пространства все тяжёлые следы.',
+      composition:'Воск белый ваниль 250г · Lemon 5к · Эвкалипт 5к · Lemongrass 3к · Травы: snow lotus, globe amaranth · Камень: горный хрусталь',
+      tags:['Чистка','Очищение','Горный хрусталь','Обновление'] },
+    EN:{ name:'AquaSoul Cleanse', cat:'CLEANSING',
+      intention:'As pure water washes stone, this light rinses away all heavy traces.',
+      composition:'White vanilla soy wax 250g · Lemon 5d · Eucalyptus 5d · Lemongrass 3d · Herbs: snow lotus, globe amaranth · Crystal: clear quartz',
+      tags:['Cleansing','Purification','Clear Quartz','Renewal'] },
+    HE:{ name:'טיהור אקווה-נשמה', cat:'טיהור',
+      intention:'כמו מים טהורים שוטפים אבן, כך האור הזה שוטף את כל העקבות הכבדים.',
+      composition:'שעוות סויה לבנה-וניל 250גר · לימון · אקליפטוס · למונגרס · snow lotus, globe amaranth · קוורץ שקוף',
+      tags:['טיהור','ניקוי','קוורץ שקוף','חידוש'] }
+  },
+  'heartwave': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aa44ff',
+    RU:{ name:'Heartwave Abundance', cat:'ГАРМОНИЯ / ПРОДАЖА',
+      intention:'Волна изобилия находит меня там, где царит гармония, и приносит дары, желанные моей душе.',
+      composition:'Воск бежевый кофе 250г · Choco Arome 4к · Апельсин 3к · Island 3к · Травы: звёздчатый анис, лавровый лист · Камень: тигровый глаз · Декор: большое сердечко',
+      tags:['Гармония','Изобилие','Тигровый глаз','Притяжение клиентов'] },
+    EN:{ name:'Heartwave Abundance', cat:'HARMONY',
+      intention:'The wave of abundance finds me where harmony reigns and brings gifts desired by my soul.',
+      composition:'Coffee beige soy wax 250g · Choco Arome 4d · Orange 3d · Island 3d · Herbs: star anise, bay leaf · Crystal: tiger\'s eye · Decor: big heart',
+      tags:['Harmony','Abundance','Tigers Eye','Client Attraction'] },
+    HE:{ name:'שפע גל-לב', cat:'הרמוניה',
+      intention:'גל השפע מוצא אותי שם שבו שוררת הרמוניה ומביא מתנות נחשקות.',
+      composition:'שעוות סויה בז\' קפה 250גר · שוקולד · תפוז · איילנד · אניס, עלה דפנה · עין הנמר',
+      tags:['הרמוניה','שפע','עין הנמר','משיכת לקוחות'] }
+  },
+  'deep-ocean': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aa44ff',
+    RU:{ name:'Deep Ocean Harmony', cat:'ГАРМОНИЯ',
+      intention:'Я погружаюсь в бездонный покой океана, где все мои волны успокаиваются, а мысли становятся кристально ясными.',
+      composition:'Воск белый ваниль 250г · Deep Ocean 6к · Лаванда 4к · Декор: ароматизированные камни из моря · Камень: амазонит',
+      tags:['Гармония','Покой','Амазонит','Медитация'] },
+    EN:{ name:'Deep Ocean Harmony', cat:'HARMONY',
+      intention:'I dive into the boundless calm of the ocean, where thoughts become crystal clear.',
+      composition:'White vanilla soy wax 250g · Deep Ocean 6d · Lavender 4d · Decor: sea stones · Crystal: amazonite',
+      tags:['Harmony','Calm','Amazonite','Meditation'] },
+    HE:{ name:'הרמוניה עמוקת-אוקיינוס', cat:'הרמוניה',
+      intention:'אני צוללת לשלווה האינסופית של האוקיינוס, שם המחשבות הופכות לצלולות.',
+      composition:'שעוות סויה לבנה-וניל 250גר · אוקיינוס עמוק · לבנדר · קישוט: אבנים מהים · אמזוניט',
+      tags:['הרמוניה','שלווה','אמזוניט','מדיטציה'] }
+  },
+  'uv-bloom': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#4488ff',
+    RU:{ name:'UV Bloom Protection', cat:'ЗАЩИТА / ЗДОРОВЬЕ',
+      intention:'Под невидимым светом этого цветка моя аура расцветает здоровьем, отталкивая все незримые угрозы.',
+      composition:'Воск белый ваниль 250г · Лаванда 4к · Lemongrass 3к · Lilac 3к · Травы: лаванда, лепестки роз, незабудка · Камень: аметист · Декор: сердечко',
+      tags:['Защита','Здоровье','Аметист','UV-реактивная'] },
+    EN:{ name:'UV Bloom Protection', cat:'PROTECTION / HEALTH',
+      intention:'Under the invisible light of this bloom my aura flourishes with health.',
+      composition:'White vanilla soy wax 250g · Lavender 4d · Lemongrass 3d · Lilac 3d · Herbs: lavender, rose petals, forget-me-not · Crystal: amethyst',
+      tags:['Protection','Health','Amethyst','UV-Reactive'] },
+    HE:{ name:'פריחת הגנה UV', cat:'הגנה / בריאות',
+      intention:'תחת האור הבלתי-נראה של הפרח הזה האאורה שלי פורחת בבריאות.',
+      composition:'שעוות סויה לבנה-וניל 250גר · לבנדר · למונגרס · לילך · לבנדר, עלי ורד, forget-me-not · אמטיסט',
+      tags:['הגנה','בריאות','אמטיסט','UV ריאקטיבי'] }
+  },
+  'cosmic-cherry': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#ff44aa',
+    RU:{ name:'Cosmic Cherry Bloom', cat:'ЛЮБОВЬ К СЕБЕ',
+      intention:'Я цвету, как вишня в весенней вселенной, принимая свою уникальную красоту и сладость бытия.',
+      composition:'Воск розовый 250г · Cherry 5к · Жасмин 3к · Ваниль 2к · Травы: лепестки роз, незабудка, пионы · Камень: розовый кварц · Декор: пучок роз',
+      tags:['Любовь к себе','Принятие','Розовый кварц','Уверенность'] },
+    EN:{ name:'Cosmic Cherry Bloom', cat:'SELF-LOVE',
+      intention:'I bloom like cherry in the spring universe, embracing my unique beauty.',
+      composition:'Pink soy wax 250g · Cherry 5d · Jasmine 3d · Vanilla 2d · Herbs: rose petals, forget-me-not, peonies · Crystal: rose quartz',
+      tags:['Self-Love','Acceptance','Rose Quartz','Confidence'] },
+    HE:{ name:'פריחה קוסמית של דובדבן', cat:'אהבה עצמית',
+      intention:'אני פורחת כדובדבן ביקום האביבי, מאמצת את היופי הייחודי שלי.',
+      composition:'שעוות סויה ורודה 250גר · דובדבן · יסמין · וניל · עלי ורד, forget-me-not, אדמונית · קוורץ ורוד',
+      tags:['אהבה עצמית','קבלה','קוורץ ורוד','ביטחון'] }
+  },
+  'shadow-light': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aa44ff',
+    RU:{ name:'Shadow & Light Balance', cat:'МЕДИТАЦИЯ / ГАРМОНИЯ',
+      intention:'В танце света и тени я нахожу свою целостность, принимая все грани своей души.',
+      composition:'Воск белый+красный слоями 250г · Sandalwood 4к · Royal Home 3к · Bergamot 3к · Травы: полынь, шалфей · Камень: флюорит',
+      tags:['Медитация','Баланс','Флюорит','Интеграция'] },
+    EN:{ name:'Shadow & Light Balance', cat:'MEDITATION',
+      intention:'In the dance of light and shadow I find wholeness, embracing all facets of my soul.',
+      composition:'White+red soy wax layers 250g · Sandalwood 4d · Royal Home 3d · Bergamot 3d · Herbs: wormwood, sage · Crystal: fluorite',
+      tags:['Meditation','Balance','Fluorite','Integration'] },
+    HE:{ name:'איזון צל ואור', cat:'מדיטציה',
+      intention:'בריקוד האור והצל אני מוצאת את שלמותי, מאמצת את כל פנות נשמתי.',
+      composition:'שעוות סויה לבנה+אדומה שכבות 250גר · סנדלווד · רויאל הום · ברגמוט · לענה, מרווה · פלואוריט',
+      tags:['מדיטציה','איזון','פלואוריט','אינטגרציה'] }
+  },
+  'soul-freq': {
+    icon:'🕯️', price:'60 / 120 / 220 ₪', color:'#aa44ff',
+    RU:{ name:'Soul Frequency Gratitude', cat:'БЛАГОДАРНОСТЬ / ГАРМОНИЯ',
+      intention:'Моя благодарность вибрирует на частоте изобилия, и вселенная отвечает мне взаимным сиянием.',
+      composition:'Воск бежевый кофе 250г · Апельсин 4к · Coffee 3к · Geranium 3к · Травы: хризантемы, звёздчатый анис · Камень: гранат · Декор: сердечко',
+      tags:['Благодарность','Изобилие','Гранат','Радость'] },
+    EN:{ name:'Soul Frequency Gratitude', cat:'GRATITUDE',
+      intention:'My gratitude vibrates at the frequency of abundance and the universe responds with radiance.',
+      composition:'Coffee beige soy wax 250g · Orange 4d · Coffee 3d · Geranium 3d · Herbs: chrysanthemums, star anise · Crystal: garnet',
+      tags:['Gratitude','Abundance','Garnet','Joy'] },
+    HE:{ name:'תודה בתדר הנשמה', cat:'הכרת תודה / הרמוניה',
+      intention:'ההכרת תודה שלי רוטטת בתדר השפע והיקום עונה בזוהר.',
+      composition:'שעוות סויה בז\' קפה 250גר · תפוז · קפה · גרניום · כריזנתמות, אניס · גרנט',
+      tags:['הכרת תודה','שפע','גרנט','שמחה'] }
+  },
+  // OILS
+  'light-armor': {
+    icon:'✨', price:'90 / 220 ₪', color:'#4488ff',
+    RU:{ name:'Invisible Light Armor', cat:'ЗАЩИТА',
+      intention:'Это масло — твой невидимый щит. Носи его как броню из света, сквозь которую проходит только благо.',
+      composition:'База Argan 10мл · Лаванда 3к · Rosemary 2к · Pine 2к · Камень: тигровый глаз · Наносить на запястья и точки пульса',
+      tags:['Защита','Щит','Тигровый глаз','Ежедневное масло'] },
+    EN:{ name:'Invisible Light Armor', cat:'PROTECTION',
+      intention:'This oil is your invisible shield. Wear it as armor made of light.',
+      composition:'Argan base 10ml · Lavender 3d · Rosemary 2d · Pine 2d · Crystal: tiger\'s eye · Apply to wrists and pulse points',
+      tags:['Protection','Shield','Tigers Eye','Daily Oil'] },
+    HE:{ name:'שריון אור בלתי-נראה', cat:'הגנה',
+      intention:'השמן הזה הוא המגן הבלתי-נראה שלך. לבש/י אותו כשריון של אור.',
+      composition:'בסיס ארגן 10מ״ל · לבנדר · רוזמרין · אורן · עין הנמר · למרוח על פרקי הידיים',
+      tags:['הגנה','מגן','עין הנמר','שמן יומיומי'] }
+  },
+  'self-love': {
+    icon:'✨', price:'90 / 220 ₪', color:'#ff44aa',
+    RU:{ name:'Self-Love Galaxy', cat:'ЛЮБОВЬ',
+      intention:'Я — целая вселенная, достойная любви, и каждое прикосновение этого масла напоминает мне об этом.',
+      composition:'База Argan 10мл · Rose 2к · Bergamot 3к · Sandalwood 1к · Камень: розовый кварц',
+      tags:['Любовь к себе','Принятие','Розовый кварц','Самооценка'] },
+    EN:{ name:'Self-Love Galaxy', cat:'LOVE',
+      intention:'I am a whole universe worthy of love, every touch reminds me of this.',
+      composition:'Argan base 10ml · Rose 2d · Bergamot 3d · Sandalwood 1d · Crystal: rose quartz',
+      tags:['Self-Love','Acceptance','Rose Quartz','Self-Worth'] },
+    HE:{ name:'גלקסיית האהבה-העצמית', cat:'אהבה',
+      intention:'אני יקום שלם הראוי לאהבה, וכל מגע מזכיר לי זאת.',
+      composition:'בסיס ארגן 10מ״ל · ורד · ברגמוט · סנדלווד · קוורץ ורוד',
+      tags:['אהבה עצמית','קבלה','קוורץ ורוד','ערך עצמי'] }
+  },
+  'success-magnet': {
+    icon:'✨', price:'90 / 220 ₪', color:'#44ff88',
+    RU:{ name:'Success Magnet', cat:'УСПЕХ',
+      intention:'Я намагничиваю пространство вокруг себя на удачу и лёгкие победы.',
+      composition:'База Argan 10мл · Bergamot 3к · Апельсин 2к · Royal Home 1к · Камень: авантюрин',
+      tags:['Успех','Удача','Авантюрин','Переговоры'] },
+    EN:{ name:'Success Magnet', cat:'SUCCESS',
+      intention:'I magnetize the space around me for luck and effortless victories.',
+      composition:'Argan base 10ml · Bergamot 3d · Orange 2d · Royal Home 1d · Crystal: aventurine',
+      tags:['Success','Luck','Aventurine','Negotiations'] },
+    HE:{ name:'מגנט ההצלחה', cat:'הצלחה',
+      intention:'אני ממגנטת את המרחב סביבי להצלחה ולניצחונות קלים.',
+      composition:'בסיס ארגן 10מ״ל · ברגמוט · תפוז · רויאל הום · אוונטורין',
+      tags:['הצלחה','מזל','אוונטורין','משא ומתן'] }
+  },
+  'forest': {
+    icon:'✨', price:'90 / 220 ₪', color:'#44ffee',
+    RU:{ name:'Breath of the Forest', cat:'ЗДОРОВЬЕ',
+      intention:'С каждым вдохом лёгкость наполняет моё тело, а сила леса очищает и укрепляет его.',
+      composition:'База Argan 10мл · Эвкалипт 3к · Лимонный эвкалипт 2к · Pine 1к · Камень: горный хрусталь',
+      tags:['Здоровье','Дыхание','Горный хрусталь','Иммунитет'] },
+    EN:{ name:'Breath of the Forest', cat:'HEALTH',
+      intention:'With every breath lightness fills my body and the forest\'s power cleanses it.',
+      composition:'Argan base 10ml · Eucalyptus 3d · Lemon eucalyptus 2d · Pine 1d · Crystal: clear quartz',
+      tags:['Health','Breathing','Clear Quartz','Immunity'] },
+    HE:{ name:'נשימת היער', cat:'בריאות',
+      intention:'עם כל נשימה קלילות ממלאת את גופי וכוח היער מטהר אותו.',
+      composition:'בסיס ארגן 10מ״ל · אקליפטוס · אקליפטוס לימון · אורן · קוורץ שקוף',
+      tags:['בריאות','נשימה','קוורץ שקוף','חיסוניות'] }
+  },
+  'velvet-dream': {
+    icon:'✨', price:'90 / 220 ₪', color:'#aa44ff',
+    RU:{ name:'Velvet Dream Portal', cat:'СОН / ГАРМОНИЯ',
+      intention:'Я погружаюсь в бархатную глубину снов, где меня ждут исцеление и ответы.',
+      composition:'База Argan 10мл · Лаванда 4к · Ylang-ylang 1к · Ваниль 1к · Камень: аметист · Наносить на виски и запястья перед сном',
+      tags:['Сон','Исцеление','Аметист','Осознанные сны'] },
+    EN:{ name:'Velvet Dream Portal', cat:'SLEEP / HARMONY',
+      intention:'I dive into the velvet depths of dreams where healing and answers await.',
+      composition:'Argan base 10ml · Lavender 4d · Ylang-ylang 1d · Vanilla 1d · Crystal: amethyst · Apply to temples and wrists before sleep',
+      tags:['Sleep','Healing','Amethyst','Lucid Dreams'] },
+    HE:{ name:'פורטל חלום קטיפתי', cat:'שינה / הרמוניה',
+      intention:'אני צוללת לעומק הקטיפתי של החלומות שם ממתינים ריפוי ותשובות.',
+      composition:'בסיס ארגן 10מ״ל · לבנדר · ילנג-ילנג · וניל · אמטיסט · למרוח על הרקות לפני השינה',
+      tags:['שינה','ריפוי','אמטיסט','חלומות צלולים'] }
+  },
+  // SOAPS
+  'dual-detox': {
+    icon:'🫧', price:'45 / 80 ₪', color:'#aaaaaa',
+    RU:{ name:'Dual Reality Detox', cat:'ЧИСТКА / ДЕТОКС',
+      intention:'Это мыло стирает грань между физической и энергетической тяжестью, оставляя только лёгкость.',
+      composition:'Senteur de Marseille 100г · Чёрная соль 15г · Эвкалипт 5к · Lemongrass 3к · Травы внутри: крапива, шалфей · Камень: флюорит',
+      tags:['Детокс','Очищение','Флюорит','Чёрная соль'] },
+    EN:{ name:'Dual Reality Detox', cat:'CLEANSING / DETOX',
+      intention:'This soap erases the boundary between physical and energetic heaviness.',
+      composition:'Senteur de Marseille 100g · Black salt 15g · Eucalyptus 5d · Lemongrass 3d · Herbs: nettle, sage · Crystal: fluorite',
+      tags:['Detox','Cleansing','Fluorite','Black Salt'] },
+    HE:{ name:'דטוקס מציאות כפולה', cat:'טיהור / דטוקס',
+      intention:'הסבון הזה מוחק את הגבול בין כובד פיזי לאנרגטי.',
+      composition:'Senteur de Marseille 100גר · מלח שחור 15גר · אקליפטוס · למונגרס · קרפדה, מרווה · פלואוריט',
+      tags:['דטוקס','ניקוי','פלואוריט','מלח שחור'] }
+  },
+  'pink-nebula': {
+    icon:'🫧', price:'45 / 80 ₪', color:'#ff44aa',
+    RU:{ name:'Pink Nebula Tenderness', cat:'НЕЖНОСТЬ / ЛЮБОВЬ',
+      intention:'Каждая пенка — это облако из розовой туманности, которое обволакивает кожу заботой и любовью.',
+      composition:'Rubes Care Olive Oil 100г · Розовая соль 10г · Rose 3к · Лаванда 2к · Цветы: лепестки роз, пионы · Камень: розовый кварц',
+      tags:['Нежность','Любовь','Розовый кварц','Чувствительная кожа'] },
+    EN:{ name:'Pink Nebula Tenderness', cat:'TENDERNESS / LOVE',
+      intention:'Every lather is a cloud from a pink nebula enveloping your skin with love.',
+      composition:'Rubes Care Olive Oil 100g · Pink salt 10g · Rose 3d · Lavender 2d · Flowers: rose petals, peonies · Crystal: rose quartz',
+      tags:['Tenderness','Love','Rose Quartz','Sensitive Skin'] },
+    HE:{ name:'רכות ערפילית ורודה', cat:'רוך / אהבה',
+      intention:'כל קצף הוא ענן מערפילית ורודה שעוטף את עורך באהבה.',
+      composition:'Rubes Care שמן זית 100גר · מלח ורוד 10גר · ורד · לבנדר · עלי ורד, אדמונית · קוורץ ורוד',
+      tags:['רוך','אהבה','קוורץ ורוד','עור רגיש'] }
+  },
+  'solar-pulse': {
+    icon:'🫧', price:'45 / 80 ₪', color:'#ffaa00',
+    RU:{ name:'Solar Pulse Energy', cat:'ЭНЕРГИЯ',
+      intention:'Утренний душ превращается в запуск солнечного двигателя, заряжающего меня силой на весь день.',
+      composition:'Senteur de Marseille 100г · Coffee 3к · Апельсин 4к · Lemon 3к · Декор: хризантемы, green ball, звёздчатый анис · Камень: гранат',
+      tags:['Энергия','Бодрость','Гранат','Цитрус'] },
+    EN:{ name:'Solar Pulse Energy', cat:'ENERGY',
+      intention:'The morning shower becomes a launch of the solar engine charging you with power.',
+      composition:'Senteur de Marseille 100g · Coffee 3d · Orange 4d · Lemon 3d · Decor: chrysanthemums, star anise · Crystal: garnet',
+      tags:['Energy','Vitality','Garnet','Citrus'] },
+    HE:{ name:'אנרגיית פולס סולארי', cat:'אנרגיה',
+      intention:'המקלחת הבוקרית הופכת לשיגור מנוע סולארי שטוען אותך בכוח.',
+      composition:'Senteur de Marseille 100גר · קפה · תפוז · לימון · כריזנתמות, אניס · גרנט',
+      tags:['אנרגיה','חיוניות','גרנט','הדרים'] }
+  },
+  'black-salt': {
+    icon:'🫧', price:'45 / 80 ₪', color:'#4488ff',
+    RU:{ name:'Black Salt Shield', cat:'ЗАЩИТА / ЧИСТКА',
+      intention:'С каждым смыванием вода уносит не только пыль дня, но и все прилипшие чужие взгляды и энергии.',
+      composition:'Senteur de Marseille 100г · Чёрная соль 20г · Lemongrass 4к · Лаванда 3к · Pine 3к · Травы: чабрец, полынь · Камень: лабрадорит',
+      tags:['Защита','Чистка','Лабрадорит','Чёрная соль'] },
+    EN:{ name:'Black Salt Shield', cat:'PROTECTION / CLEANSING',
+      intention:'With every rinse water carries away the day\'s dust and all clinging foreign energies.',
+      composition:'Senteur de Marseille 100g · Black salt 20g · Lemongrass 4d · Lavender 3d · Pine 3d · Herbs: thyme, wormwood · Crystal: labradorite',
+      tags:['Protection','Cleansing','Labradorite','Black Salt'] },
+    HE:{ name:'מגן מלח שחור', cat:'הגנה / טיהור',
+      intention:'עם כל שטיפה המים נושאים את אבק היום ואת כל האנרגיות הזרות.',
+      composition:'Senteur de Marseille 100גר · מלח שחור 20גר · למונגרס · לבנדר · אורן · תימין, לענה · לברדוריט',
+      tags:['הגנה','ניקוי','לברדוריט','מלח שחור'] }
+  },
+  'vanilla-silk': {
+    icon:'🫧', price:'45 / 80 ₪', color:'#aa44ff',
+    RU:{ name:'Vanilla Silk Luxury', cat:'РОСКОШЬ / ГАРМОНИЯ',
+      intention:'Этот кусочек шёлка из ароматов — твоя личная церемония роскоши, доступная здесь и сейчас.',
+      composition:'Rubes Care Olive Oil 100г · Ваниль крем 5к · Sandalwood 2к · Ylang-ylang 1к · Цветы: globe amaranth, лепестки роз, магнолия · Камень: аметист',
+      tags:['Роскошь','Гармония','Аметист','СПА-уход'] },
+    EN:{ name:'Vanilla Silk Luxury', cat:'LUXURY / HARMONY',
+      intention:'This silken piece of aromas is your personal ceremony of luxury, here and now.',
+      composition:'Rubes Care Olive Oil 100g · Vanilla cream 5d · Sandalwood 2d · Ylang-ylang 1d · Flowers: globe amaranth, rose petals, magnolia · Crystal: amethyst',
+      tags:['Luxury','Harmony','Amethyst','Spa Care'] },
+    HE:{ name:'יוקרת וניל משי', cat:'יוקרה / הרמוניה',
+      intention:'חתיכת המשי הזו מארומות היא הטקס האישי שלך של יוקרה, כאן ועכשיו.',
+      composition:'Rubes Care שמן זית 100גר · קרם וניל · סנדלווד · ילנג-ילנג · globe amaranth, עלי ורד, מגנוליה · אמטיסט',
+      tags:['יוקרה','הרמוניה','אמטיסט','ספא'] }
+  },
+  // CRYSTALS
+  'rose-quartz': {
+    icon:'💎', price:'30 ₪', color:'#ff44aa',
+    RU:{ name:'Розовый кварц', cat:'ЛЮБОВЬ',
+      intention:'Камень безусловной любви и сердца. Привлекает · притягивает.',
+      composition:'Стихия: Вода · Чакра: Сердечная · Намерение: Любовь · Действие: Привлекает и притягивает',
+      tags:['Любовь','Вода','Сердечная чакра','Притяжение'] },
+    EN:{ name:'Rose Quartz', cat:'LOVE',
+      intention:'Stone of unconditional love and the heart. Attracts · magnetizes.',
+      composition:'Element: Water · Chakra: Heart · Intention: Love · Action: Attracts and magnetizes',
+      tags:['Love','Water','Heart Chakra','Attraction'] },
+    HE:{ name:'קוורץ ורוד', cat:'אהבה',
+      intention:'אבן האהבה הבלתי-מותנית והלב. מושך · притягивает.',
+      composition:'יסוד: מים · צ׳אקרה: לב · כוונה: אהבה · פעולה: מושך ומקרב',
+      tags:['אהבה','מים','צ׳אקרת הלב','משיכה'] }
+  },
+  'amethyst': {
+    icon:'💎', price:'35 ₪', color:'#aa44ff',
+    RU:{ name:'Аметист', cat:'ЗАЩИТА / ИНТУИЦИЯ',
+      intention:'Камень защиты, интуиции и ясности. Очищает · усиливает.',
+      composition:'Стихия: Воздух · Чакра: Третий глаз · Намерение: Защита · Действие: Очищает и усиливает',
+      tags:['Защита','Воздух','Третий глаз','Интуиция'] },
+    EN:{ name:'Amethyst', cat:'PROTECTION',
+      intention:'Stone of protection, intuition and clarity. Cleanses · amplifies.',
+      composition:'Element: Air · Chakra: Third Eye · Intention: Protection · Action: Cleanses and amplifies',
+      tags:['Protection','Air','Third Eye','Intuition'] },
+    HE:{ name:'אמטיסט', cat:'הגנה',
+      intention:'אבן ההגנה, האינטואיציה והבהירות. מטהר · מגביר.',
+      composition:'יסוד: אוויר · צ׳אקרה: עין שלישית · כוונה: הגנה · פעולה: מטהר ומגביר',
+      tags:['הגנה','אוויר','עין שלישית','אינטואיציה'] }
+  },
+  'citrine': {
+    icon:'💎', price:'45 ₪', color:'#ffaa00',
+    RU:{ name:'Цитрин', cat:'УСПЕХ / ИЗОБИЛИЕ',
+      intention:'Камень успеха, изобилия и солнечной энергии. Притягивает изобилие.',
+      composition:'Стихия: Огонь · Чакра: Солнечное сплетение · Намерение: Успех · Действие: Притягивает изобилие',
+      tags:['Успех','Огонь','Солнечное сплетение','Изобилие'] },
+    EN:{ name:'Citrine', cat:'SUCCESS',
+      intention:'Stone of success, abundance and solar energy. Attracts abundance.',
+      composition:'Element: Fire · Chakra: Solar Plexus · Intention: Success · Action: Attracts abundance',
+      tags:['Success','Fire','Solar Plexus','Abundance'] },
+    HE:{ name:'ציטרין', cat:'הצלחה',
+      intention:'אבן ההצלחה, השפע ואנרגיית השמש. מושך שפע.',
+      composition:'יסוד: אש · צ׳אקרה: סולארית · כוונה: הצלחה · פעולה: מושך שפע',
+      tags:['הצלחה','אש','סולארית','שפע'] }
+  },
+  'fluorite': {
+    icon:'💎', price:'60 ₪', color:'#44ffee',
+    RU:{ name:'Флюорит', cat:'ГАРМОНИЯ / ФОКУС',
+      intention:'Камень гармонии, фокуса и ментальной ясности. Балансирует · очищает.',
+      composition:'Стихия: Ветер · Чакра: Сердце · Намерение: Гармония · Действие: Балансирует и очищает',
+      tags:['Гармония','Ветер','Сердце','Ясность'] },
+    EN:{ name:'Fluorite', cat:'HARMONY',
+      intention:'Stone of harmony, focus and mental clarity. Balances · cleanses.',
+      composition:'Element: Wind · Chakra: Heart · Intention: Harmony · Action: Balances and cleanses',
+      tags:['Harmony','Wind','Heart','Clarity'] },
+    HE:{ name:'פלואוריט', cat:'הרמוניה',
+      intention:'אבן ההרמוניה, המיקוד והבהירות המנטלית. מאזן · מטהר.',
+      composition:'יסוד: רוח · צ׳אקרה: לב · כוונה: הרמוניה · פעולה: מאזן ומטהר',
+      tags:['הרמוניה','רוח','לב','בהירות'] }
+  },
+  'orchid-calcite': {
+    icon:'💎', price:'55 ₪', color:'#ffaa00',
+    RU:{ name:'Орхидный кальцит', cat:'ТВОРЧЕСТВО · РЕДКИЙ',
+      intention:'Камень творчества, чувственности и роста. Раскрывает · вдохновляет.',
+      composition:'Стихия: Огонь · Чакра: Сакральная · Намерение: Творчество · Действие: Раскрывает и вдохновляет · ✦ РЕДКИЙ КАМЕНЬ ✦',
+      tags:['Творчество','Огонь','Сакральная','РЕДКИЙ'] },
+    EN:{ name:'Orchid Calcite', cat:'CREATIVITY · RARE',
+      intention:'Stone of creativity, sensuality and growth. Unlocks · inspires.',
+      composition:'Element: Fire · Chakra: Sacral · Intention: Creativity · Action: Unlocks and inspires · ✦ RARE STONE ✦',
+      tags:['Creativity','Fire','Sacral','RARE'] },
+    HE:{ name:'קלציט סחלב', cat:'יצירתיות · נדיר',
+      intention:'אבן היצירתיות, החושניות והצמיחה. פותח · מעורר.',
+      composition:'יסוד: אש · צ׳אקרה: סקרל · כוונה: יצירה · פעולה: פותח ומעורר · ✦ אבן נדירה ✦',
+      tags:['יצירתיות','אש','סקרל','נדיר'] }
+  },
+};
+
+// ── STATE ────────────────────────────────────────────────────
+let currentLang = 'RU';
+let currentModalLang = 'RU';
+let currentProductId = null;
+
+const TAGLINES = {
+  RU:'✦ С благим намерением ✦',
+  EN:'✦ With Pure Intention ✦',
+  HE:'✦ עם כוונה טהורה ✦'
+};
+const SEC_TITLES = {
+  candles:{ RU:'✦ Свечи ✦', EN:'✦ Candles ✦', HE:'✦ נרות ✦' },
+  oils:   { RU:'✦ Масла ✦', EN:'✦ Oils ✦',    HE:'✦ שמנים ✦' },
+  soaps:  { RU:'✦ Мыло ✦',  EN:'✦ Soaps ✦',   HE:'✦ סבונים ✦' },
+  crystals:{ RU:'✦ Кристаллы ✦', EN:'✦ Crystals ✦', HE:'✦ קריסטלים ✦' },
+};
+const MODAL_LABELS = {
+  intention:{ RU:'НАМЕРЕНИЕ', EN:'INTENTION', HE:'כוונה' },
+  composition:{ RU:'СОСТАВ', EN:'COMPOSITION', HE:'מרכיבים' },
+  properties:{ RU:'СВОЙСТВА', EN:'PROPERTIES', HE:'מאפיינים' },
+};
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent===lang));
+  document.getElementById('tagline').textContent = TAGLINES[lang];
+  // Update nav tabs
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.textContent = tab.dataset[lang.toLowerCase()] || tab.dataset.ru;
+  });
+  // Update section titles
+  ['candles','oils','soaps','crystals'].forEach(s => {
+    const el = document.getElementById(`sec-title-${s}`);
+    if(el) el.textContent = SEC_TITLES[s][lang];
+  });
+  // Update modal if open
+  if(currentProductId) renderModal();
+}
+
+function showSection(name) {
+  document.querySelectorAll('.product-section').forEach(s => s.classList.remove('visible'));
+  document.getElementById('sec-'+name).classList.add('visible');
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.id==='tab-'+name);
+  });
+}
+
+function openModal(id) {
+  currentProductId = id;
+  currentModalLang = currentLang;
+  const p = PRODUCTS[id];
+  if(!p) return;
+  // Set modal color
+  document.getElementById('modal-box').style.setProperty('--modal-color', p.color);
+  document.getElementById('modal-box').style.setProperty('--modal-shadow', p.color+'33');
+  renderModal();
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function renderModal() {
+  const p = PRODUCTS[currentProductId];
+  const d = p[currentModalLang] || p['RU'];
+  const imgEl = document.getElementById('modal-img');
+  const imgSrc = PRODUCT_IMAGES[currentProductId];
+  if(imgEl && imgSrc){ imgEl.src = imgSrc; imgEl.style.display='block'; }
+  else if(imgEl){ imgEl.style.display='none'; }
+  document.getElementById('modal-icon').textContent = p.icon;
+  document.getElementById('modal-name').textContent = d.name;
+  document.getElementById('modal-cat').textContent = d.cat;
+  document.getElementById('modal-price').textContent = p.price;
+  document.getElementById('modal-intention').textContent = d.intention;
+  document.getElementById('modal-composition').textContent = d.composition;
+  document.getElementById('lbl-intention').textContent = MODAL_LABELS.intention[currentModalLang];
+  document.getElementById('lbl-composition').textContent = MODAL_LABELS.composition[currentModalLang];
+  document.getElementById('lbl-properties').textContent = MODAL_LABELS.properties[currentModalLang];
+  // Tags
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = d.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
+  // Lang buttons
+  document.querySelectorAll('.modal-lang-btn').forEach(b =>
+    b.classList.toggle('active', b.textContent===currentModalLang));
+}
+
+function setModalLang(lang) {
+  currentModalLang = lang;
+  document.querySelectorAll('.modal-lang-btn').forEach(b =>
+    b.classList.toggle('active', b.textContent===lang));
+  renderModal();
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+  currentProductId = null;
+}
+
+function closeModalOutside(e) {
+  if(e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
