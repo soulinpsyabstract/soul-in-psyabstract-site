@@ -199,7 +199,9 @@
         var price=a.base_token_price_usd?'$'+parseFloat(a.base_token_price_usd).toFixed(5):'—';
         var liq=a.reserve_in_usd?'$'+Math.round(parseFloat(a.reserve_in_usd)).toLocaleString():'—';
         var vol=a.volume_usd&&a.volume_usd.h24?'$'+Math.round(parseFloat(a.volume_usd.h24)).toLocaleString():'—';
-        el.innerHTML='Base Network · Liquidity: <strong style="color:#44ff88">'+liq+'</strong> · Price: <strong style="color:#44ff88">'+price+'</strong> · 24h Vol: <strong style="color:#44ff88">'+vol+'</strong>';
+        var ratio=a.volume_usd&&a.reserve_in_usd?parseFloat(a.volume_usd.h24)/parseFloat(a.reserve_in_usd)*100:0;
+        var health=ratio<0.5?['Low','#ff4444']:ratio<3?['Normal','#44ff88']:['High','#ffd700'];
+        el.innerHTML='Base Network · Liquidity: <strong style="color:#44ff88">'+liq+'</strong> · Price: <strong style="color:#44ff88">'+price+'</strong> · 24h Vol: <strong style="color:#44ff88">'+vol+'</strong> · Pool: <strong style="color:'+health[1]+'">'+health[0]+'</strong>';
       })
       .catch(function(){el.textContent='Base Network · Price feed unavailable';});
   })();

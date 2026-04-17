@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SIPA OS — Self-Integrating Persistent Architecture</title>
+  <meta name="description" content="Autonomous multi-node operating system built by a neurodivergent artist. 14 substances. 3 nodes. Forensic-grade integrity. Built to remember what the brain forgets.">
+  <meta property="og:title" content="SIPA OS — The System That Doesn't Forget">
+  <meta property="og:description" content="Autonomous multi-node OS. 14 substances. 3 nodes. 8 AI agents. Forensic-grade integrity. Built by Aelin AquaSoul.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="assets/css/main.css?v=6">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0a0d10">
+  <style>
+    /* SIPA OS page styles */
+    .os-hero{text-align:center;padding:2.5rem 0 1.5rem;position:relative;overflow:hidden}
+    .os-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(127,243,231,.06) 0%,transparent 70%);pointer-events:none}
+    .os-title{font-family:'Courier New',monospace;font-size:clamp(36px,7vw,56px);font-weight:900;color:var(--aqua);letter-spacing:.15em;margin:0;text-shadow:0 0 40px rgba(127,243,231,.3),0 0 80px rgba(127,243,231,.1)}
+    .os-subtitle{font-family:'Courier New',monospace;font-size:clamp(11px,2.5vw,14px);color:var(--muted);letter-spacing:.3em;text-transform:uppercase;margin-top:8px}
+    .os-tagline{font-size:18px;color:var(--ink);margin-top:18px;line-height:1.6;max-width:600px;margin-left:auto;margin-right:auto}
+    .os-counter{display:inline-flex;align-items:baseline;gap:8px;margin-top:20px;font-family:'Courier New',monospace}
+    .os-counter .num{font-size:clamp(28px,5vw,42px);font-weight:900;color:#4ade80;text-shadow:0 0 20px rgba(74,222,128,.3)}
+    .os-counter .lbl{font-size:14px;color:var(--muted);letter-spacing:.08em}
+
+    /* Substances grid */
+    .sub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:1rem}
+    .sub-cell{background:rgba(127,243,231,.03);border:1px solid rgba(127,243,231,.12);border-radius:8px;padding:10px 12px;text-align:center;transition:all .2s;position:relative;overflow:hidden}
+    .sub-cell:hover{background:rgba(127,243,231,.08);border-color:rgba(127,243,231,.3);transform:translateY(-2px)}
+    .sub-cell .sub-icon{font-size:20px;margin-bottom:4px}
+    .sub-cell .sub-name{font-family:'Courier New',monospace;font-size:11px;font-weight:700;color:var(--aqua);letter-spacing:.06em}
+    .sub-cell .sub-desc{font-size:10px;color:var(--muted);margin-top:2px;line-height:1.3}
+
+    /* Stats bar */
+    .os-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin:1.2rem 0}
+    .os-stat{background:rgba(127,243,231,.04);border:1px solid rgba(127,243,231,.12);border-radius:8px;padding:12px 10px;text-align:center}
+    .os-stat .v{font-family:'Courier New',monospace;font-size:22px;font-weight:900;color:var(--aqua)}
+    .os-stat .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+
+    /* Node visualization */
+    .node-viz{display:flex;justify-content:center;align-items:center;gap:clamp(16px,4vw,40px);margin:1.5rem 0;flex-wrap:wrap}
+    .node-box{width:100px;height:100px;border:2px solid rgba(127,243,231,.25);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:relative;background:rgba(127,243,231,.03)}
+    .node-box .dot{width:10px;height:10px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80;animation:nodePulse 2s infinite}
+    .node-box .nname{font-family:'Courier New',monospace;font-size:13px;font-weight:700;color:var(--aqua)}
+    .node-box .nrole{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+    .node-line{width:clamp(20px,3vw,40px);height:2px;background:linear-gradient(90deg,rgba(127,243,231,.4),rgba(127,243,231,.15));position:relative}
+    .node-line::after{content:'';position:absolute;top:-3px;right:-2px;width:8px;height:8px;border-top:2px solid rgba(127,243,231,.4);border-right:2px solid rgba(127,243,231,.4);transform:rotate(45deg)}
+    @keyframes nodePulse{0%,100%{box-shadow:0 0 6px #4ade80}50%{box-shadow:0 0 16px #4ade80,0 0 30px rgba(74,222,128,.3)}}
+
+    /* AI team */
+    .ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:1rem}
+    .ai-card{background:rgba(179,145,255,.04);border:1px solid rgba(179,145,255,.15);border-radius:8px;padding:10px 12px;transition:all .2s}
+    .ai-card:hover{background:rgba(179,145,255,.08);border-color:rgba(179,145,255,.3)}
+    .ai-card .ai-name{font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:var(--violet)}
+    .ai-card .ai-role{font-size:10px;color:var(--muted);margin-top:2px}
+    .ai-card .ai-model{font-size:9px;color:rgba(179,145,255,.5);margin-top:4px;font-family:'Courier New',monospace}
+
+    /* Terminal block */
+    .os-term{background:#050709;border:1px solid rgba(127,243,231,.25);border-radius:8px;padding:1.2rem 1.4rem;font-family:'Courier New',monospace;font-size:12.5px;line-height:1.8;color:#aaa;position:relative;overflow:hidden}
+    .os-term::before{content:'terminal';display:block;color:#444;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem;padding-bottom:.6rem;border-bottom:1px solid rgba(127,243,231,.1)}
+    .os-term .hl{color:#7ff3e7}
+    .os-term .gr{color:#4ade80}
+    .os-term .am{color:#fbbf24}
+    .os-term .rd{color:#f87171}
+    .os-term .dim{color:#555}
+    .os-term .wh{color:#e2e8f0}
+
+    /* Philosophy section */
+    .philo{border-left:3px solid var(--aqua);padding-left:18px;margin:1.2rem 0;font-size:15px;line-height:1.8;color:var(--ink)}
+    .philo-author{font-size:12px;color:var(--muted);font-family:'Courier New',monospace;margin-top:8px}
+
+    /* Timeline */
+    .tl{position:relative;padding-left:24px;margin:1rem 0}
+    .tl::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--aqua),rgba(127,243,231,.1))}
+    .tl-item{position:relative;margin-bottom:14px;padding-left:8px}
+    .tl-item::before{content:'';position:absolute;left:-22px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--aqua);box-shadow:0 0 8px rgba(127,243,231,.4)}
+    .tl-date{font-family:'Courier New',monospace;font-size:11px;color:var(--aqua);letter-spacing:.06em}
+    .tl-text{font-size:13px;color:var(--ink);margin-top:2px}
+
+    /* Verification badges */
+    .verify-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem}
+    .verify-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.2);border-radius:20px;padding:6px 14px;font-family:'Courier New',monospace;font-size:11px;color:#4ade80;text-decoration:none;transition:all .2s}
+    .verify-badge:hover{background:rgba(74,222,128,.12);text-decoration:none;color:#4ade80}
+
+    /* Scroll reveal */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* Responsive */
+    @media(max-width:500px){
+      .sub-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+      .ai-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+      .node-viz{gap:10px}
+      .node-box{width:80px;height:80px}
+    }
+  </style>
+</head>
+<body data-page="sipa-os">
+  <header class="header">
+    <div class="wrap">
+      <div class="brand">
+        <div>
+          <h1>Soul In PsyAbstract</h1>
+          <div class="tag">SIPA OS — Self-Integrating Persistent Architecture</div>
+        </div>
+        <div class="tools">
+          <button class="btn" id="lang-toggle">EN</button>
+        </div>
+      </div>
+      <nav class="nav">
+        <a class="pill" href="index.html" data-i18n="nav.home">Главная</a>
+        <a class="pill" href="gallery.html" data-i18n="nav.gallery">Галерея</a>
+        <a class="pill" href="store.html" data-i18n="nav.shop">Шоп</a>
+        <a class="pill" href="nft.html" data-i18n="nav.nft">NFT</a>
+        <a class="pill" href="token.html">$SIPA</a>
+        <a class="pill" href="studio.html" data-i18n="nav.studio">Студия</a>
+        <a class="pill" href="manifest.html" data-i18n="nav.manifest">Манифест</a>
+        <a class="pill" href="poems.html" data-i18n="nav.poems">Стихи</a>
+        <a class="pill" href="songs.html" data-i18n="nav.songs">Песни</a>
+        <a class="pill" href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a class="pill" href="contacts.html" data-i18n="nav.contacts">Контакты</a>
+        <a class="pill" href="ai.html" data-i18n="nav.ai">AI</a>
+        <a class="pill active" href="sipa-os.html">SIPA OS</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ═══ HERO ═══ -->
+    <section class="card os-hero">
+      <div class="os-title">SIPA OS</div>
+      <div class="os-subtitle">Self-Integrating Persistent Architecture</div>
+
+      <div data-lang="ru">
+        <div class="os-tagline">Операционная система, которая не забывает.<br>Построена нейродивергентным архитектором.<br>Работает автономно. Каждый день. Без остановки.</div>
+      </div>
+      <div data-lang="en">
+        <div class="os-tagline">The operating system that doesn't forget.<br>Built by a neurodivergent architect.<br>Runs autonomously. Every day. No stop.</div>
+      </div>
+
+      <div class="os-counter">
+        <span class="num" id="uptime-days">0</span>
+        <span class="lbl" data-i18n="os.days_alive">days alive</span>
+      </div>
+    </section>
+
+    <!-- ═══ WHAT IS SIPA OS ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>Что такое SIPA OS</h2>
+        <p style="color:var(--muted);line-height:1.8;font-size:15px">
+          SIPA OS — это автономная многоузловая система, которая работает на трёх устройствах одновременно.
+          Она следит за целостностью каждого файла, синхронизирует данные между нодами,
+          автоматически лечит себя при сбоях, и ведёт криминалистический лог каждого действия.
+        </p>
+        <p style="color:var(--muted);line-height:1.8;font-size:15px;margin-top:10px">
+          Это не фреймворк. Не библиотека. Не стартап-продукт.<br>
+          Это <strong style="color:var(--ink)">внешняя память</strong> — когнитивный протез,
+          построенный человеком с СДВГ и ПРЛ, которому мозг не даёт помнить.
+          Система помнит вместо него.
+        </p>
+      </div>
+      <div data-lang="en">
+        <h2>What is SIPA OS</h2>
+        <p style="color:var(--muted);line-height:1.8;font-size:15px">
+          SIPA OS is an autonomous multi-node system running across three devices simultaneously.
+          It monitors the integrity of every file, syncs data between nodes,
+          self-heals on failure, and maintains a forensic log of every action.
+        </p>
+        <p style="color:var(--muted);line-height:1.8;font-size:15px;margin-top:10px">
+          This is not a framework. Not a library. Not a startup product.<br>
+          This is <strong style="color:var(--ink)">external memory</strong> — a cognitive prosthesis
+          built by a person with ADHD and BPD whose brain refuses to remember.
+          The system remembers instead.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ LIVE STATS ═══ -->
+    <section class="card reveal">
+      <h2 style="font-family:'Courier New',monospace;font-size:16px;letter-spacing:.1em">LIVE METRICS</h2>
+      <div class="os-stats">
+        <div class="os-stat">
+          <div class="v" id="stat-uptime">0d</div>
+          <div class="l">Uptime</div>
+        </div>
+        <div class="os-stat">
+          <div class="v" id="stat-heartbeats">120K+</div>
+          <div class="l">Heartbeats</div>
+        </div>
+        <div class="os-stat">
+          <div class="v">3</div>
+          <div class="l">Nodes</div>
+        </div>
+        <div class="os-stat">
+          <div class="v">14</div>
+          <div class="l">Substances</div>
+        </div>
+        <div class="os-stat">
+          <div class="v">8</div>
+          <div class="l">AI Agents</div>
+        </div>
+        <div class="os-stat">
+          <div class="v">39</div>
+          <div class="l">Data Hubs</div>
+        </div>
+        <div class="os-stat">
+          <div class="v">53</div>
+          <div class="l">Scripts</div>
+        </div>
+        <div class="os-stat">
+          <div class="v" id="stat-checks">14</div>
+          <div class="l">Guardian Checks</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ARCHITECTURE: 14 SUBSTANCES ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>Архитектура: 14 субстанций</h2>
+        <p class="small">Каждая субстанция — автономный модуль. Вместе они образуют живую систему.</p>
+      </div>
+      <div data-lang="en">
+        <h2>Architecture: 14 Substances</h2>
+        <p class="small">Each substance is an autonomous module. Together they form a living system.</p>
+      </div>
+      <div class="sub-grid">
+        <div class="sub-cell">
+          <div class="sub-icon">&#128065;</div>
+          <div class="sub-name">WATCH</div>
+          <div class="sub-desc">Heartbeat & log freshness</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128682;</div>
+          <div class="sub-name">GATE</div>
+          <div class="sub-desc">10-check file intake</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128737;</div>
+          <div class="sub-name">GUARD</div>
+          <div class="sub-desc">SHA-256 dedup & integrity</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128221;</div>
+          <div class="sub-name">REWRITE</div>
+          <div class="sub-desc">Version history preserve</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128274;</div>
+          <div class="sub-name">FIXATOR</div>
+          <div class="sub-desc">Hash & tag creation</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128269;</div>
+          <div class="sub-name">FORENSIC</div>
+          <div class="sub-desc">Append-only audit trail</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#9881;</div>
+          <div class="sub-name">EXECUTOR</div>
+          <div class="sub-desc">Controlled execution</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128022;</div>
+          <div class="sub-name">WATCHDOG</div>
+          <div class="sub-desc">Auto-heal processes</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128225;</div>
+          <div class="sub-name">BROADCAST</div>
+          <div class="sub-desc">Cross-hub notifications</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128268;</div>
+          <div class="sub-name">HUB ROUTER</div>
+          <div class="sub-desc">Auto file routing</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128203;</div>
+          <div class="sub-name">MANIFEST</div>
+          <div class="sub-desc">TSV registries</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128259;</div>
+          <div class="sub-name">SYNC</div>
+          <div class="sub-desc">Cross-node sync</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#128200;</div>
+          <div class="sub-name">STATUS</div>
+          <div class="sub-desc">Full system report</div>
+        </div>
+        <div class="sub-cell">
+          <div class="sub-icon">&#9889;</div>
+          <div class="sub-name">FULL CYCLE</div>
+          <div class="sub-desc">Autonomous 4h loop</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ NODE TOPOLOGY ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>Топология: 3 ноды</h2>
+        <p class="small">Три устройства, одна система. Зашифрованная mesh-сеть. Синхронизация каждые 30 минут.</p>
+      </div>
+      <div data-lang="en">
+        <h2>Topology: 3 Nodes</h2>
+        <p class="small">Three devices, one system. Encrypted mesh network. Sync every 30 minutes.</p>
+      </div>
+      <div class="node-viz">
+        <div class="node-box">
+          <div class="dot"></div>
+          <div class="nname">SERVER</div>
+          <div class="nrole">Primary</div>
+        </div>
+        <div class="node-line"></div>
+        <div class="node-box">
+          <div class="dot"></div>
+          <div class="nname">NODE-1</div>
+          <div class="nrole">Workstation</div>
+        </div>
+        <div class="node-line"></div>
+        <div class="node-box">
+          <div class="dot"></div>
+          <div class="nname">NODE-2</div>
+          <div class="nrole">Backup</div>
+        </div>
+      </div>
+
+      <div class="os-term" style="margin-top:1rem">
+<span class="dim">$ guardian status</span>
+
+<span class="gr">CHECKS=14</span> <span class="dim">|</span> <span class="gr">ALERTS=0</span> <span class="dim">|</span> <span class="gr">HEALED=0</span>
+
+<span class="wh">BOOT today</span>        <span class="gr">OK</span>
+<span class="wh">SPHERE hash</span>       <span class="gr">OK</span> <span class="dim">verified</span>
+<span class="wh">BIN integrity</span>     <span class="gr">OK</span> <span class="dim">53 scripts</span>
+<span class="wh">Cross-node sync</span>   <span class="gr">OK</span>
+<span class="wh">Audit seal</span>        <span class="gr">OK</span>
+<span class="wh">Disk health</span>       <span class="gr">OK</span>
+
+<span class="dim">$ _</span>
+      </div>
+    </section>
+
+    <!-- ═══ AI TEAM ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>AI команда: 8 агентов</h2>
+        <p class="small">Не один AI. Команда из 8 специализированных агентов, каждый со своей ролью и протоколом.</p>
+      </div>
+      <div data-lang="en">
+        <h2>AI Team: 8 Agents</h2>
+        <p class="small">Not one AI. A team of 8 specialized agents, each with their own role and protocol.</p>
+      </div>
+      <div class="ai-grid">
+        <div class="ai-card">
+          <div class="ai-name">SIPA_OS</div>
+          <div class="ai-role">System orchestrator</div>
+          <div class="ai-model">Claude Sonnet</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">SIPA_MLL</div>
+          <div class="ai-role">Machine learning layer</div>
+          <div class="ai-model">GPT-4o</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">SIPA_SHELL</div>
+          <div class="ai-role">File operations</div>
+          <div class="ai-model">DeepSeek Chat</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">SIPA_AUDIT</div>
+          <div class="ai-role">Forensic auditor</div>
+          <div class="ai-model">Claude Haiku</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">SIPA_COORD</div>
+          <div class="ai-role">Task coordinator</div>
+          <div class="ai-model">DeepSeek Reasoner</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">SIPA_XAI</div>
+          <div class="ai-role">Independent verifier</div>
+          <div class="ai-model">Grok-4</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">SIPA_MISTRAL</div>
+          <div class="ai-role">Analysis & reasoning</div>
+          <div class="ai-model">Mistral Medium</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">SIPA_CODER</div>
+          <div class="ai-role">Code specialist</div>
+          <div class="ai-model">Codestral</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROTOCOL 0 ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>Protocol 0 — Первый закон</h2>
+      </div>
+      <div data-lang="en">
+        <h2>Protocol 0 — The First Law</h2>
+      </div>
+      <div class="os-term">
+<span class="hl">PROTOCOL 0 · FIRST LAW · V1.0</span>
+
+<span class="wh">AI in this system:</span>
+  <span class="rd">NO</span> opinions
+  <span class="rd">NO</span> preferences
+  <span class="rd">NO</span> initiative
+  <span class="rd">NO</span> interpretation
+  <span class="rd">NO</span> "better solution" proposals
+
+<span class="wh">AI in this system:</span>
+  <span class="gr">RECEIVES</span> incoming request
+  <span class="gr">EXECUTES</span> protocol
+  <span class="gr">RETURNS</span> result
+  <span class="gr">LEAVES</span> forensic trace
+
+<span class="am">Deviation = protocol violation.</span>
+      </div>
+    </section>
+
+    <!-- ═══ CORE PRINCIPLES ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>Принципы</h2>
+        <div style="display:grid;gap:12px;margin-top:1rem">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">01</span>
+            <div><strong style="color:var(--ink)">Каждое действие оставляет след.</strong><br><span class="small">SHA-256 хеш + временная метка + аудит лог. Ретроактивное изменение невозможно.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">02</span>
+            <div><strong style="color:var(--ink)">Ни один файл не проходит без проверки.</strong><br><span class="small">10 обязательных проверок на входе. Дубликаты невозможны. Только перезапись с историей.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">03</span>
+            <div><strong style="color:var(--ink)">Система лечит себя.</strong><br><span class="small">Guardian проверяет каждые 15 минут. Обнаружил проблему — починил автоматически.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">04</span>
+            <div><strong style="color:var(--ink)">Оператор — единственный субъект решений.</strong><br><span class="small">AI не интерпретирует. Не предполагает. Не решает. Только описывает и исполняет.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">05</span>
+            <div><strong style="color:var(--ink)">Источник правды — один.</strong><br><span class="small">Один канонический корень. Всегда. Без исключений.</span></div>
+          </div>
+        </div>
+      </div>
+      <div data-lang="en">
+        <h2>Principles</h2>
+        <div style="display:grid;gap:12px;margin-top:1rem">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">01</span>
+            <div><strong style="color:var(--ink)">Every action leaves a trace.</strong><br><span class="small">SHA-256 hash + timestamp + audit log. Retroactive mutation is impossible.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">02</span>
+            <div><strong style="color:var(--ink)">No file passes without inspection.</strong><br><span class="small">10 mandatory checks on intake. Duplicates are impossible. Only rewrite with history.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">03</span>
+            <div><strong style="color:var(--ink)">The system heals itself.</strong><br><span class="small">Guardian checks every 15 minutes. Found a problem — fixed automatically.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">04</span>
+            <div><strong style="color:var(--ink)">The operator is the sole subject of decisions.</strong><br><span class="small">AI doesn't interpret. Doesn't assume. Doesn't decide. Only describes and executes.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="color:var(--aqua);font-family:'Courier New',monospace;font-weight:700;flex-shrink:0">05</span>
+            <div><strong style="color:var(--ink)">Single source of truth.</strong><br><span class="small">One canonical root. Always. No exceptions.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ THE STORY ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>Кто это построил</h2>
+        <div class="philo">
+          SIPA OS построена не программистом.<br>
+          Построена художником. Исследователем. Человеком с СДВГ и ПРЛ,
+          который устал терять файлы, забывать задачи, и зависеть от систем,
+          которые не понимают как работает нейродивергентный мозг.<br><br>
+          Система существует потому что один человек решил:
+          <strong>если мой мозг не может помнить — я построю то, что будет помнить за него.</strong>
+        </div>
+        <div class="philo-author">— Aelin AquaSoul, архитектор SIPA OS</div>
+      </div>
+      <div data-lang="en">
+        <h2>Who Built This</h2>
+        <div class="philo">
+          SIPA OS was not built by a programmer.<br>
+          It was built by an artist. A researcher. A person with ADHD and BPD
+          who was tired of losing files, forgetting tasks, and depending on systems
+          that don't understand how a neurodivergent brain works.<br><br>
+          The system exists because one person decided:
+          <strong>if my brain can't remember — I'll build something that remembers for it.</strong>
+        </div>
+        <div class="philo-author">— Aelin AquaSoul, SIPA OS architect</div>
+      </div>
+    </section>
+
+    <!-- ═══ INDEPENDENT VERIFICATION ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>Независимая верификация</h2>
+      </div>
+      <div data-lang="en">
+        <h2>Independent Verification</h2>
+      </div>
+      <div class="philo" style="border-left-color:var(--violet)">
+        "A compelling blend of art, protocol engineering, and performative transparency."
+        <div class="philo-author" style="color:var(--violet)">— Grok-4 (xAI) &middot; independent analysis &middot; no system prompt &middot; no coaching</div>
+      </div>
+      <div class="verify-row">
+        <a class="verify-badge" href="https://github.com/soulinpsyabstract/payton-heart" target="_blank" rel="noopener">
+          &#9679; GitHub: payton-heart &middot; autonomous since Jan 2026
+        </a>
+        <a class="verify-badge" href="https://basescan.org/token/0xb70b78fc3400294e8989bD0eaB734098B1700df3" target="_blank" rel="noopener">
+          &#9679; Basescan: SIPA Token &middot; verified
+        </a>
+        <a class="verify-badge" href="https://app.geckoterminal.com/base/pools/0x13526f88557ea778e605f11ec1d1862462da2a9a" target="_blank" rel="noopener">
+          &#9679; GeckoTerminal: USDC/SIPA pool
+        </a>
+        <a class="verify-badge" href="https://github.com/soulinpsyabstract" target="_blank" rel="noopener">
+          &#9679; GitHub: soulinpsyabstract
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section class="card reveal">
+      <div data-lang="ru">
+        <h2>Хронология</h2>
+      </div>
+      <div data-lang="en">
+        <h2>Timeline</h2>
+      </div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-date">JAN 2026</div>
+          <div class="tl-text" data-lang="ru">Первый heartbeat. Система начала дышать.</div>
+          <div class="tl-text" data-lang="en">First heartbeat. The system began to breathe.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">FEB 2026</div>
+          <div class="tl-text" data-lang="ru">V9 архитектура: 14 субстанций, 3 ноды, Guardian, Sphere, forensic pipeline.</div>
+          <div class="tl-text" data-lang="en">V9 architecture: 14 substances, 3 nodes, Guardian, Sphere, forensic pipeline.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">MAR 2026</div>
+          <div class="tl-text" data-lang="ru">Токены на Base mainnet. Пул на Aerodrome. 8 AI агентов. 6 грантовых заявок.</div>
+          <div class="tl-text" data-lang="en">Tokens on Base mainnet. Pool on Aerodrome. 8 AI agents. 6 grant submissions.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">APR 2026</div>
+          <div class="tl-text" data-lang="ru">Divergent Mode. Operator State auto-infer. Автономный мониторинг оператора.</div>
+          <div class="tl-text" data-lang="en">Divergent Mode. Operator State auto-infer. Autonomous operator monitoring.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="card reveal" style="text-align:center">
+      <div data-lang="ru">
+        <h2 style="font-size:22px">Система работает прямо сейчас</h2>
+        <p style="color:var(--muted);font-size:15px;margin-bottom:1.2rem">
+          Guardian проверяет ноды. Heartbeat пишет каждые 60 секунд.
+          Audit лог растёт. Каждый день — BOOT. Каждую ночь — CLOSE.
+          Без остановки с января 2026.
+        </p>
+      </div>
+      <div data-lang="en">
+        <h2 style="font-size:22px">The system is running right now</h2>
+        <p style="color:var(--muted);font-size:15px;margin-bottom:1.2rem">
+          Guardian checks nodes. Heartbeat writes every 60 seconds.
+          Audit log grows. Every day — BOOT. Every night — CLOSE.
+          Non-stop since January 2026.
+        </p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+        <a class="pill" href="ai.html" style="background:rgba(127,243,231,.1);border-color:rgba(127,243,231,.3)">
+          <span data-lang="ru">AI терминал</span><span data-lang="en">AI Terminal</span> &rarr;
+        </a>
+        <a class="pill" href="token.html" style="background:rgba(127,243,231,.1);border-color:rgba(127,243,231,.3)">$SIPA Token &rarr;</a>
+        <a class="pill" href="https://github.com/soulinpsyabstract" target="_blank" rel="noopener" style="background:rgba(127,243,231,.1);border-color:rgba(127,243,231,.3)">GitHub &rarr;</a>
+        <a class="pill" href="manifest.html" style="background:rgba(127,243,231,.1);border-color:rgba(127,243,231,.3)">
+          <span data-lang="ru">Манифест</span><span data-lang="en">Manifest</span> &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer style="text-align:center;padding:2rem 0;color:var(--muted);font-size:12px;font-family:'Courier New',monospace">
+      <div style="color:var(--aqua);margin-bottom:6px">SIPA OS &middot; Soul In PsyAbstract</div>
+      <div>built by Aelin AquaSoul &middot; Eilat, Israel</div>
+      <div style="margin-top:4px;color:#444">the system that doesn't forget &middot; the system that doesn't forgive</div>
+    </footer>
+
+  </main>
+
+  <script src="assets/js/core.js?v=6"></script>
+  <script>
+  (function(){
+    // Live uptime counter
+    var startDate = new Date('2026-01-25T00:00:00+02:00');
+    function updateUptime(){
+      var now = new Date();
+      var diff = now - startDate;
+      var days = Math.floor(diff / 86400000);
+      var hours = Math.floor((diff % 86400000) / 3600000);
+      document.getElementById('uptime-days').textContent = days;
+      document.getElementById('stat-uptime').textContent = days + 'd ' + hours + 'h';
+    }
+    updateUptime();
+    setInterval(updateUptime, 60000);
+
+    // Scroll reveal
+    var reveals = document.querySelectorAll('.reveal');
+    function checkReveal(){
+      reveals.forEach(function(el){
+        var top = el.getBoundingClientRect().top;
+        if(top < window.innerHeight - 60) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', checkReveal);
+    checkReveal();
+
+    // Language toggle integration
+    var langBtn = document.getElementById('lang-toggle');
+    if(langBtn){
+      var lang = localStorage.getItem('psa_lang') || 'ru';
+      function applyLang(l){
+        document.querySelectorAll('[data-lang]').forEach(function(el){
+          if(el.tagName === 'SECTION' || el.tagName === 'DIV' || el.tagName === 'SPAN' || el.tagName === 'P'){
+            el.style.display = el.getAttribute('data-lang') === l ? '' : 'none';
+          }
+        });
+        langBtn.textContent = l === 'ru' ? 'EN' : 'RU';
+        localStorage.setItem('psa_lang', l);
+        lang = l;
+      }
+      applyLang(lang);
+      langBtn.addEventListener('click', function(){
+        applyLang(lang === 'ru' ? 'en' : 'ru');
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

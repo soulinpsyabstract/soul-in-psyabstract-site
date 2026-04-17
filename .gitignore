@@ -1,0 +1,6 @@
+# Large video files — не в git (183M / 33M)
+assets/vid/
+assets/video/
+*.mp4
+*.mov
+*.avi

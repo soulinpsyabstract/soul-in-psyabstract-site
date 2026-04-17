@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Soul In PsyAbstract — ?מה הריח של הנשמה שלה</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#0a0d14;color:#e8f2ff;
+  font-family:'Segoe UI','Arial',sans-serif;
+  min-height:100vh;direction:rtl;
+  line-height:1.7;
+}
+.wrap{max-width:600px;margin:0 auto;padding:24px 18px}
+.logo{text-align:center;margin-bottom:10px;font-family:'Courier New',monospace;font-size:13px;color:#7ff3e7;letter-spacing:.1em}
+h1{text-align:center;font-size:clamp(24px,5vw,34px);color:#7ff3e7;margin-bottom:6px}
+.sub{text-align:center;color:#a6b4c6;font-size:15px;margin-bottom:30px}
+
+/* Question card */
+.q-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+  border:1px solid rgba(127,243,231,.15);
+  border-radius:16px;padding:24px 20px;margin-bottom:16px;
+  display:none;
+}
+.q-card.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.q-num{font-family:'Courier New',monospace;font-size:12px;color:#7ff3e7;letter-spacing:.1em;margin-bottom:8px}
+.q-text{font-size:18px;font-weight:700;margin-bottom:16px;line-height:1.5}
+
+/* Options */
+.opts{display:grid;gap:8px}
+.opt{
+  background:rgba(127,243,231,.04);
+  border:1px solid rgba(127,243,231,.12);
+  border-radius:12px;padding:14px 16px;
+  cursor:pointer;transition:all .2s;
+  font-size:15px;text-align:right;
+}
+.opt:hover{background:rgba(127,243,231,.1);border-color:rgba(127,243,231,.3)}
+.opt.selected{background:rgba(127,243,231,.15);border-color:#7ff3e7;color:#7ff3e7;font-weight:700}
+.opt .opt-emoji{margin-left:8px;font-size:18px}
+
+/* Progress */
+.progress{
+  height:4px;background:rgba(127,243,231,.1);border-radius:2px;margin-bottom:20px;overflow:hidden;
+}
+.progress-bar{height:100%;background:#7ff3e7;border-radius:2px;transition:width .4s ease;width:0}
+
+/* Result */
+#result{display:none}
+#result.active{display:block;animation:fadeIn .6s ease}
+.result-card{
+  background:linear-gradient(135deg,rgba(127,243,231,.08),rgba(179,145,255,.06));
+  border:1px solid rgba(127,243,231,.25);
+  border-radius:16px;padding:24px 20px;margin-bottom:14px;
+}
+.result-title{font-size:22px;font-weight:900;color:#7ff3e7;margin-bottom:6px}
+.result-cat{font-size:13px;color:#b391ff;font-family:'Courier New',monospace;letter-spacing:.08em;margin-bottom:12px}
+.result-desc{font-size:15px;color:#a6b4c6;line-height:1.8;margin-bottom:12px}
+.result-compose{font-size:13px;color:#e8f2ff;line-height:1.8;background:rgba(0,0,0,.2);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.result-intent{font-style:italic;color:#b391ff;font-size:14px;line-height:1.7;margin-top:10px}
+.result-stone{display:inline-flex;align-items:center;gap:6px;background:rgba(179,145,255,.1);border:1px solid rgba(179,145,255,.2);border-radius:20px;padding:4px 12px;font-size:12px;color:#b391ff;margin-top:8px}
+
+.cta{
+  display:block;width:100%;text-align:center;
+  background:rgba(127,243,231,.15);border:1px solid rgba(127,243,231,.4);
+  border-radius:12px;padding:14px;color:#7ff3e7;font-size:16px;font-weight:700;
+  cursor:pointer;transition:all .2s;text-decoration:none;margin-top:16px;
+}
+.cta:hover{background:rgba(127,243,231,.25)}
+
+.footer{text-align:center;margin-top:30px;font-size:11px;color:#555;font-family:'Courier New',monospace}
+.restart{color:#7ff3e7;cursor:pointer;text-decoration:underline;font-size:13px;display:block;text-align:center;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="logo">SOUL IN PSYABSTRACT</div>
+  <h1>?מה הריח של הנשמה שלה</h1>
+  <div class="sub">שאלון קצר שיעזור לך לבחור את המתנה המושלמת</div>
+
+  <div class="progress"><div class="progress-bar" id="pbar"></div></div>
+
+  <!-- Q1 -->
+  <div class="q-card active" id="q1">
+    <div class="q-num">01 / 05</div>
+    <div class="q-text">מה היא הכי צריכה עכשיו?</div>
+    <div class="opts">
+      <div class="opt" data-v="calm" onclick="pick(1,this)"><span class="opt-emoji">🌊</span>שקט ורוגע — לנשום, לעצור, להרפות</div>
+      <div class="opt" data-v="love" onclick="pick(1,this)"><span class="opt-emoji">🌹</span>אהבה וחום — לחבק את עצמה, להרגיש רצויה</div>
+      <div class="opt" data-v="energy" onclick="pick(1,this)"><span class="opt-emoji">⚡</span>אנרגיה — לקום, לזוז, לכבוש</div>
+      <div class="opt" data-v="protect" onclick="pick(1,this)"><span class="opt-emoji">🛡️</span>הגנה — להרגיש בטוחה ומוגנת</div>
+      <div class="opt" data-v="luxury" onclick="pick(1,this)"><span class="opt-emoji">✨</span>פינוק — פשוט להתפנק כמו מלכה</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2">
+    <div class="q-num">02 / 05</div>
+    <div class="q-text">איזה ריח עושה לה טוב?</div>
+    <div class="opts">
+      <div class="opt" data-v="floral" onclick="pick(2,this)"><span class="opt-emoji">🌸</span>פרחוני — ורדים, יסמין, שושנים</div>
+      <div class="opt" data-v="citrus" onclick="pick(2,this)"><span class="opt-emoji">🍊</span>הדרים — תפוז, לימון, ברגמוט</div>
+      <div class="opt" data-v="sweet" onclick="pick(2,this)"><span class="opt-emoji">🍫</span>מתוק — וניל, שוקולד, קפה</div>
+      <div class="opt" data-v="fresh" onclick="pick(2,this)"><span class="opt-emoji">🌿</span>רענן — אקליפטוס, לבנדר, אורן</div>
+      <div class="opt" data-v="exotic" onclick="pick(2,this)"><span class="opt-emoji">🌙</span>אקזוטי — סנדלווד, אילנג אילנג, עמוק</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q3">
+    <div class="q-num">03 / 05</div>
+    <div class="q-text">?איך היא אוהבת להתפנק</div>
+    <div class="opts">
+      <div class="opt" data-v="candle" onclick="pick(3,this)"><span class="opt-emoji">🕯️</span>נר דולק, שקט, ומוזיקה רכה</div>
+      <div class="opt" data-v="bath" onclick="pick(3,this)"><span class="opt-emoji">🛁</span>אמבטיה חמה עם סבון מפנק</div>
+      <div class="opt" data-v="skin" onclick="pick(3,this)"><span class="opt-emoji">💜</span>שמן על העור — ריח שנשאר איתה כל היום</div>
+      <div class="opt" data-v="all" onclick="pick(3,this)"><span class="opt-emoji">🎁</span>את הכל! תן לי סט שלם</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="q4">
+    <div class="q-num">04 / 05</div>
+    <div class="q-text">?מה יותר מתאר אותה</div>
+    <div class="opts">
+      <div class="opt" data-v="gentle" onclick="pick(4,this)"><span class="opt-emoji">🦋</span>עדינה ורכה — פרפר שעף בשקט</div>
+      <div class="opt" data-v="fierce" onclick="pick(4,this)"><span class="opt-emoji">🔥</span>חזקה ועזה — אש שלא נכבית</div>
+      <div class="opt" data-v="deep" onclick="pick(4,this)"><span class="opt-emoji">🌌</span>עמוקה ומסתורית — יקום שלם בפנים</div>
+      <div class="opt" data-v="sunny" onclick="pick(4,this)"><span class="opt-emoji">☀️</span>חמה ושמחה — שמש שמחממת את כולם</div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="q5">
+    <div class="q-num">05 / 05</div>
+    <div class="q-text">?אם היא הייתה אבן חן — איזה צבע</div>
+    <div class="opts">
+      <div class="opt" data-v="pink" onclick="pick(5,this)"><span class="opt-emoji">💗</span>ורוד — רוז קוורץ, אהבה, רכות</div>
+      <div class="opt" data-v="purple" onclick="pick(5,this)"><span class="opt-emoji">💜</span>סגול — אמטיסט, אינטואיציה, חלומות</div>
+      <div class="opt" data-v="green" onclick="pick(5,this)"><span class="opt-emoji">💚</span>ירוק — אוונטורין, שפע, צמיחה</div>
+      <div class="opt" data-v="gold" onclick="pick(5,this)"><span class="opt-emoji">🧡</span>זהב-כתום — עין הנמר, כוח, ביטחון</div>
+      <div class="opt" data-v="clear" onclick="pick(5,this)"><span class="opt-emoji">🤍</span>שקוף-לבן — קריסטל, ניקיון, בהירות</div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result"></div>
+
+  <div class="footer">
+    Soul In PsyAbstract · Aelin AquaSoul · Eilat<br>
+    כל המוצרים בעבודת יד · אבנים אמיתיות · שמנים אתריים טבעיים
+  </div>
+
+</div>
+
+<script>
+var answers = {};
+var products = {
+  // Candles
+  love_candle: {
+    name: 'PsyAbstract Love Flow',
+    nameHe: 'נר אהבה — Love Flow',
+    cat: 'אהבה',
+    compose: 'שעווה ורודה · שמן ורד · אילנג אילנג · וניל · עלי ורדים ופיוניה · רוז קוורץ',
+    desc: 'נר מגנטי למשיכת אהבה והעצמתה. הרוז קוורץ מתכוונן על תדר הלב, והשמנים יוצרים הילה של רכות.',
+    intent: '״אני פותחת את הלב לזרם האוניברסלי, ומאפשרת לאהבה להיכנס ולהישפך בקלות ובחופשיות.״',
+    stone: 'רוז קוורץ 💗',
+    price: '200₪'
+  },
+  cherry_candle: {
+    name: 'Cosmic Cherry Bloom',
+    nameHe: 'נר אהבה עצמית — Cherry Bloom',
+    cat: 'אהבה עצמית',
+    compose: 'שעווה ורודה · דובדבן · יסמין · וניל · עלי ורדים ושכחה · רוז קוורץ',
+    desc: 'נר לאהבה עצמית וקבלה. ניחוח מתוק ושובב של דובדבן ויסמין מרים את מצב הרוח.',
+    intent: '״אני פורחת כדובדבן ביקום אביבי, מקבלת את היופי הייחודי שלי ואת מתיקות הקיום.״',
+    stone: 'רוז קוורץ 💗',
+    price: '200₪'
+  },
+  calm_candle: {
+    name: 'Deep Ocean Harmony',
+    nameHe: 'נר הרמוניה — Deep Ocean',
+    cat: 'הרמוניה · רוגע',
+    compose: 'שעווה לבנה-וניל · Deep Ocean · לבנדר · אבני ים מבושמות · אמזוניט',
+    desc: 'נר מדיטטיבי להפגת מתחים ואיזון רגשי. הניחוח והאמזוניט עוזרים לבטא רגשות ולמצוא שלום.',
+    intent: '״אני שוקעת לתוך השקט העמוק של האוקיינוס, שם כל הגלים שלי נרגעים.״',
+    stone: 'אמזוניט 💙',
+    price: '200₪'
+  },
+  success_candle: {
+    name: 'Labyrinth of Success',
+    nameHe: 'נר הצלחה — Labyrinth of Success',
+    cat: 'הצלחה · שפע',
+    compose: 'שעווה ירוקה · ברגמוט · תפוז · סנדלווד · עלה דפנה · אוונטורין',
+    desc: 'נר-מוביל למטרות וזרימה פיננסית. השעווה הירוקה והאוונטורין מושכים הזדמנויות.',
+    intent: '״אני מוצאת בקלות את הדרך בלב המבוך, וכל דלת נפתחת לשגשוג שלי.״',
+    stone: 'אוונטורין 💚',
+    price: '200₪'
+  },
+  protect_candle: {
+    name: 'Neon Spiral Shield',
+    nameHe: 'נר הגנה — Spiral Shield',
+    cat: 'הגנה',
+    compose: 'שעווה אדומה · לבנדר · רוזמרין · אורן · עלי זית ומרווה · לברדוריט',
+    desc: 'נר הגנה פעילה. השעווה האדומה והצמחים יוצרים מחסום אנרגטי, והלברדוריט מגביר את שדה הכוח האישי.',
+    intent: '״המרחב שלי מסתובב בספירלות של אור בלתי חדיר, דוחה כל השפעה זרה.״',
+    stone: 'לברדוריט 🌈',
+    price: '200₪'
+  },
+  gratitude_candle: {
+    name: 'Soul Frequency Gratitude',
+    nameHe: 'נר הכרת תודה — Soul Frequency',
+    cat: 'הכרת תודה · שמחה',
+    compose: 'שעווה בז\' קפה · תפוז · קפה · גרניום · כריזנתמה ואניס · גרנט',
+    desc: 'נר לפרקטיקת הכרת תודה. הניחוח השמשי החם ממלא את הלב ומושך סיבות חדשות לשמוח.',
+    intent: '״הכרת התודה שלי רוטטת על תדר השפע, והיקום עונה לי בזוהר הדדי.״',
+    stone: 'גרנט 🧡',
+    price: '200₪'
+  },
+  meditate_candle: {
+    name: 'Shadow & Light Balance',
+    nameHe: 'נר מדיטציה — Shadow & Light',
+    cat: 'מדיטציה · איזון',
+    compose: 'שעווה לבנה + אדומה בשכבות · סנדלווד · Royal Home · ברגמוט · לענה ומרווה · פלואוריט',
+    desc: 'נר למדיטציה עמוקה ואינטגרציה של סתירות פנימיות. הפלואוריט מסדר מחשבות.',
+    intent: '״בריקוד של אור וצל אני מוצאת את השלמות שלי, מקבלת את כל הפנים של הנשמה.״',
+    stone: 'פלואוריט 💜',
+    price: '200₪'
+  },
+  luxury_candle: {
+    name: 'Heartwave Abundance',
+    nameHe: 'נר יוקרה — Heartwave Abundance',
+    cat: 'הרמוניה · פינוק',
+    compose: 'שעווה בז\' קפה · שוקו ארומה · תפוז · Island · אניס ודפנה · עין הנמר',
+    desc: 'נר שפע חמים ומפנק. אידיאלי לאווירה של שגשוג ושל ביטחון עצמי.',
+    intent: '״גל השפע מוצא אותי שם שהרמוניה שוררת, ומביא מתנות שהנשמה שלי חפצה.״',
+    stone: 'עין הנמר 🧡',
+    price: '200₪'
+  },
+  // Soaps
+  love_soap: {
+    name: 'Pink Nebula Tenderness',
+    nameHe: 'סבון רכות — Pink Nebula',
+    cat: 'רכות · אהבה',
+    compose: 'Rubes Care + שמן זית · מלח ורוד · שמן ורד · לבנדר · עלי ורדים ופיוניה',
+    desc: 'סבון אולטרה-רך ולוחי. מושלם לעור רגיש ולריטואלים של אהבה לגוף. מעניק תחושת קטיפה.',
+    intent: '״כל קצף — זה ענן מערפילית ורודה שעוטף את העור בדאגה ובאהבה.״',
+    stone: 'רוז קוורץ 💗',
+    price: '120₪'
+  },
+  energy_soap: {
+    name: 'Solar Pulse Energy',
+    nameHe: 'סבון אנרגיה — Solar Pulse',
+    cat: 'אנרגיה · תנופה',
+    compose: 'Senteur de Marseille · קפה · תפוז · לימון · כריזנתמה ואניס',
+    desc: 'סבון מעורר ומטעין. הדרים משפרים את הזרימה ונותנים אנרגיה מהרגע הראשון.',
+    intent: '״מקלחת הבוקר הופכת להתנעה של מנוע שמשי שמטעין אותי בכוח לכל היום.״',
+    stone: 'גרנט 🧡',
+    price: '120₪'
+  },
+  luxury_soap: {
+    name: 'Vanilla Silk Luxury',
+    nameHe: 'סבון פינוק — Vanilla Silk',
+    cat: 'יוקרה · פינוק',
+    compose: 'Rubes Care + שמן זית · וניל צרפתי · סנדלווד · אילנג · פרחים מיובשים',
+    desc: 'סבון מפנק מיוחד. ניחוח מתוק-פרחוני עמיד שהופך רחצה לטיפול ספא.',
+    intent: '״חתיכת משי מריחות — הטקס האישי של יוקרה, נגיש כאן ועכשיו.״',
+    stone: 'אמטיסט 💜',
+    price: '120₪'
+  },
+  protect_soap: {
+    name: 'Black Salt Shield',
+    nameHe: 'סבון הגנה — Black Salt Shield',
+    cat: 'הגנה · ניקוי',
+    compose: 'Senteur de Marseille · מלח שחור · למונגראס · לבנדר · אורן · קורנית ולענה',
+    desc: 'סבון הגנה חזק. מומלץ אחרי יום כבד או אחרי מקומות צפופים. משאיר תחושת רעננות.',
+    intent: '״עם כל שטיפה, המים לוקחים לא רק את האבק אלא את כל האנרגיות הזרות.״',
+    stone: 'לברדוריט 🌈',
+    price: '120₪'
+  },
+  // Oils
+  love_oil: {
+    name: 'Self-Love Galaxy',
+    nameHe: 'שמן אהבה — Self-Love Galaxy',
+    cat: 'אהבה · טיפוח',
+    compose: 'בסיס ארגן 10מ"ל · ורד · ברגמוט · סנדלווד',
+    desc: 'שמן לטיפוח עצמי והעלאת הדימוי העצמי. ניחוח פרחוני-עצי שמרפא פצעי לב.',
+    intent: '״אני יקום שלם, ראויה לאהבה, וכל מגע של השמן הזה מזכיר לי את זה.״',
+    stone: 'רוז קוורץ 💗',
+    price: '60₪'
+  },
+  calm_oil: {
+    name: 'Velvet Dream Portal',
+    nameHe: 'שמן שינה — Velvet Dream',
+    cat: 'שינה · רוגע',
+    compose: 'בסיס ארגן 10מ"ל · לבנדר · אילנג אילנג · וניל',
+    desc: 'שמן לשינה שקטה וחלומות נעימים. למרוח על רקות, פרקים או כרית. מפיג חרדה.',
+    intent: '״אני שוקעת לתוך עומק הקטיפה של החלומות, שם מחכים ריפוי ותשובות.״',
+    stone: 'אמטיסט 💜',
+    price: '60₪'
+  },
+  energy_oil: {
+    name: 'Success Magnet',
+    nameHe: 'שמן הצלחה — Success Magnet',
+    cat: 'הצלחה · אנרגיה',
+    compose: 'בסיס ארגן 10מ"ל · ברגמוט · תפוז · Royal Home',
+    desc: 'שמן-מפעיל לפני פגישות חשובות. מושך הזדמנויות ומכוונן לגל הצלחה.',
+    intent: '״אני ממגנטת את המרחב סביבי למזל ולניצחונות קלים.״',
+    stone: 'אוונטורין 💚',
+    price: '60₪'
+  },
+  protect_oil: {
+    name: 'Invisible Light Armor',
+    nameHe: 'שמן הגנה — Light Armor',
+    cat: 'הגנה',
+    compose: 'בסיס ארגן 10מ"ל · לבנדר · רוזמרין · אורן',
+    desc: 'שמן הגנה יומיומי לנקודות הדופק. יוצר שדה אנרגטי שחותך השפעות שליליות.',
+    intent: '״השמן הזה — השריון הבלתי נראה שלך. לבשי אותו כשריון מאור.״',
+    stone: 'עין הנמר 🧡',
+    price: '60₪'
+  }
+};
+
+function pick(qNum, el){
+  // Mark selected
+  el.parentElement.querySelectorAll('.opt').forEach(function(o){o.classList.remove('selected')});
+  el.classList.add('selected');
+  answers[qNum] = el.getAttribute('data-v');
+
+  // Update progress
+  var total = 5;
+  var done = Object.keys(answers).length;
+  document.getElementById('pbar').style.width = (done/total*100)+'%';
+
+  // Move to next question after a short delay
+  setTimeout(function(){
+    if(qNum < total){
+      document.getElementById('q'+qNum).classList.remove('active');
+      document.getElementById('q'+(qNum+1)).classList.add('active');
+    } else {
+      // Show result
+      showResult();
+    }
+  }, 400);
+}
+
+function showResult(){
+  document.getElementById('q5').classList.remove('active');
+  var r = document.getElementById('result');
+
+  // Determine best products based on answers
+  var need = answers[1];    // calm/love/energy/protect/luxury
+  var scent = answers[2];   // floral/citrus/sweet/fresh/exotic
+  var format = answers[3];  // candle/bath/skin/all
+  var personality = answers[4]; // gentle/fierce/deep/sunny
+  var stone = answers[5];   // pink/purple/green/gold/clear
+
+  // Pick candle
+  var candle;
+  if(need==='love' || stone==='pink') candle = personality==='gentle' ? products.cherry_candle : products.love_candle;
+  else if(need==='calm') candle = scent==='exotic' ? products.meditate_candle : products.calm_candle;
+  else if(need==='energy' || personality==='sunny') candle = scent==='sweet' ? products.gratitude_candle : products.success_candle;
+  else if(need==='protect' || personality==='fierce') candle = products.protect_candle;
+  else if(need==='luxury') candle = scent==='sweet' ? products.luxury_candle : products.calm_candle;
+  else candle = products.calm_candle;
+
+  // Pick soap
+  var soap;
+  if(need==='love' || stone==='pink' || personality==='gentle') soap = products.love_soap;
+  else if(need==='energy' || personality==='sunny' || scent==='citrus') soap = products.energy_soap;
+  else if(need==='protect' || personality==='fierce') soap = products.protect_soap;
+  else soap = products.luxury_soap;
+
+  // Pick oil
+  var oil;
+  if(need==='love' || stone==='pink') oil = products.love_oil;
+  else if(need==='calm' || stone==='purple' || personality==='deep') oil = products.calm_oil;
+  else if(need==='energy' || personality==='sunny' || scent==='citrus') oil = products.energy_oil;
+  else if(need==='protect' || personality==='fierce') oil = products.protect_oil;
+  else oil = products.love_oil;
+
+  // Determine what to show based on format preference
+  var items = [];
+  if(format==='candle') items = [candle];
+  else if(format==='bath') items = [soap];
+  else if(format==='skin') items = [oil];
+  else items = [candle, soap, oil]; // all
+
+  var html = '<h2 style="text-align:center;color:#7ff3e7;margin-bottom:6px">&#10024; ההמלצה שלנו</h2>';
+  html += '<p style="text-align:center;color:#a6b4c6;margin-bottom:20px;font-size:14px">נבחר במיוחד בשבילה, לפי מה שסיפרת לנו</p>';
+
+  items.forEach(function(item){
+    html += '<div class="result-card">';
+    html += '<div class="result-title">'+item.nameHe+'</div>';
+    html += '<div class="result-cat">'+item.cat+' · '+item.price+'</div>';
+    html += '<div class="result-desc">'+item.desc+'</div>';
+    html += '<div class="result-compose"><strong>הרכב:</strong> '+item.compose+'</div>';
+    html += '<div class="result-intent">'+item.intent+'</div>';
+    html += '<div class="result-stone">&#128142; '+item.stone+'</div>';
+    html += '</div>';
+  });
+
+  if(items.length > 1){
+    var total = items.reduce(function(s,i){return s+parseInt(i.price)},0);
+    html += '<div style="text-align:center;margin:16px 0;font-size:18px;color:#7ff3e7;font-weight:700">סה"כ סט: '+total+'₪</div>';
+  }
+
+  html += '<a class="cta" href="https://wa.me/972525074743?text='+encodeURIComponent('היי! עשיתי את השאלון ואני רוצה להזמין מתנה 🎁')+'">&#128172; להזמין דרך וואטסאפ</a>';
+  html += '<span class="restart" onclick="restart()">&#8634; להתחיל מחדש</span>';
+
+  r.innerHTML = html;
+  r.classList.add('active');
+}
+
+function restart(){
+  answers = {};
+  document.getElementById('pbar').style.width = '0';
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('result').innerHTML = '';
+  document.querySelectorAll('.q-card').forEach(function(c){c.classList.remove('active')});
+  document.querySelectorAll('.opt').forEach(function(o){o.classList.remove('selected')});
+  document.getElementById('q1').classList.add('active');
+}
+</script>
+</body>
+</html>

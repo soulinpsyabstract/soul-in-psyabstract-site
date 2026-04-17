@@ -22,9 +22,11 @@
     const card = document.createElement('article');
     card.className = 'art';
     const img = document.createElement('img');
+    img.loading = 'lazy';
     img.src = `/assets/img/${String(i).padStart(2,'0')}.jpg`;
     img.alt = `Art #${i}`;
-    img.onerror = () => { img.style.objectFit = 'contain'; img.alt = 'image placeholder'; };
+    img.onload = () => { img.classList.add('loaded'); };
+    img.onerror = () => { img.style.objectFit = 'contain'; img.alt = 'image placeholder'; img.classList.add('loaded'); };
     img.style.cursor = 'zoom-in';
     img.addEventListener('click', () => {
       const ov = document.createElement('div');
@@ -41,10 +43,9 @@
     meta.className = 'meta';
 
     const badge = document.createElement('span');
-    badge.className = 'badge';
-    if (DRAFT.has(i)) badge.textContent = 'DRAFT';
-    else if (FREE.has(i)) badge.textContent = 'FREE';
-    else badge.textContent = 'FOR SALE';
+    if (DRAFT.has(i)) { badge.className = 'badge draft'; badge.textContent = 'DRAFT'; }
+    else if (FREE.has(i)) { badge.className = 'badge free'; badge.textContent = 'FREE'; }
+    else { badge.className = 'badge for-sale'; badge.textContent = 'FOR SALE'; }
 
     // Title from __DATA__
     const artData = window.__DATA__ && window.__DATA__.ART && window.__DATA__.ART[i-1];

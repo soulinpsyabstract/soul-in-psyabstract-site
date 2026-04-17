@@ -45,6 +45,16 @@
     'nav.faq':{ru:'FAQ',en:'FAQ'},
     'nav.contacts':{ru:'Контакты',en:'Contacts'},
     'nav.ai':{ru:'AI',en:'AI'},
+    'nav.shop':{ru:'Шоп',en:'Shop'},
+    'nav.studio':{ru:'Студия',en:'Studio'},
+    'studio.title':{ru:'Студия',en:'Studio'},
+    'studio.subtitle':{ru:'Процесс · UV-ревилы · За кулисами · Aelin AquaSoul',en:'Process · UV reveals · Behind the scenes · Aelin AquaSoul'},
+    'studio.all':{ru:'Все',en:'All'},
+    'studio.process':{ru:'Процесс',en:'Process'},
+    'studio.uv':{ru:'UV Reveal',en:'UV Reveal'},
+    'studio.candles':{ru:'Свечи',en:'Candles'},
+    'studio.glue':{ru:'Горячий клей',en:'Hot Glue Art'},
+    'studio.moments':{ru:'Моменты',en:'Studio Moments'},
     'cta.buy':{ru:'Купить',en:'Buy'},
   };
 
@@ -93,7 +103,7 @@
   }
 
   // NAV GUARD: если ссылка ведёт на отсутствующую страницу из списка, блокируем.
-  const PAGES = ['index.html','gallery.html','nft.html','manifest.html','poems.html','songs.html','faq.html','contacts.html','ai.html'];
+  const PAGES = ['index.html','gallery.html','store.html','nft.html','token.html','studio.html','terms.html','manifest.html','poems.html','songs.html','faq.html','contacts.html','soulwish.html','ai.html'];
   function bindNavGuard(){
     document.addEventListener('click',(e)=>{
       const a = e.target.closest('a');

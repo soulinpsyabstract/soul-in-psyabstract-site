@@ -37,11 +37,20 @@
           </label>
         </div>
         <div style="font-size:15px;font-weight:700;margin-bottom:10px">${t('Итого','Total')}: <span id="bm-total">${fmt(base)}</span></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          ${ncpCode?`<a class="btn" id="bm-fast" target="_blank" rel="noopener" href="https://www.paypal.com/ncp/payment/${ncpCode}">PayPal Fast</a>`:''}
-          <a class="btn" target="_blank" rel="noopener" href="${(window.__PAYCFG__&&__PAYCFG__.PAYPAL_ME)||'https://paypal.me/SoulInPsyAbstract'}">PayPal.me</a>
-          ${a.nft?`<a class="btn" target="_blank" href="${a.nft}" rel="noopener">NFT</a>`:''}
-          ${eth?`<button class="btn" id="copyeth">${t('ETH адрес','Copy ETH')}</button>`:''}
+        <div style="display:flex;gap:8px;flex-wrap:wrap;flex-direction:column">
+          <div style="font-size:12px;color:var(--muted);letter-spacing:.05em">${t('ОПЛАТА КАРТИНЫ','ARTWORK PAYMENT')}</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            ${ncpCode?`<a class="btn" id="bm-art" target="_blank" rel="noopener" href="https://www.paypal.com/ncp/payment/${ncpCode}">${t('Картина','Artwork')} · PayPal ${fmt(base)}</a>`:''}
+            <a class="btn" target="_blank" rel="noopener" href="${(window.__PAYCFG__&&__PAYCFG__.PAYPAL_ME)||'https://paypal.me/SoulInPsyAbstract'}">PayPal.me</a>
+            ${a.nft?`<a class="btn" target="_blank" href="${a.nft}" rel="noopener">NFT</a>`:''}
+            ${eth?`<button class="btn" id="copyeth">${t('ETH адрес','Copy ETH')}</button>`:''}
+          </div>
+          <div id="bm-ship-wrap" style="display:none;margin-top:6px">
+            <div style="font-size:12px;color:var(--muted);letter-spacing:.05em">${t('ОПЛАТА ДОСТАВКИ','SHIPPING PAYMENT')}</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+              <a class="btn" id="bm-ship-pay" target="_blank" rel="noopener" href="#">${t('Доставка','Shipping')} · PayPal</a>
+            </div>
+          </div>
         </div>
         <div style="margin-top:10px"><button class="btn" onclick="document.getElementById('buym').remove()">${t('Закрыть','Close')}</button></div>
       </div>
@@ -51,14 +60,29 @@
     const exEl = document.getElementById('bm-excl');
     const shipEl = document.getElementById('bm-ship');
     const totalEl = document.getElementById('bm-total');
-    const fastEl = document.getElementById('bm-fast');
+    const artEl = document.getElementById('bm-art');
+    const shipPayEl = document.getElementById('bm-ship-pay');
+    const shipWrapEl = document.getElementById('bm-ship-wrap');
     function recalc(){
-      const total = base + (exEl.checked?ex:0) + (shipEl.value==='ship150'?150:shipEl.value==='ship200'?200:shipEl.value==='ship300'?300:0);
+      const shipAmount = shipEl.value==='ship150'?150:shipEl.value==='ship200'?200:shipEl.value==='ship300'?300:0;
+      const artAmount = base + (exEl.checked?ex:0);
+      const total = artAmount + shipAmount;
       totalEl.textContent = fmt(total);
-      if(fastEl){
-        const shipCode = shipEl.value ? (shipNcp[shipEl.value]||'') : '';
-        const baseCode = exEl.checked ? (window.__PAYCFG__&&window.__PAYCFG__.NCP&&window.__PAYCFG__.NCP[String(base+ex)])||ncpCode : ncpCode;
-        fastEl.href = 'https://www.paypal.com/ncp/payment/' + (shipCode||baseCode||ncpCode);
+      // Artwork button — always artwork NCP
+      if(artEl){
+        const artCode = exEl.checked ? (window.__PAYCFG__&&window.__PAYCFG__.NCP&&window.__PAYCFG__.NCP[String(artAmount)])||ncpCode : ncpCode;
+        artEl.href = 'https://www.paypal.com/ncp/payment/' + (artCode||ncpCode);
+        artEl.textContent = t('Картина','Artwork') + ' · PayPal ' + fmt(artAmount);
+      }
+      // Shipping button — separate, only visible when shipping selected
+      if(shipWrapEl && shipPayEl){
+        if(shipEl.value && shipNcp[shipEl.value]){
+          shipWrapEl.style.display = 'block';
+          shipPayEl.href = 'https://www.paypal.com/ncp/payment/' + shipNcp[shipEl.value];
+          shipPayEl.textContent = t('Доставка','Shipping') + ' · PayPal ' + fmt(shipAmount);
+        } else {
+          shipWrapEl.style.display = 'none';
+        }
       }
     }
     if(exEl) exEl.addEventListener('change', recalc);

@@ -302,6 +302,32 @@ main {
 }
 .modal-close:hover{background:var(--modal-color,var(--cyan));color:#000;}
 
+/* ── PHOTO GALLERY ── */
+.photo-gallery {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap:10px; margin-bottom:30px;
+}
+.photo-gallery img {
+  width:100%; border-radius:10px; aspect-ratio:3/4; object-fit:cover;
+  border:1px solid #00f5ff22; cursor:pointer; transition:all .22s;
+}
+.photo-gallery img:hover {
+  transform:scale(1.03); border-color:var(--cyan);
+  box-shadow:0 4px 20px #00f5ff44;
+}
+.photo-gallery video {
+  width:100%; border-radius:10px; aspect-ratio:3/4; object-fit:cover;
+  border:1px solid #ff44cc22;
+}
+.photo-lightbox {
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(0,0,0,.92); align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.photo-lightbox.open { display:flex; }
+.photo-lightbox img { max-width:92vw; max-height:92vh; border-radius:12px; }
+
 /* ── SECTION HIDDEN ── */
 .product-section{display:none;}
 .product-section.visible{display:block;}
@@ -338,7 +364,8 @@ footer .ft-brand{
 
 <!-- ── NAV ── -->
 <nav class="nav-tabs">
-  <button class="nav-tab active" onclick="showSection('candles')" id="tab-candles" data-ru="Свечи" data-he="נרות" data-en="Candles">Свечи</button>
+  <button class="nav-tab active" onclick="showSection('gallery')" id="tab-gallery" data-ru="Фото" data-he="תמונות" data-en="Gallery">Фото</button>
+  <button class="nav-tab" onclick="showSection('candles')" id="tab-candles" data-ru="Свечи" data-he="נרות" data-en="Candles">Свечи</button>
   <button class="nav-tab" onclick="showSection('oils')" id="tab-oils" data-ru="Масла" data-he="שמנים" data-en="Oils">Масла</button>
   <button class="nav-tab" onclick="showSection('soaps')" id="tab-soaps" data-ru="Мыло" data-he="סבונים" data-en="Soaps">Мыло</button>
   <button class="nav-tab" onclick="showSection('crystals')" id="tab-crystals" data-ru="Кристаллы" data-he="קריסטלים" data-en="Crystals">Кристаллы</button>
@@ -347,8 +374,94 @@ footer .ft-brand{
 <!-- ── MAIN ── -->
 <main>
 
+  <!-- MEET THE ARTIST -->
+  <div class="product-section visible" id="sec-artist" style="max-width:900px;margin:0 auto 30px;">
+    <div class="section-title">✦ Meet the Artist · הכירו את האמנית · Познакомьтесь ✦</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:10px;">
+      <div style="position:relative;width:100%;padding-bottom:177%;border-radius:14px;overflow:hidden;background:#000;">
+        <iframe src="https://www.youtube.com/embed/sGZbuu9crPY" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div style="position:relative;width:100%;padding-bottom:177%;border-radius:14px;overflow:hidden;background:#000;">
+        <iframe src="https://www.youtube.com/embed/9CJdDDQGbPg" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div style="position:relative;width:100%;padding-bottom:177%;border-radius:14px;overflow:hidden;background:#000;">
+        <iframe src="https://www.youtube.com/embed/vmL6mDAlvkE" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO GALLERY -->
+  <div class="product-section visible" id="sec-gallery">
+    <div class="section-title">✦ Handmade with Soul · עם כוונה טהורה ✦</div>
+    <div class="photo-gallery">
+      <video src="assets/vid/SIPA_CRAFT_2026-03-24_001__process_flow.mp4" controls muted playsinline></video>
+      <img src="assets/img/products/candle_photo_01.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_02.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <video src="assets/vid/SIPA_CRAFT_2026-03-24_002__material_alchemy.mp4" controls muted playsinline></video>
+      <img src="assets/img/products/candle_photo_03.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_04.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <video src="assets/vid/SIPA_CRAFT_2026-03-24_003__candle_calibration.mp4" controls muted playsinline></video>
+      <img src="assets/img/products/candle_photo_05.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_06.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <video src="assets/vid/SIPA_CRAFT_2026-03-24_004__final_reveal.mp4" controls muted playsinline></video>
+      <img src="assets/img/products/candle_photo_07.jpg" alt="Candle detail" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_08.jpg" alt="Candle detail" onclick="openLightbox(this)">
+      <video src="assets/vid/VID_20260324_222016.mp4" controls muted playsinline></video>
+      <img src="assets/img/products/candle_photo_09.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_10.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <video src="assets/vid/VID_20260324_222050.mp4" controls muted playsinline></video>
+      <img src="assets/img/products/candle_photo_11.jpg" alt="Candle detail" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_12.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <video src="assets/vid/VID_20260324_230200.mp4" controls muted playsinline></video>
+      <img src="assets/img/products/candle_photo_13.jpg" alt="Candle detail" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_14.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_15.jpg" alt="Candle detail" onclick="openLightbox(this)">
+      <img src="assets/img/products/candle_photo_16.jpg" alt="Ritual candle" onclick="openLightbox(this)">
+    </div>
+  </div>
+
+  <!-- MY STORY -->
+  <div class="product-section visible" id="sec-story" style="max-width:800px;margin:0 auto 30px;">
+    <div class="section-title">✦ My Story · הסיפור שלי · Моя история ✦</div>
+
+    <div style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:14px;padding:20px 22px;margin-bottom:14px;direction:rtl;text-align:right;">
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.1em;margin-bottom:8px;">🇮🇱 עברית</div>
+      <p style="font-size:13px;line-height:1.8;color:#d0dce8;margin:0;">עשרים שנה של כאב וחיפוש, של שבירות ודיסוציאציות. לא יכולתי לדמיין דבר בעיני רוחי — אפנטזיה. המוח שלי רץ במהירות של 200 קמ"ש. מתוך הכאוס הזה נולדה השיטה: <em style="color:var(--cyan);">"אני לא יוצרת תמונות. אני בונה מערכות שמחזיקות מצב"</em>. הגילוי היה האומנות הריאקטיבית לאור UV — שתי מציאויות על אותו בד. בניתי את SIPA OS מאפס, בלילות של זיעה ודם. זו לא אבטחה — זו הדרך שלי לזכור. <strong>מתוך השבירה נולד המבנה.</strong></p>
+    </div>
+
+    <div style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:14px;padding:20px 22px;margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.1em;margin-bottom:8px;">🇷🇺 Русский</div>
+      <p style="font-size:13px;line-height:1.8;color:#d0dce8;margin:0;">Двадцать лет боли и поиска, сломленности и диссоциаций. Я не могла ничего представить в уме — афантазия. Мой мозг работал на скорости 200 км/ч. Из этого хаоса родился метод: <em style="color:var(--cyan);">«Я не создаю изображения. Я строю системы, которые удерживают состояние»</em>. Открытием стало UV-реактивное искусство — две реальности на одном холсте. Я построила SIPA OS с нуля, ночами, в поте и крови. Это не слежка — это то, как я помню. <strong>Из слома родилась структура.</strong></p>
+    </div>
+
+    <div style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:14px;padding:20px 22px;margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.1em;margin-bottom:8px;">🇬🇧 English</div>
+      <p style="font-size:13px;line-height:1.8;color:#d0dce8;margin:0;">Twenty years of pain and searching, of fracture and dissociation. I could picture nothing in my mind — aphantasia. My brain raced at 200 km/h. From that chaos, the method was born: <em style="color:var(--cyan);">"I do not make images. I build systems that hold state."</em> The discovery was UV-reactive art — two realities on one canvas. I built SIPA OS from scratch, through sleepless nights of sweat and blood. It is not surveillance — it is how I remember. <strong>From the breakage, structure emerged.</strong></p>
+    </div>
+
+    <div class="section-title" style="margin-top:24px;">✦ My Vision · החזון שלי · Моё видение ✦</div>
+
+    <div style="background:rgba(170,68,255,.04);border:1px solid rgba(170,68,255,.18);border-radius:14px;padding:20px 22px;margin-bottom:14px;direction:rtl;text-align:right;">
+      <div style="font-size:11px;color:#aa44ff;letter-spacing:.1em;margin-bottom:8px;">🇮🇱 עברית</div>
+      <p style="font-size:13px;line-height:1.8;color:#d0dce8;margin:0;">החזון שלי נבנה מחמישה עמודים: הקמת עמותה לנערות בסיכון. פיתוח אפליקציית SIPA OS — כלי עבור אנשים עם שוני נוירולוגי. הרחבת המודעות לאומנות ככלי להכנסת אור ולנגיעה בנשמה. שליחות עליונה — לעשות את העולם טוב יותר. ולבסוף, לקנות בית ומנוחה ראויה לשותפה שלי לחיים.</p>
+      <p style="font-size:12px;font-style:italic;color:#aa44ff;margin-top:8px;">Chaos non cadit in ordinationem sine intellectu — הכאוס לא הופך לסדר ללא הבנה.</p>
+    </div>
+
+    <div style="background:rgba(170,68,255,.04);border:1px solid rgba(170,68,255,.18);border-radius:14px;padding:20px 22px;margin-bottom:14px;">
+      <div style="font-size:11px;color:#aa44ff;letter-spacing:.1em;margin-bottom:8px;">🇷🇺 Русский</div>
+      <p style="font-size:13px;line-height:1.8;color:#d0dce8;margin:0;">Моё видение строится на пяти столпах: создание фонда для девушек в группе риска. Разработка приложения SIPA OS — реального инструмента для людей с нейроотличиями. Расширение осознания искусства как инструмента, приносящего свет и касающегося души. Высшая миссия — сделать мир лучше. И наконец — купить дом и обеспечить достойный отдых моей спутнице жизни.</p>
+      <p style="font-size:12px;font-style:italic;color:#aa44ff;margin-top:8px;">Chaos non cadit in ordinationem sine intellectu — хаос не становится порядком без понимания.</p>
+    </div>
+
+    <div style="background:rgba(170,68,255,.04);border:1px solid rgba(170,68,255,.18);border-radius:14px;padding:20px 22px;">
+      <div style="font-size:11px;color:#aa44ff;letter-spacing:.1em;margin-bottom:8px;">🇬🇧 English</div>
+      <p style="font-size:13px;line-height:1.8;color:#d0dce8;margin:0;">My vision is built on five pillars: establishing a foundation for at-risk girls. Developing the SIPA OS app — a real tool for people with neurodivergence. Expanding awareness of art as a means to bring light and touch the soul. A supreme mission — to make the world better. And finally, to buy a home and secure dignified rest for my life partner.</p>
+      <p style="font-size:12px;font-style:italic;color:#aa44ff;margin-top:8px;">Chaos non cadit in ordinationem sine intellectu — chaos does not become order without understanding.</p>
+    </div>
+  </div>
+
   <!-- CANDLES -->
-  <div class="product-section visible" id="sec-candles">
+  <div class="product-section" id="sec-candles">
     <div class="section-title" id="sec-title-candles">✦ Свечи ✦</div>
     <div class="product-grid">
 
@@ -612,6 +725,20 @@ footer .ft-brand{
       <div class="modal-section-label" id="lbl-properties">СВОЙСТВА</div>
       <div class="modal-tags" id="modal-tags"></div>
     </div>
+    <div style="padding:16px 20px 20px;display:flex;gap:10px;flex-wrap:wrap;border-top:1px solid var(--modal-color,#00f5ff)22;">
+      <a id="modal-order-btn" href="https://wa.me/972525074743" target="_blank" rel="noopener"
+         style="flex:1;display:block;text-align:center;padding:11px 18px;
+                background:var(--modal-color,#00f5ff);color:#000;
+                border-radius:10px;font-weight:700;font-size:14px;
+                text-decoration:none;font-family:'Courier New',monospace;
+                letter-spacing:.06em;">
+        Заказать →
+      </a>
+      <button onclick="closeModal()"
+              style="padding:11px 16px;background:none;border:1px solid var(--modal-color,#00f5ff)66;
+                     color:var(--modal-color,#00f5ff);border-radius:10px;cursor:pointer;
+                     font-size:13px;font-family:'Courier New',monospace;">✕</button>
+    </div>
   </div>
 </div>
 
@@ -623,9 +750,79 @@ footer .ft-brand{
   <br><a href="https://t.me/messycketch" style="color:#00f5ff88;text-decoration:none;" target="_blank">Telegram →</a>
 </div>
 
+<!-- ── LIGHTBOX ── -->
+<div class="photo-lightbox" id="lightbox" onclick="this.classList.remove('open')">
+  <img id="lightbox-img" src="" alt="Photo">
+</div>
+
+<!-- ── CONTACT / LEAD CAPTURE ── -->
+<section style="max-width:900px;margin:30px auto;padding:0 16px;">
+  <h2 style="text-align:center;font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--cyan);margin-bottom:6px;">Contact · צור קשר · Связаться</h2>
+  <p style="text-align:center;font-size:12px;color:#557799;margin-bottom:18px;">DM for orders · הזמנות בהודעה · Заказы в личку</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px;">
+    <a href="https://www.instagram.com/soul.in.psyabstract" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,68,204,.06);border:1px solid rgba(255,68,204,.25);border-radius:12px;padding:14px 18px;color:#ff44cc;text-decoration:none;font-size:13px;font-family:'Courier New',monospace;">Instagram →</a>
+    <a href="https://t.me/messycketch" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,245,255,.06);border:1px solid rgba(0,245,255,.25);border-radius:12px;padding:14px 18px;color:var(--cyan);text-decoration:none;font-size:13px;font-family:'Courier New',monospace;">Telegram →</a>
+    <a href="https://www.tiktok.com/@soul.in.psyabstract" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px 18px;color:#e2e8f0;text-decoration:none;font-size:13px;font-family:'Courier New',monospace;">TikTok →</a>
+    <a href="https://www.facebook.com/soulinpsyabstract" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(66,103,178,.08);border:1px solid rgba(66,103,178,.25);border-radius:12px;padding:14px 18px;color:#4267B2;text-decoration:none;font-size:13px;font-family:'Courier New',monospace;">Facebook →</a>
+  </div>
+  <div style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:14px;padding:18px 20px;text-align:center;">
+    <div style="font-size:13px;color:#d0dce8;margin-bottom:10px;">Subscribe · הרשמו לעדכונים · Подпишитесь</div>
+    <a href="https://t.me/SoulInPsyAbstract" target="_blank" rel="noopener" style="display:inline-block;background:var(--cyan);color:#0a0d10;font-weight:700;font-size:13px;padding:10px 24px;border-radius:8px;text-decoration:none;font-family:'Courier New',monospace;">Telegram Channel @SoulInPsyAbstract →</a>
+    <div style="font-size:11px;color:#557799;margin-top:8px;">Updates · New drops · Behind the scenes</div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section style="max-width:900px;margin:30px auto;padding:0 16px;">
+  <h2 style="text-align:center;font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--cyan);margin-bottom:6px;">Google Reviews · ★★★★★</h2>
+  <p style="text-align:center;font-size:12px;color:#557799;margin-bottom:18px;">26 reviews · 5.0 average</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);border-radius:14px;padding:16px 18px;">
+      <div style="color:#ffd700;font-size:14px;margin-bottom:6px;">★★★★★</div>
+      <div style="font-size:13px;color:#d0dce8;line-height:1.6;margin-bottom:8px;">"100% сервис, потрясающие свечи, восхитительный аромат и что-то особенное!!! Доставка по всей стране. Горячо рекомендую"</div>
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.04em;">— Ortal</div>
+    </div>
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);border-radius:14px;padding:16px 18px;">
+      <div style="color:#ffd700;font-size:14px;margin-bottom:6px;">★★★★★</div>
+      <div style="font-size:13px;color:#d0dce8;line-height:1.6;margin-bottom:8px;">"Absolutely astonishing"</div>
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.04em;">— Kim Brandes</div>
+    </div>
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);border-radius:14px;padding:16px 18px;">
+      <div style="color:#ffd700;font-size:14px;margin-bottom:6px;">★★★★★</div>
+      <div style="font-size:13px;color:#d0dce8;line-height:1.6;margin-bottom:8px;direction:rtl;text-align:right;">"אין ספק מספר 1.. להיט אמיתי"</div>
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.04em;">— חזי דיוה</div>
+    </div>
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);border-radius:14px;padding:16px 18px;">
+      <div style="color:#ffd700;font-size:14px;margin-bottom:6px;">★★★★★</div>
+      <div style="font-size:13px;color:#d0dce8;line-height:1.6;margin-bottom:8px;">"Отличное место, потрясающее отношение, прямо кайф быть тут"</div>
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.04em;">— מיכאל אסיף</div>
+    </div>
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);border-radius:14px;padding:16px 18px;">
+      <div style="color:#ffd700;font-size:14px;margin-bottom:6px;">★★★★★</div>
+      <div style="font-size:13px;color:#d0dce8;line-height:1.6;margin-bottom:8px;direction:rtl;text-align:right;">"תותחית על. כל בעייה פותרת באהבה ובשמחה"</div>
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.04em;">— אילנה לברון</div>
+    </div>
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);border-radius:14px;padding:16px 18px;">
+      <div style="color:#ffd700;font-size:14px;margin-bottom:6px;">★★★★★</div>
+      <div style="font-size:13px;color:#d0dce8;line-height:1.6;margin-bottom:8px;direction:rtl;text-align:right;">"אין על מרינה בעולם"</div>
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.04em;">— adar caroutchy</div>
+    </div>
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);border-radius:14px;padding:16px 18px;">
+      <div style="color:#ffd700;font-size:14px;margin-bottom:6px;">★★★★★</div>
+      <div style="font-size:13px;color:#d0dce8;line-height:1.6;margin-bottom:8px;direction:rtl;text-align:right;">"תודה רבה על יחס אישי ומקצועי"</div>
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.04em;">— איריס אהרון</div>
+    </div>
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.18);border-radius:14px;padding:16px 18px;">
+      <div style="color:#ffd700;font-size:14px;margin-bottom:6px;">★★★★★</div>
+      <div style="font-size:13px;color:#d0dce8;line-height:1.6;margin-bottom:8px;">"Super)))"</div>
+      <div style="font-size:11px;color:var(--cyan);letter-spacing:.04em;">— Regina Spinchevsky</div>
+    </div>
+  </div>
+</section>
+
 <!-- ── FOOTER ── -->
 <footer>
-  <p>soulinpsyabstract.store · Eilat, Israel</p>
+  <p>soulinpsyabstract.com · Eilat, Israel</p>
   <div class="ft-brand">Soul In PsyAbstract · עם כוונה טהורה</div>
 </footer>
 
@@ -1057,6 +1254,7 @@ const MODAL_LABELS = {
   intention:{ RU:'НАМЕРЕНИЕ', EN:'INTENTION', HE:'כוונה' },
   composition:{ RU:'СОСТАВ', EN:'COMPOSITION', HE:'מרכיבים' },
   properties:{ RU:'СВОЙСТВА', EN:'PROPERTIES', HE:'מאפיינים' },
+  order:{ RU:'Заказать →', EN:'Order →', HE:'להזמין →' },
 };
 
 function setLang(lang) {
@@ -1120,6 +1318,9 @@ function renderModal() {
   // Tags
   const tagsEl = document.getElementById('modal-tags');
   tagsEl.innerHTML = d.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
+  // Order button label
+  const orderBtn = document.getElementById('modal-order-btn');
+  if(orderBtn) orderBtn.textContent = MODAL_LABELS.order[currentModalLang];
   // Lang buttons
   document.querySelectorAll('.modal-lang-btn').forEach(b =>
     b.classList.toggle('active', b.textContent===currentModalLang));
@@ -1142,7 +1343,16 @@ function closeModalOutside(e) {
   if(e.target === document.getElementById('modal-overlay')) closeModal();
 }
 
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape') { closeModal(); document.getElementById('lightbox').classList.remove('open'); }
+});
+
+// ── LIGHTBOX ──
+function openLightbox(img) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = img.src;
+  lb.classList.add('open');
+}
 </script>
 </body>
 </html>
