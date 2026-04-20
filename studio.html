@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Studio — Soul In PsyAbstract</title>
+  <meta name="description" content="Behind the scenes. Process videos, UV reveals, studio moments by Aelin AquaSoul.">
+  <link rel="stylesheet" href="assets/css/main.css?v=7">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0a0d10">
+  <style>
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:16px}
+    .video-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0f1318;transition:transform .3s,box-shadow .3s}
+    .video-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(127,243,231,.12)}
+    .video-card video{width:100%;display:block;aspect-ratio:9/16;object-fit:cover;background:#000}
+    .video-card .vid-landscape{aspect-ratio:16/9}
+    .video-card .vid-meta{padding:12px 14px}
+    .video-card .vid-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+    .video-card .vid-tag{font-size:12px;color:var(--muted)}
+    .vid-filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .vid-filter button{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);border-radius:999px;padding:6px 14px;font-size:13px;transition:all .15s}
+    .vid-filter button:hover,.vid-filter button.active{background:rgba(127,243,231,.12);color:var(--aqua);border-color:rgba(127,243,231,.3)}
+    .studio-hero{text-align:center;padding:20px 0 10px}
+    .studio-hero h2{font-size:32px;margin-bottom:8px}
+    .empty-state{text-align:center;padding:40px 20px;color:var(--muted);font-size:15px;line-height:1.8}
+    .empty-state .icon{font-size:48px;margin-bottom:12px;opacity:.4}
+    .photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:16px}
+    .photo-card{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0f1318;transition:transform .3s,box-shadow .3s;cursor:pointer}
+    .photo-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(127,243,231,.12)}
+    .photo-card img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+    .photo-card .ph-meta{padding:8px 12px;font-size:12px;color:var(--muted)}
+    .photo-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .photo-overlay img{max-width:95vw;max-height:95vh;border-radius:8px}
+    .section-title{font-size:20px;font-weight:700;color:var(--ink);margin:24px 0 8px;padding-left:4px}
+    @media(max-width:600px){.video-grid{grid-template-columns:1fr}.photo-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body data-page="studio">
+  <header class="header">
+    <div class="wrap">
+      <div class="brand">
+        <div>
+          <h1>Soul In PsyAbstract</h1>
+          <div class="tag">Studio · Process · Behind the Scenes</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a class="pill" href="index.html" data-i18n="nav.home">Home</a>
+        <a class="pill" href="gallery.html" data-i18n="nav.gallery">Gallery</a>
+        <a class="pill" href="store.html" data-i18n="nav.shop">Shop</a>
+        <a class="pill" href="nft.html" data-i18n="nav.nft">NFT</a>
+        <a class="pill" href="token.html">$SIPA</a>
+        <a class="pill" href="studio.html" data-i18n="nav.studio">Studio</a>
+        <a class="pill" href="ai.html" data-i18n="nav.ai">AI</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="fatal" class="small"></div>
+
+    <section class="card studio-hero">
+      <h2 data-i18n="studio.title">Studio</h2>
+      <p class="small" data-i18n="studio.subtitle">Process · UV reveals · Behind the scenes · Aelin AquaSoul</p>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="card">
+      <div class="vid-filter" id="vid-filter">
+        <button class="active" data-filter="all" data-i18n="studio.all">All</button>
+        <button data-filter="process" data-i18n="studio.process">Process</button>
+        <button data-filter="uv" data-i18n="studio.uv">UV Reveal</button>
+        <button data-filter="candles" data-i18n="studio.candles">Candles</button>
+        <button data-filter="glue" data-i18n="studio.glue">Hot Glue Art</button>
+        <button data-filter="studio" data-i18n="studio.moments">Studio Moments</button>
+      </div>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <h3 class="section-title" id="photo-title">Studio Photos · March–April 2026</h3>
+    <section>
+      <div class="photo-grid" id="photo-grid"></div>
+    </section>
+
+    <!-- VIDEO GRID -->
+    <h3 class="section-title" id="video-title">Videos</h3>
+    <section id="video-grid-section">
+      <div class="video-grid" id="video-grid"></div>
+    </section>
+
+    <div class="footer">Aelin AquaSoul · Soul In PsyAbstract · Eilat, Israel · 2026</div>
+  </main>
+
+  <script src="assets/js/core.js?v=8"></script>
+  <script src="assets/js/pwa.js"></script>
+  <script>
+  (function(){
+    'use strict';
+
+    var PHOTOS = [
+      {src:'assets/img/studio/IMG_20260324_221918_web.jpg',date:'24.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260324_221937_web.jpg',date:'24.03',tag:'uv'},
+      {src:'assets/img/studio/IMG_20260324_222128_web.jpg',date:'24.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260325_023425_web.jpg',date:'25.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260325_023429_web.jpg',date:'25.03',tag:'uv'},
+      {src:'assets/img/studio/IMG_20260325_023435_web.jpg',date:'25.03',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260326_205445_web.jpg',date:'26.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260326_205449_web.jpg',date:'26.03',tag:'uv'},
+      {src:'assets/img/studio/IMG_20260326_205455_web.jpg',date:'26.03',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260327_012200_web.jpg',date:'27.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260327_012207_web.jpg',date:'27.03',tag:'uv'},
+      {src:'assets/img/studio/IMG_20260327_012218_web.jpg',date:'27.03',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260328_023639_web.jpg',date:'28.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260328_023645_web.jpg',date:'28.03',tag:'candles'},
+      {src:'assets/img/studio/IMG_20260328_023652_web.jpg',date:'28.03',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260329_182604_web.jpg',date:'29.03',tag:'glue'},
+      {src:'assets/img/studio/IMG_20260329_182610_web.jpg',date:'29.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260329_192922_web.jpg',date:'29.03',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260330_170451_web.jpg',date:'30.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260330_170455_web.jpg',date:'30.03',tag:'uv'},
+      {src:'assets/img/studio/IMG_20260330_170457_web.jpg',date:'30.03',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260331_151920_web.jpg',date:'31.03',tag:'process'},
+      {src:'assets/img/studio/IMG_20260331_170716_web.jpg',date:'31.03',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260401_112349_web.jpg',date:'01.04',tag:'process'},
+      {src:'assets/img/studio/IMG_20260402_141626_web.jpg',date:'02.04',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260405_203344_web.jpg',date:'05.04',tag:'uv'},
+      {src:'assets/img/studio/IMG_20260405_203519_web.jpg',date:'05.04',tag:'process'},
+      {src:'assets/img/studio/IMG_20260406_101156_web.jpg',date:'06.04',tag:'studio'},
+      {src:'assets/img/studio/IMG_20260407_144059_web.jpg',date:'07.04',tag:'candles'},
+      {src:'assets/img/studio/IMG_20260408_151109_web.jpg',date:'08.04',tag:'process'},
+      {src:'assets/img/studio/IMG_20260408_151116_web.jpg',date:'08.04',tag:'studio'}
+    ];
+
+    var VIDEOS = [
+      // { src:'assets/video/clip01.mp4', poster:'', title_ru:'...', title_en:'...', tag:'process', orient:'portrait' }
+    ];
+
+    var photoGrid = document.getElementById('photo-grid');
+    var videoGrid = document.getElementById('video-grid');
+    var filterBar = document.getElementById('vid-filter');
+    var photoTitle = document.getElementById('photo-title');
+    var videoTitle = document.getElementById('video-title');
+    var lang = (window.PSA && window.PSA.ST && window.PSA.ST.lang) || 'en';
+    var currentFilter = 'all';
+
+    function renderPhotos(){
+      var filtered = currentFilter === 'all' ? PHOTOS : PHOTOS.filter(function(p){ return p.tag === currentFilter; });
+      photoTitle.textContent = (lang==='ru'?'Фото студии':'Studio Photos') + ' · March–April 2026';
+      if(!filtered.length){
+        photoGrid.innerHTML = '<div class="empty-state"><div>' + (lang==='ru'?'Нет фото в этой категории':'No photos in this category') + '</div></div>';
+        return;
+      }
+      photoGrid.innerHTML = filtered.map(function(p){
+        return '<div class="photo-card" data-tag="'+p.tag+'" data-src="'+p.src+'">' +
+          '<img loading="lazy" src="'+p.src+'" alt="Studio '+p.date+'">' +
+          '<div class="ph-meta">'+p.date+' · '+p.tag+'</div></div>';
+      }).join('');
+    }
+
+    function renderVideos(){
+      var filtered = currentFilter === 'all' ? VIDEOS : VIDEOS.filter(function(v){ return v.tag === currentFilter; });
+      videoTitle.textContent = lang==='ru'?'Видео':'Videos';
+      if(!filtered.length){
+        videoGrid.innerHTML =
+          '<div class="empty-state">' +
+          '<div class="icon">&#127916;</div>' +
+          '<div>' + (lang==='ru' ? 'Видео скоро появятся.<br>Процесс создания, UV-ревилы, свечи, студия.' : 'Videos coming soon.<br>Process, UV reveals, candles, studio moments.') + '</div>' +
+          '</div>';
+        return;
+      }
+      videoGrid.innerHTML = filtered.map(function(v){
+        var title = lang === 'ru' ? v.title_ru : v.title_en;
+        var cls = v.orient === 'landscape' ? ' vid-landscape' : '';
+        return '<div class="video-card" data-tag="' + v.tag + '">' +
+          '<video class="' + cls + '" preload="metadata" controls playsinline' +
+          (v.poster ? ' poster="' + v.poster + '"' : '') + '>' +
+          '<source src="' + v.src + '" type="video/mp4">' +
+          '</video>' +
+          '<div class="vid-meta">' +
+          '<div class="vid-title">' + title + '</div>' +
+          '<div class="vid-tag">' + v.tag + '</div>' +
+          '</div></div>';
+      }).join('');
+    }
+
+    filterBar.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-filter]');
+      if(!btn) return;
+      currentFilter = btn.getAttribute('data-filter');
+      filterBar.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderPhotos();
+      renderVideos();
+    });
+
+    // Lightbox for photos
+    photoGrid.addEventListener('click', function(e){
+      var card = e.target.closest('.photo-card');
+      if(!card) return;
+      var overlay = document.createElement('div');
+      overlay.className = 'photo-overlay';
+      overlay.innerHTML = '<img src="'+card.getAttribute('data-src')+'">';
+      overlay.addEventListener('click', function(){ overlay.remove(); });
+      document.body.appendChild(overlay);
+    });
+
+    renderPhotos();
+    renderVideos();
+  })();
+  </script>
+  <script>
+    window.intercomSettings = {
+      api_base: "https://api-iam.intercom.io",
+      app_id: "h9dl06fm",
+    };
+  </script>
+  <script>
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/h9dl06fm';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+  </script>
+</body>
+</html>
