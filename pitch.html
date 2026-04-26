@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SIPA OS — Investor One-Pager</title>
+  <meta name="robots" content="noindex">
+  <style>
+    :root {
+      --bg: #0a0d10;
+      --card: #111417;
+      --border: rgba(255,255,255,.08);
+      --aqua: #7ff3e7;
+      --muted: #8a9aaa;
+      --text: #e8edf2;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 32px 16px 64px;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+
+    .header { text-align: center; padding: 48px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+    .header h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -.5px; color: var(--aqua); }
+    .header .sub { font-size: 1rem; color: var(--muted); margin-top: 8px; }
+    .header .entity { font-size: .85rem; color: rgba(127,243,231,.5); margin-top: 6px; }
+
+    .block { margin-bottom: 32px; padding: 24px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
+    .block-label { font-size: .7rem; font-weight: 700; letter-spacing: 2px; color: var(--aqua); text-transform: uppercase; margin-bottom: 10px; }
+    .block p { color: var(--text); }
+
+    .traction-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+    .tstat { background: rgba(127,243,231,.05); border: 1px solid rgba(127,243,231,.15); border-radius: 8px; padding: 12px; text-align: center; }
+    .tstat .num { font-size: 1.4rem; font-weight: 700; color: var(--aqua); }
+    .tstat .lbl { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+
+    .ask-box { background: rgba(127,243,231,.07); border: 1px solid rgba(127,243,231,.3); border-radius: 12px; padding: 28px; text-align: center; margin-top: 16px; }
+    .ask-box .amount { font-size: 2.2rem; font-weight: 700; color: var(--aqua); }
+    .ask-box .round { font-size: .85rem; color: var(--muted); margin-bottom: 16px; }
+    .ask-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .ask-list li { color: var(--text); font-size: .9rem; }
+    .ask-list li::before { content: "→ "; color: var(--aqua); }
+
+    .tagline { text-align: center; padding: 40px 0 0; font-size: 1rem; color: var(--muted); font-style: italic; }
+    .tagline strong { color: var(--text); }
+
+    .contact { text-align: center; margin-top: 32px; font-size: .85rem; color: var(--muted); }
+    .contact a { color: var(--aqua); text-decoration: none; }
+
+    @media(max-width:520px) {
+      .traction-grid { grid-template-columns: repeat(2, 1fr); }
+      .header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1>SIPA OS</h1>
+    <div class="sub">AI Shell for Neurodivergent Founders</div>
+    <div class="entity">Soul In PsyAbstract LLC · Delaware (pending) · Eilat, Israel</div>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Problem</div>
+    <p>Neurodivergent founders (ADHD / BPD / Autism) lose ideas, context, and momentum — not because they lack intelligence, but because working memory fails them. Notion and Jira were built for neurotypical brains. <strong>The tools are the disability.</strong></p>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Solution</div>
+    <p>SIPA OS is an AI shell that acts as external memory. Brain Dump → auto-classification → 38 structured hubs → Guardian monitoring. One system that thinks like you do, not like a project manager.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Traction</div>
+    <p>Live infrastructure. Real numbers.</p>
+    <div class="traction-grid">
+      <div class="tstat"><div class="num">51,640</div><div class="lbl">Files under management</div></div>
+      <div class="tstat"><div class="num">3</div><div class="lbl">Active nodes</div></div>
+      <div class="tstat"><div class="num">38</div><div class="lbl">Specialized hubs</div></div>
+      <div class="tstat"><div class="num">ALERTS=0</div><div class="lbl">Guardian uptime</div></div>
+      <div class="tstat"><div class="num">$1,200</div><div class="lbl">Azure credits active</div></div>
+      <div class="tstat"><div class="num">Live</div><div class="lbl">Pricing + Crypto payments</div></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Market</div>
+    <p>15–20% of the global population is neurodivergent — founders at disproportionately higher rates. ADHD diagnoses growing 30% YoY. Underserved, underbuilt, underfunded.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Business Model</div>
+    <p>SaaS subscription: Basic / Pro / Genesis tiers. Stripe integration pending LLC activation. Crypto payments live via NOWPayments. Partnership pipeline: Confluent, Miro, Atlassian.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Team</div>
+    <p>Aelin AquaSoul — systems architect, ADHD + BPD. Built SIPA OS to survive her own cognition. <strong>No gap between the builder and the user.</strong> That is founder-market fit.</p>
+  </div>
+
+  <div class="ask-box">
+    <div class="round">Pre-Seed Round</div>
+    <div class="amount">$150,000</div>
+    <ul class="ask-list">
+      <li>Stripe live + first paying customer</li>
+      <li>Crusoe GPU compute for AI inference</li>
+      <li>Core team hire</li>
+    </ul>
+  </div>
+
+  <div class="tagline"><strong>"SIPA OS is not productivity software. It is cognitive infrastructure."</strong></div>
+
+  <div class="contact">
+    Aelin AquaSoul · <a href="mailto:soulinpsyabstract@gmail.com">soulinpsyabstract@gmail.com</a> · <a href="https://soulinpsyabstract.com">soulinpsyabstract.com</a>
+  </div>
+
+</div>
+</body>
+</html>
