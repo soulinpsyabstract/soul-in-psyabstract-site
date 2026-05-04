@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIPA OS — System Status</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --neon:   #00f0ff;
+    --aqua:   #00c8d7;
+    --dim:    #007a8a;
+    --black:  #000000;
+    --dark:   #060c0f;
+    --mid:    #0a1318;
+    --border: #0f2a30;
+    --ok:     #00ff88;
+    --warn:   #ffcc00;
+    --err:    #ff3355;
+    --text:   #a0e8ef;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── SCANLINE overlay ── */
+  body::before {
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,240,255,0.015) 2px,
+      rgba(0,240,255,0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ── HEADER ── */
+  .os-header {
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 24px 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .os-logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: var(--neon);
+    text-shadow: 0 0 18px var(--neon), 0 0 40px rgba(0,240,255,0.4);
+  }
+  .os-logo span { color: var(--dim); font-weight: 400; }
+  .os-tagline {
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .os-ts {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── GLOBAL STATUS BAR ── */
+  .global-bar {
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--mid);
+  }
+  .pulse {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 10px var(--ok), 0 0 20px rgba(0,255,136,0.4);
+    animation: pulse-anim 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  .pulse.warn  { background: var(--warn); box-shadow: 0 0 10px var(--warn); }
+  .pulse.crit  { background: var(--err);  box-shadow: 0 0 10px var(--err); animation: pulse-fast 0.5s ease-in-out infinite; }
+  @keyframes pulse-anim { 0%,100%{opacity:1} 50%{opacity:.4} }
+  @keyframes pulse-fast  { 0%,100%{opacity:1} 50%{opacity:.2} }
+  .global-label { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: var(--neon); }
+  .global-sub   { font-size: 10px; color: var(--dim); margin-left: auto; }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    padding: 0;
+  }
+
+  /* ── HUB CARD ── */
+  .hub {
+    background: var(--dark);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .hub::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--ok);
+    box-shadow: 0 0 8px var(--ok);
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .hub.warn::before { background: var(--warn); box-shadow: 0 0 8px var(--warn); }
+  .hub.err::before  { background: var(--err);  box-shadow: 0 0 8px var(--err); }
+  .hub.unknown::before { background: var(--dim); box-shadow: none; }
+  .hub:hover { background: #0b1a20; }
+
+  .hub-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--aqua);
+  }
+  .hub-desc {
+    font-size: 10px;
+    color: #3a6570;
+    letter-spacing: 0.06em;
+  }
+  .hub-status {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ok);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .hub-status.warn { color: var(--warn); }
+  .hub-status.err  { color: var(--err); }
+  .hub-status.unknown { color: var(--dim); }
+  .hub-status::before {
+    content: '■';
+    font-size: 7px;
+  }
+
+  /* ── INCIDENTS PANEL ── */
+  .incidents {
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
+  }
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 10px;
+  }
+  .incident-none {
+    font-size: 11px;
+    color: var(--ok);
+    letter-spacing: 0.1em;
+  }
+  .incident-item {
+    background: var(--mid);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--err);
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+  .incident-item .inc-name { color: var(--err); font-weight: 700; margin-bottom: 4px; }
+  .incident-item .inc-body { color: #5a8a92; font-size: 10px; line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  .os-footer {
+    border-top: 1px solid var(--border);
+    padding: 10px 24px;
+    display: flex;
+    gap: 16px;
+    background: var(--dark);
+  }
+  .os-footer a {
+    font-size: 10px;
+    color: var(--dim);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+  .os-footer a:hover { color: var(--neon); }
+
+  /* ── LOADING / ERROR ── */
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    gap: 10px;
+    color: var(--dim);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .spin {
+    width: 12px; height: 12px;
+    border: 1px solid var(--border);
+    border-top-color: var(--neon);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── HUB LEGEND ── */
+  .legend {
+    padding: 8px 24px;
+    display: flex;
+    gap: 18px;
+    border-bottom: 1px solid var(--border);
+    background: #040a0d;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .legend-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+
+<div class="os-header">
+  <div>
+    <div class="os-logo">SIPA<span> OS</span></div>
+    <div class="os-tagline">Soul In PsyAbstract · System Status</div>
+  </div>
+  <div class="os-ts" id="ts">—</div>
+</div>
+
+<div id="global-bar" class="global-bar">
+  <div class="spin"></div>
+  <div class="global-label" style="color:var(--dim)">LOADING…</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--ok);box-shadow:0 0 4px var(--ok)"></div> Operational</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--warn);box-shadow:0 0 4px var(--warn)"></div> Degraded</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--err);box-shadow:0 0 4px var(--err)"></div> Outage</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--dim)"></div> Unknown</div>
+</div>
+
+<div id="grid" class="grid">
+  <div class="loading"><div class="spin"></div> SCANNING HUBS…</div>
+</div>
+
+<div id="incidents" class="incidents" style="display:none">
+  <div class="section-title">Active Incidents</div>
+  <div id="incidents-body"></div>
+</div>
+
+<div class="os-footer">
+  <a href="https://sipaosentertainment.statuspage.io" target="_blank" rel="noopener">↗ Full Status Page</a>
+  <a href="https://soulinpsyabstract.store" target="_blank" rel="noopener">↗ SIPA OS</a>
+  <span style="margin-left:auto;font-size:9px;color:#1a3540;letter-spacing:0.1em">5ccqmhkl8jsk</span>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── SECURITY L1: Request control ── */
+  var PAGE_ID   = '5ccqmhkl8jsk';
+  var BASE_URL  = 'https://' + PAGE_ID + '.statuspage.io/api/v2';
+  var REFRESH   = 60000;  /* 60s minimum — never hammer the API */
+  var TIMEOUT   = 8000;
+  var _last_req = 0;
+
+  function safe_fetch(path, cb) {
+    var now = Date.now();
+    if (now - _last_req < 10000) return; /* L1: min 10s between requests */
+    _last_req = now;
+
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, TIMEOUT);
+
+    fetch(BASE_URL + path, {
+      signal: ctrl.signal,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (r) {
+      clearTimeout(timer);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(cb)
+    .catch(function (e) {
+      clearTimeout(timer);
+      show_error(e.message || 'Network error');
+    });
+  }
+
+  /* ── SECURITY L2: Data sanitization ── */
+  function sanitize(str) {
+    if (typeof str !== 'string') return '';
+    /* strip everything non-printable, limit length */
+    return str.replace(/[<>"'`\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 200);
+  }
+
+  /* ── SECURITY L3: DOM-only rendering, no innerHTML with raw data ── */
+  function el(tag, cls) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    return e;
+  }
+  function txt(node, str) { node.textContent = sanitize(str); }
+
+  /* ── STATUS MAPPING ── */
+  var STATUS_MAP = {
+    'operational':             { cls: '',        label: 'Operational',      hub_cls: '' },
+    'degraded_performance':    { cls: 'warn',    label: 'Degraded',         hub_cls: 'warn' },
+    'partial_outage':          { cls: 'warn',    label: 'Partial Outage',   hub_cls: 'warn' },
+    'major_outage':            { cls: 'err',     label: 'Major Outage',     hub_cls: 'err' },
+    'under_maintenance':       { cls: 'warn',    label: 'Maintenance',      hub_cls: 'warn' }
+  };
+
+  /* ── HUB DESCRIPTIONS (enrich API names) ── */
+  var HUB_DESC = {
+    'zendesk':    'Support ticket routing',
+    'intercom':   'Live chat + customer sync',
+    'shopify':    'Orders, inventory, customers',
+    'calendly':   'Meeting scheduling',
+    'airtable':   'Data sync + records',
+    'slack':      'Team notifications',
+    'jira':       'Issue tracking + forensics',
+    'hubspot':    'CRM contact sync',
+    'posthog':    'Analytics pipeline',
+    'sipa brain': 'AI core · port 9923',
+    'sipa ai':    'AI server · port 9924',
+    'webhook hub':'Event relay · port 5008',
+    'site':       'soulinpsyabstract.store',
+    'cloudflare': 'Tunnel + DNS + DDoS',
+    'api':        'REST API · v1 endpoints',
+    'sphere':     'Distributed file governance',
+  };
+
+  function get_hub_desc(name) {
+    var k = sanitize(name).toLowerCase();
+    for (var key in HUB_DESC) {
+      if (k.indexOf(key) !== -1) return HUB_DESC[key];
+    }
+    return 'SIPA OS component';
+  }
+
+  /* ── RENDER ── */
+  function render_global(indicator, description) {
+    var bar   = document.getElementById('global-bar');
+    var map   = { none: '', minor: 'warn', major: 'warn', critical: 'err' };
+    var cls   = map[indicator] || '';
+    bar.innerHTML = '';
+
+    var dot = el('div', 'pulse ' + cls);
+    var lbl = el('div', 'global-label');
+    txt(lbl, sanitize(description) || 'All Systems Operational');
+    var sub = el('div', 'global-sub');
+    txt(sub, 'SIPA OS · ' + new Date().toUTCString().slice(0, 25));
+
+    bar.appendChild(dot);
+    bar.appendChild(lbl);
+    bar.appendChild(sub);
+  }
+
+  function render_grid(components) {
+    var grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    if (!components || !components.length) {
+      var none = el('div', 'loading');
+      txt(none, 'No components found');
+      grid.appendChild(none);
+      return;
+    }
+
+    components.forEach(function (comp) {
+      var info   = STATUS_MAP[comp.status] || { cls: 'unknown', label: sanitize(comp.status) || '?', hub_cls: 'unknown' };
+      var card   = el('div', 'hub ' + info.hub_cls);
+
+      var name   = el('div', 'hub-name');
+      txt(name, comp.name);
+
+      var desc   = el('div', 'hub-desc');
+      txt(desc, get_hub_desc(comp.name));
+
+      var status = el('div', 'hub-status ' + info.cls);
+      txt(status, info.label);
+
+      card.appendChild(name);
+      card.appendChild(desc);
+      card.appendChild(status);
+      grid.appendChild(card);
+    });
+  }
+
+  function render_incidents(incidents) {
+    var panel = document.getElementById('incidents');
+    var body  = document.getElementById('incidents-body');
+    body.innerHTML = '';
+
+    if (!incidents || !incidents.length) {
+      panel.style.display = 'none';
+      return;
+    }
+
+    panel.style.display = 'block';
+    incidents.forEach(function (inc) {
+      var item  = el('div', 'incident-item');
+      var title = el('div', 'inc-name');
+      txt(title, inc.name);
+      var upd   = inc.incident_updates && inc.incident_updates[0];
+      var bdiv  = el('div', 'inc-body');
+      txt(bdiv, upd ? upd.body : 'Investigating…');
+      item.appendChild(title);
+      item.appendChild(bdiv);
+      body.appendChild(item);
+    });
+  }
+
+  function show_error(msg) {
+    var bar = document.getElementById('global-bar');
+    bar.innerHTML = '';
+    var dot = el('div', 'pulse crit');
+    var lbl = el('div', 'global-label');
+    lbl.style.color = 'var(--err)';
+    txt(lbl, 'STATUS UNAVAILABLE');
+    var sub = el('div', 'global-sub');
+    txt(sub, sanitize(msg));
+    bar.appendChild(dot);
+    bar.appendChild(lbl);
+    bar.appendChild(sub);
+  }
+
+  function update_ts() {
+    var ts = document.getElementById('ts');
+    if (ts) txt(ts, new Date().toUTCString().slice(0, 25) + ' UTC');
+  }
+
+  /* ── MAIN FETCH ── */
+  function fetch_status() {
+    update_ts();
+    safe_fetch('/summary.json', function (data) {
+      var status     = data.status     || {};
+      var components = data.components || [];
+      var incidents  = data.incidents  || [];
+
+      render_global(status.indicator, status.description);
+      render_grid(components);
+      render_incidents(incidents);
+    });
+  }
+
+  /* ── BOOT ── */
+  fetch_status();
+  setInterval(fetch_status, REFRESH);
+
+})();
+</script>
+</body>
+</html>
