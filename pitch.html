@@ -1,190 +1,261 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="facebook-domain-verification" content="y7kiyzg2ii3z0sh4e7xkptdjtaedub" />
-    <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ei Ni init zi Gi Nr Ui Xi Hi capture calculateEventProperties tn register register_once register_for_session unregister unregister_for_session an getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ln identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty nn Qi createPersonProfile setInternalOrTestUser sn qi cn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Ji debug Fr rn getPageViewId captureTraceFeedback captureTraceMetric Bi".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_qNbWJKfsSAvjGAscjVDUvaiuaA632WogXQHfbJzhjDhM', {
-        api_host: 'https://z.soulinpsyabstract.store',
-        ui_host: 'https://us.posthog.com',
-        defaults: '2026-01-30',
-        person_profiles: 'identified_only',
-    })
-    </script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIPA OS — Investor One-Pager</title>
-  <meta name="robots" content="noindex">
-  <style>
-    :root {
-      --bg: #0a0d10;
-      --card: #111417;
-      --border: rgba(255,255,255,.08);
-      --aqua: #7ff3e7;
-      --muted: #8a9aaa;
-      --text: #e8edf2;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-size: 15px;
-      line-height: 1.7;
-      padding: 32px 16px 64px;
-    }
-    .wrap { max-width: 720px; margin: 0 auto; }
-
-    .header { text-align: center; padding: 48px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-    .header h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -.5px; color: var(--aqua); }
-    .header .sub { font-size: 1rem; color: var(--muted); margin-top: 8px; }
-    .header .entity { font-size: .85rem; color: rgba(127,243,231,.5); margin-top: 6px; }
-
-    .block { margin-bottom: 32px; padding: 24px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
-    .block-label { font-size: .7rem; font-weight: 700; letter-spacing: 2px; color: var(--aqua); text-transform: uppercase; margin-bottom: 10px; }
-    .block p { color: var(--text); }
-
-    .traction-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
-    .tstat { background: rgba(127,243,231,.05); border: 1px solid rgba(127,243,231,.15); border-radius: 8px; padding: 12px; text-align: center; }
-    .tstat .num { font-size: 1.4rem; font-weight: 700; color: var(--aqua); }
-    .tstat .lbl { font-size: .75rem; color: var(--muted); margin-top: 2px; }
-
-    .market-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
-    .mstat { background: rgba(127,243,231,.04); border: 1px solid rgba(127,243,231,.12); border-radius: 8px; padding: 14px; text-align: center; }
-    .mstat .mnum { font-size: 1.3rem; font-weight: 700; color: var(--aqua); }
-    .mstat .mlbl { font-size: .7rem; color: var(--muted); margin-top: 3px; text-transform: uppercase; letter-spacing: 1px; }
-    .mstat .mdesc { font-size: .75rem; color: var(--text); margin-top: 4px; opacity: .7; }
-
-    .ask-box { background: rgba(127,243,231,.07); border: 1px solid rgba(127,243,231,.3); border-radius: 12px; padding: 28px; text-align: center; margin-top: 16px; }
-    .ask-box .amount { font-size: 2.2rem; font-weight: 700; color: var(--aqua); }
-    .ask-box .round { font-size: .85rem; color: var(--muted); margin-bottom: 16px; }
-    .ask-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .ask-list li { color: var(--text); font-size: .9rem; }
-    .ask-list li::before { content: "→ "; color: var(--aqua); }
-
-    .cta-box { background: rgba(127,243,231,.04); border: 1px solid rgba(127,243,231,.2); border-radius: 12px; padding: 24px; text-align: center; margin-top: 32px; }
-    .cta-box .cta-title { font-size: .7rem; font-weight: 700; letter-spacing: 2px; color: var(--aqua); text-transform: uppercase; margin-bottom: 12px; }
-    .cta-box .cta-note { font-size: .82rem; color: var(--muted); margin-bottom: 10px; }
-    .cta-box a { color: var(--aqua); text-decoration: none; font-weight: 500; }
-    .cta-box a:hover { text-decoration: underline; }
-
-    .tagline { text-align: center; padding: 36px 0 0; font-size: 1rem; color: var(--muted); font-style: italic; }
-    .tagline strong { color: var(--text); }
-
-    .contact { text-align: center; margin-top: 24px; font-size: .85rem; color: var(--muted); }
-    .contact a { color: var(--aqua); text-decoration: none; }
-
-    @media(max-width:520px) {
-      .traction-grid, .market-grid { grid-template-columns: repeat(2, 1fr); }
-      .header h1 { font-size: 1.8rem; }
-    }
-  </style>
-  <script src="/assets/js/sipa-auth.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIPA OS — Axis Tel Aviv · 2026-05-14</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #0a0a0a; color: #e8e8e8; }
+  .slide {
+    width: 100%; min-height: 100vh;
+    padding: 60px 80px;
+    border-bottom: 2px solid #222;
+    page-break-after: always;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  @media print {
+    body { background: #fff; color: #111; }
+    .slide { border-bottom: 1px solid #ccc; min-height: 100vh; }
+    .accent { color: #0066cc !important; }
+    .tag { background: #e8f0fe !important; color: #0066cc !important; }
+    table { color: #111 !important; }
+    th { background: #f0f0f0 !important; color: #111 !important; }
+    td { border-color: #ccc !important; }
+    .codeblock { background: #f5f5f5 !important; color: #222 !important; border-color: #ccc !important; }
+    .footer { color: #666 !important; }
+  }
+  .slide-num { font-size: 11px; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 40px; }
+  h1 { font-size: 52px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 24px; }
+  h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+  h3 { font-size: 20px; font-weight: 600; color: #aaa; margin-bottom: 32px; letter-spacing: 1px; text-transform: uppercase; }
+  .accent { color: #76e5c0; }
+  .accent2 { color: #f0a070; }
+  p { font-size: 18px; line-height: 1.7; color: #ccc; margin-bottom: 16px; }
+  .big { font-size: 26px; line-height: 1.5; color: #e8e8e8; font-weight: 300; }
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 16px; }
+  th { background: #1a2a3a; color: #76e5c0; text-align: left; padding: 12px 16px; font-weight: 600; }
+  td { padding: 12px 16px; border-bottom: 1px solid #222; color: #ccc; vertical-align: top; }
+  td:first-child { color: #e8e8e8; font-weight: 500; }
+  .tag { display: inline-block; background: #1a3a2a; color: #76e5c0; padding: 4px 12px; border-radius: 20px; font-size: 13px; margin: 4px 4px 4px 0; font-weight: 600; }
+  .tag2 { background: #2a1a0a; color: #f0a070; }
+  .codeblock { background: #111; border: 1px solid #333; border-radius: 8px; padding: 24px; font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.8; color: #76e5c0; margin: 20px 0; white-space: pre; }
+  .cover-tagline { font-size: 22px; color: #76e5c0; font-style: italic; margin-bottom: 48px; }
+  .cover-meta { font-size: 16px; color: #666; line-height: 2; }
+  .cover-url { font-size: 20px; color: #76e5c0; font-weight: 600; margin-top: 8px; }
+  .divider { border: none; border-top: 1px solid #333; margin: 32px 0; }
+  blockquote { border-left: 3px solid #76e5c0; padding-left: 24px; margin: 24px 0; font-size: 20px; color: #ccc; font-style: italic; line-height: 1.6; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin: 24px 0; }
+  .card { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 24px; }
+  .card h4 { font-size: 16px; color: #76e5c0; margin-bottom: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .card p { font-size: 15px; color: #aaa; margin: 0; }
+  .ask-box { background: linear-gradient(135deg, #0a2a1a, #0a1a2a); border: 1px solid #76e5c0; border-radius: 12px; padding: 40px; text-align: center; margin: 24px 0; }
+  .ask-amount { font-size: 64px; font-weight: 800; color: #76e5c0; }
+  .ask-label { font-size: 18px; color: #aaa; margin-top: 8px; }
+  .footer { margin-top: 40px; font-size: 12px; color: #444; letter-spacing: 2px; text-transform: uppercase; }
+  ul { padding-left: 24px; }
+  li { font-size: 17px; color: #ccc; line-height: 1.8; margin-bottom: 8px; }
+  li strong { color: #e8e8e8; }
+  .status-done { color: #76e5c0; }
+  .status-miss { color: #f0a070; }
+</style>
 </head>
 <body>
-<div class="wrap">
 
-  <div class="header">
-    <h1>SIPA OS</h1>
-    <div class="sub">AI Shell for Neurodivergent Founders</div>
-    <div class="entity">Soul In PsyAbstract LLC · Delaware incorporation in progress (Stripe Atlas · filed 2026-04-27) · Eilat, Israel</div>
+<!-- SLIDE 01 — COVER -->
+<div class="slide">
+  <div class="slide-num">01 / 12 · Axis Tel Aviv · Early Bird Startup · 2026-05-14</div>
+  <h1>S I P A &nbsp; O S</h1>
+  <div class="cover-tagline">"Your brain is not broken. Your tools are."</div>
+  <div class="cover-meta">
+    Founder: &nbsp;<strong>Aelin AquaSoul</strong><br>
+    Entity: &nbsp;<strong>Soul In PsyAbstract LLC · Delaware</strong><br>
+    Location: &nbsp;<strong>Eilat, Israel</strong><br>
+    <div class="cover-url">sipa-os-shell.onhercules.app</div>
   </div>
-
-  <div class="block">
-    <div class="block-label">Problem</div>
-    <p>Neurodivergent founders (ADHD / BPD / Autism) lose ideas, context, and momentum — not because they lack intelligence, but because working memory fails them. Notion and Jira were built for neurotypical brains. <strong>The tools are the disability.</strong></p>
-  </div>
-
-  <div class="block">
-    <div class="block-label">Solution</div>
-    <p>SIPA OS is an AI shell that acts as external memory. Brain Dump → auto-classification → 38 structured hubs → Guardian monitoring. One system that thinks like you do, not like a project manager.</p>
-  </div>
-
-  <div class="block">
-    <div class="block-label">Traction</div>
-    <p>Live infrastructure. Real numbers.</p>
-    <div class="traction-grid">
-      <div class="tstat"><div class="num">51,640</div><div class="lbl">Files under management</div></div>
-      <div class="tstat"><div class="num">3</div><div class="lbl">Active nodes</div></div>
-      <div class="tstat"><div class="num">38</div><div class="lbl">Specialized hubs</div></div>
-      <div class="tstat"><div class="num">99.9%</div><div class="lbl">Infrastructure Uptime &amp; Automated Forensic Auditing</div></div>
-      <div class="tstat"><div class="num">Active</div><div class="lbl">Microsoft for Startups Founders Hub</div></div>
-      <div class="tstat"><div class="num">Live</div><div class="lbl">Pricing + Crypto payments</div></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-label">Market</div>
-    <p>15–20% of the global population is neurodivergent — founders at disproportionately higher rates. ADHD diagnoses growing 30% YoY. Underserved, underbuilt, underfunded.</p>
-    <div class="market-grid">
-      <div class="mstat">
-        <div class="mnum">$58.3B</div>
-        <div class="mlbl">TAM</div>
-        <div class="mdesc">Global productivity software market · 1.2B knowledge workers</div>
-      </div>
-      <div class="mstat">
-        <div class="mnum">$4.7B</div>
-        <div class="mlbl">SAM</div>
-        <div class="mdesc">Neurodivergent founders &amp; knowledge workers · 15% of workforce</div>
-      </div>
-      <div class="mstat">
-        <div class="mnum">$180M</div>
-        <div class="mlbl">SOM</div>
-        <div class="mdesc">Early-adopter startups with neurodivergent leadership · Year 3</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-label">Why Us</div>
-    <p><strong>Forensic Integrity.</strong> Every file SHA256-chained. Every AI operation logged to an immutable audit trail. The system self-audits — no hallucination risk, no trust required. <em>The infrastructure is its own documentation.</em></p>
-    <p style="margin-top:10px"><strong>Infrastructure-First.</strong> Not a chatbot on top of an API. A 3-node distributed OS with 38-hub routing, cron guardians, and peer-to-peer sync. Built at kernel level — because neurodivergent cognition requires architecture, not a chat window.</p>
-    <p style="margin-top:10px"><strong>Founder = User.</strong> Built by one architect with ADHD + BPD, in hyperfocus mode. External validation: Gemini (Google) — <em>"SIPA OS doesn't just compete — it's ahead in multi-model federation and domain memory."</em></p>
-  </div>
-
-  <div class="block">
-    <div class="block-label">Assets &amp; Ecosystem</div>
-    <div class="traction-grid">
-      <div class="tstat"><div class="num">$3.3M+</div><div class="lbl">Token ecosystem FDV · SIPA $2.8M + SOUL $500K · Base mainnet · live liquidity</div></div>
-      <div class="tstat"><div class="num">Akoun</div><div class="lbl">2026 Art Certification · Jacques-Armand Akoun · world market leader since 1985</div></div>
-      <div class="tstat"><div class="num">Ars+</div><div class="lbl">S+T+ARTS Prize · Ars Electronica 2026 · institutional validation</div></div>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="block-label">Business Model</div>
-    <p>Three-tier SaaS subscription (Basic / Pro / Genesis) with Stripe integration ready upon LLC activation and crypto payments live via NOWPayments. Active partnership pipeline with Confluent, Miro, and Atlassian.</p>
-  </div>
-
-  <div class="block">
-    <div class="block-label">Team</div>
-    <p>Aelin AquaSoul — systems architect, ADHD + BPD. Built SIPA OS to survive her own cognition. <strong>No gap between the builder and the user.</strong> That is founder-market fit.</p>
-  </div>
-
-  <div class="ask-box">
-    <div class="round">Pre-Seed Round</div>
-    <div class="amount">$150,000</div>
-    <ul class="ask-list">
-      <li>Stripe live + first paying customer</li>
-      <li>AI inference infrastructure (GPU compute)</li>
-      <li>Core team hire</li>
-    </ul>
-  </div>
-
-  <div class="tagline"><strong>"SIPA OS is not productivity software. It is cognitive infrastructure."</strong></div>
-
-  <div class="cta-box">
-    <div class="cta-title">Let's Talk</div>
-    <div class="cta-note">Schedule filling fast — availability limited this week.</div>
-    <a href="mailto:aelinaquasoul@soulinpsyabstrac.onmicrosoft.com">aelinaquasoul@soulinpsyabstrac.onmicrosoft.com</a>
-    &nbsp;·&nbsp;
-    <a href="https://soulinpsyabstract.store">soulinpsyabstract.store</a>
-  </div>
-
-  <div class="contact">
-    Aelin AquaSoul · <a href="mailto:aelinaquasoul@soulinpsyabstrac.onmicrosoft.com">aelinaquasoul@soulinpsyabstrac.onmicrosoft.com</a> · <a href="https://soulinpsyabstract.store">soulinpsyabstract.store</a>
-  </div>
-
 </div>
+
+<!-- SLIDE 02 — PROBLEM -->
+<div class="slide">
+  <div class="slide-num">02 / 12 · Problem</div>
+  <h1>1.2 billion<br><span class="accent">neurodivergent</span><br>people worldwide.</h1>
+  <h3>Every productivity tool was built for neurotypical brains.</h3>
+  <table>
+    <tr><th>Profile</th><th>What it means</th><th>What tools do</th></tr>
+    <tr><td><strong>ADHD</strong></td><td>Hyperfocus bursts · executive function collapse</td><td>Punish the burst. Charge per token.</td></tr>
+    <tr><td><strong>BPD</strong></td><td>Emotional spirals · crisis states · fractured continuity</td><td>No crisis protocol. No grounding mode.</td></tr>
+    <tr><td><strong>Aphantasia</strong></td><td>No internal visual field</td><td>UX built entirely on visual metaphors.</td></tr>
+  </table>
+  <blockquote>Catastrophic churn. Zero retention.<br>A billion-dollar market the entire AI industry is still ignoring.</blockquote>
+  <p class="big"><strong>1 in 7</strong> people is neurodivergent. That is not an edge case. That is infrastructure.</p>
+</div>
+
+<!-- SLIDE 03 — SOLUTION -->
+<div class="slide">
+  <div class="slide-num">03 / 12 · Solution</div>
+  <h1>SIPA OS</h1>
+  <h3>Cognitive infrastructure. Not an app. An operating layer.</h3>
+  <div class="grid2">
+    <div class="card"><h4>⟳ Structure Engine</h4><p>Brain dump → structured task list. Embeddable API. Replace broken executive function.</p></div>
+    <div class="card"><h4>◎ Emotional Radar</h4><p>Living radar for emotional state. Patterns between daylight and darkness. Mental health API.</p></div>
+    <div class="card"><h4>→ ADHD Focus System</h4><p>Focus sessions · body-doubling · non-punishing reminders. EdTech, productivity platforms.</p></div>
+    <div class="card"><h4>∿ BPD Crisis Protocol</h4><p>DBT-grounded grounding · safe person access. Built from lived experience — not clinical distance.</p></div>
+  </div>
+  <p><strong>Why this works:</strong> The founder has ADHD, aphantasia, and BPD. She didn't design for this market. <span class="accent">She is this market.</span></p>
+</div>
+
+<!-- SLIDE 04 — TOKEN -->
+<div class="slide">
+  <div class="slide-num">04 / 12 · SIPA Token</div>
+  <h1>Not speculation.<br><span class="accent">Access to power.</span></h1>
+  <div class="codeblock">SIPA TOKEN
+─────────────────────────────────────
+Supply:   3,000,000 units
+Status:   Nearly active
+Type:     Utility access token — NOT a speculative asset</div>
+  <table>
+    <tr><th>Partner Type</th><th>Capability</th><th>Allocation</th></tr>
+    <tr><td>Mental health platform</td><td>Crisis Protocol + Emotional Radar</td><td>Guardian Layer tokens</td></tr>
+    <tr><td>HR / productivity</td><td>Focus Layer + Structure Engine</td><td>Focus + Structure tokens</td></tr>
+    <tr><td>EdTech</td><td>Focus Layer + Structure Engine</td><td>Focus + Structure tokens</td></tr>
+    <tr><td>Healthcare app</td><td>Crisis Protocol</td><td>Guardian Layer tokens</td></tr>
+  </table>
+  <p>Most platforms sell tokens as financial instruments. <span class="accent">SIPA allocates tokens as capability keys.</span></p>
+</div>
+
+<!-- SLIDE 05 — COLLABORATION MODEL -->
+<div class="slide">
+  <div class="slide-num">05 / 12 · Collaboration Model</div>
+  <h1>Not SaaS.<br><span class="accent">Capability licensing.</span></h1>
+  <table>
+    <tr><th>Stream</th><th>Mechanism</th></tr>
+    <tr><td>Per-API-call licensing</td><td>Partners pay per usage · no flat seat fee</td></tr>
+    <tr><td>Token-gated premium features</td><td>Advanced capabilities require token balance</td></tr>
+    <tr><td>Early partner pricing</td><td>Custom per partnership — no public tiers yet</td></tr>
+  </table>
+  <hr class="divider">
+  <div class="grid2">
+    <div class="card"><h4>This is NOT</h4><p>A subscription SaaS · a fixed investment ask · a public token sale</p></div>
+    <div class="card"><h4>This IS</h4><p>B2B capability licensing · structured as collaboration · each partnership custom-built</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 06 — TECHNOLOGY -->
+<div class="slide">
+  <div class="slide-num">06 / 12 · Technology</div>
+  <h1>10-layer AI stack.<br><span class="accent">Three physical nodes.</span></h1>
+  <table>
+    <tr><th>Layer</th><th>Model</th><th>Role</th></tr>
+    <tr><td>SIPA_OS</td><td>Claude Sonnet 4.6</td><td>Primary reasoning · cognitive scaffolding</td></tr>
+    <tr><td>SIPA_MLL</td><td>GPT-4o</td><td>Machine learning · pattern recognition</td></tr>
+    <tr><td>SIPA_SHELL</td><td>DeepSeek Chat</td><td>Shell-level execution</td></tr>
+    <tr><td>SIPA_XAI</td><td>Grok-4-latest</td><td>Extended reasoning</td></tr>
+    <tr><td>+4 agents</td><td>Haiku / DeepSeek / Mistral / Codestral</td><td>Audit · coord · code</td></tr>
+  </table>
+  <p><span class="tag">Azure AI Foundry</span><span class="tag">AWS Lambda + DynamoDB</span><span class="tag">NVIDIA AI Enterprise</span><span class="tag">Red Hat Build Partner</span></p>
+  <p style="margin-top:16px;font-size:15px;color:#888;">Every file → GATE (10-check validation) → GUARD (sha256 dedup) → FORENSIC → MANIFEST → BROADCAST. Zero orphaned artifacts.</p>
+</div>
+
+<!-- SLIDE 07 — WHO WE'RE LOOKING FOR -->
+<div class="slide">
+  <div class="slide-num">07 / 12 · Ideal Partners</div>
+  <h1>The platforms that need<br><span class="accent">what SIPA already built.</span></h1>
+  <div class="grid2">
+    <div class="card"><h4>Mental Health Platforms</h4><p>Crisis Protocol · Emotional Radar · grounding logic. Drop it in — your users get infrastructure that took years to build.</p></div>
+    <div class="card"><h4>HR / Productivity</h4><p>Focus Layer · Structure Engine · ADHD-native UX. Compliance is becoming regulatory. Be ahead of it.</p></div>
+    <div class="card"><h4>EdTech</h4><p>Focus sessions · brain dump to task list · no-punish reminders. The fastest-growing special education segment.</p></div>
+    <div class="card"><h4>Healthcare Apps</h4><p>DBT-grounded Guardian Layer · safe person access. Built from lived experience, not clinical distance.</p></div>
+  </div>
+  <p style="margin-top:24px;"><span class="tag">EU Accessibility Act 2025</span><span class="tag">Post-GTC 2026 GPU cost ↓</span><span class="tag">Enterprise neurodiversity mandates ↑</span></p>
+</div>
+
+<!-- SLIDE 08 — TRACTION -->
+<div class="slide">
+  <div class="slide-num">08 / 12 · Traction</div>
+  <h1>Organic.<br><span class="accent">Zero spend.</span><br>Community is pulling.</h1>
+  <table>
+    <tr><th>Signal</th><th>Value</th><th>Status</th></tr>
+    <tr><td>LinkedIn organic reach</td><td>45 engagements / 48 min · zero ad spend</td><td><span class="status-done">✅ CONFIRMED</span></td></tr>
+    <tr><td>Live PWA</td><td>sipa-os-shell.onhercules.app · 4 modules functional</td><td><span class="status-done">✅ LIVE</span></td></tr>
+    <tr><td>Legal entity</td><td>Soul In PsyAbstract LLC · Delaware · EIN in process</td><td><span class="status-done">✅ CONFIRMED</span></td></tr>
+    <tr><td>NVIDIA AI Enterprise</td><td>Enterprise Org ACTIVE · 11 subscriptions · Riva TTS →2029</td><td><span class="status-done">✅ VERIFIED 2026-04-22</span></td></tr>
+    <tr><td>Red Hat Build Partner</td><td>APPROVED — Build module certification</td><td><span class="status-done">✅ VERIFIED 2026-04-22</span></td></tr>
+    <tr><td>Community</td><td>Neuronniki — organic neurodivergent community</td><td><span class="status-done">✅ ACTIVE</span></td></tr>
+  </table>
+</div>
+
+<!-- SLIDE 09 — FOUNDER -->
+<div class="slide">
+  <div class="slide-num">09 / 12 · Founder</div>
+  <h1>She didn't build this<br>for the market.<br><span class="accent">She built it because she needed it.</span></h1>
+  <div class="codeblock">Aelin AquaSoul · Legal: Marina Nikolaevna Saponenko
+Eilat, Israel · Soul In PsyAbstract LLC · Delaware</div>
+  <ul>
+    <li><strong>ADHD</strong> (mixed type) — built the Focus System because she needed it</li>
+    <li><strong>Aphantasia</strong> — no internal visual field — built the Structure Engine to hold state externally</li>
+    <li><strong>BPD 9/9</strong> — built the Crisis Protocol from lived experience, not clinical distance</li>
+    <li><strong>UV-reactive abstract artist</strong> — 94 artworks · ArtMajeur · Rarible · Cohart</li>
+    <li><strong>System architect</strong> — not a programmer by training · a systems thinker by necessity</li>
+  </ul>
+  <blockquote>"UV-reactive works exist in two states simultaneously — because that is exactly how I experience reality." Neurology and practice are the same thing.</blockquote>
+</div>
+
+<!-- SLIDE 10 — THE OFFER -->
+<div class="slide">
+  <div class="slide-num">10 / 12 · The Offer</div>
+  <h1>Not: "give us money."<br><span class="accent">What power do you need?</span></h1>
+  <table>
+    <tr><th>SIPA HAS</th><th>Your platform GETS</th></tr>
+    <tr><td>Focus Infrastructure</td><td>ADHD-native focus tooling</td></tr>
+    <tr><td>Emotional Triage API</td><td>Real-time emotional state detection</td></tr>
+    <tr><td>Brain Dump Module</td><td>Raw thought → structured output, zero friction</td></tr>
+    <tr><td>Guardian Layer</td><td>Crisis protocol and grounding logic</td></tr>
+    <tr><td>SIPA Token allocation</td><td>Capability access keys for strategic partners</td></tr>
+  </table>
+  <table style="margin-top:16px;">
+    <tr><th>Partner Type</th><th>What it means</th></tr>
+    <tr><td><strong>Technology Partner</strong></td><td>Deep API integration · token allocation · co-development</td></tr>
+    <tr><td><strong>Integration Partner</strong></td><td>Module embedding · per-API-call licensing</td></tr>
+    <tr><td><strong>Advisory Partner</strong></td><td>Strategic guidance · community access · token allocation</td></tr>
+  </table>
+</div>
+
+<!-- SLIDE 11 — NEXT STEPS -->
+<div class="slide">
+  <div class="slide-num">11 / 12 · Next Steps</div>
+  <h1>Demo. Define.<br><span class="accent">Partner.</span></h1>
+  <div class="grid2">
+    <div class="card"><h4>Step 1 — Demo. Right now.</h4><p style="font-size:18px;color:#76e5c0;font-weight:700;">sipa-os-shell.onhercules.app</p><p>No install. No signup. Open on your phone. See the four modules.</p></div>
+    <div class="card"><h4>Step 2 — Define what you need.</h4><p>Which capability is relevant? Focus Layer · Emotional Radar · Structure Engine · Guardian Layer</p></div>
+  </div>
+  <div class="ask-box">
+    <div class="ask-label">The question we are asking:</div>
+    <div class="ask-amount" style="font-size:36px;margin-top:16px;">"What power do you need?"</div>
+    <div class="ask-label" style="margin-top:16px;">SIPA has built it. Let's structure the partnership.</div>
+  </div>
+  <p style="text-align:center;"><em>Chaos non cadit in ordinationem sine intellectu</em></p>
+</div>
+
+<!-- SLIDE 12 — CONTACT -->
+<div class="slide">
+  <div class="slide-num">12 / 12 · Contact + Community</div>
+  <h1>Let's talk.</h1>
+  <div class="grid2">
+    <div class="card">
+      <h4>Reach us</h4>
+      <p>soulinpsy.info<br>soulinpsyabstract@gmail.com<br>Soul In PsyAbstract LLC · Delaware<br>Eilat, Israel</p>
+    </div>
+    <div class="card">
+      <h4>Community</h4>
+      <p>t.me/messycketch<br>@soulinpsyabstract<br>wa.me/972525074743<br>linkedin: Soul In PsyAbstract</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;">
+    <div class="cover-url" style="font-size:28px;">sipa-os-shell.onhercules.app</div>
+    <p style="margin-top:8px;color:#555;">Live product · No install required</p>
+  </div>
+  <div class="footer">SIPA OS · Soul In PsyAbstract LLC · Axis Tel Aviv · 2026-05-14 · Founder: Aelin AquaSoul</div>
+</div>
+
 </body>
 </html>
