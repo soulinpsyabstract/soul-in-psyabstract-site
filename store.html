@@ -137,6 +137,51 @@ a.back-link:hover{color:#00f5ff;}
 
 footer{text-align:center;padding:30px 20px;border-top:1px solid #00f5ff11;}
 footer p{font-size:11px;color:#334455;letter-spacing:2px;}
+footer a{color:#336677;text-decoration:none;letter-spacing:1px;}
+footer a:hover{color:var(--cyan);}
+
+/* HANDMADE PRODUCTS */
+.hm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;padding:0 16px 40px;max-width:1200px;margin:0 auto;}
+.hm-card{background:var(--card-bg);border:1px solid #00f5ff1a;border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.hm-card:hover{transform:translateY(-4px);box-shadow:0 10px 36px #00f5ff1a,0 0 0 1px #00f5ff33;}
+.hm-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#000d2a;}
+.hm-body{padding:14px;}
+.hm-icon{font-size:26px;margin-bottom:4px;}
+.hm-name{font-family:'Cinzel Decorative',serif;font-size:11px;color:var(--cyan);margin-bottom:3px;line-height:1.3;}
+.hm-cat{font-size:10px;color:#6699bb;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+.hm-stars{color:#ffd700;font-size:13px;letter-spacing:1px;margin-bottom:2px;}
+.hm-reviews{font-size:10px;color:#4488aa;margin-bottom:8px;}
+.hm-price{font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--gold);}
+.hm-hint{font-size:9px;color:#334455;margin-top:6px;letter-spacing:1px;text-transform:uppercase;}
+.hm-card:hover .hm-hint{color:#00f5ff77;}
+
+/* HANDMADE MODAL */
+.hm-modal-overlay{position:fixed;inset:0;background:#000000cc;z-index:201;display:none;align-items:center;justify-content:center;padding:20px;}
+.hm-modal-overlay.open{display:flex;}
+.hm-modal-box{background:linear-gradient(135deg,#000d2a,#001540);border:1px solid #00f5ff44;border-radius:18px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;padding:26px;}
+.hm-modal-img{width:100%;border-radius:10px;margin-bottom:14px;max-height:260px;object-fit:cover;border:1px solid #00f5ff22;}
+.hm-modal-icon{font-size:38px;text-align:center;margin-bottom:6px;}
+.hm-modal-name{font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--cyan);margin-bottom:4px;}
+.hm-modal-cat{font-size:10px;color:#6699bb;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.hm-modal-stars{color:#ffd700;font-size:16px;letter-spacing:3px;margin-bottom:10px;}
+.hm-modal-price{font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gold);margin-bottom:12px;}
+.hm-label{font-size:10px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin:12px 0 4px;opacity:.7;}
+.hm-text{font-size:12px;color:#8899aa;line-height:1.7;}
+.hm-tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;}
+.hm-tag{font-size:10px;padding:3px 10px;border-radius:12px;background:#00f5ff0a;border:1px solid #00f5ff22;color:#88ccee;letter-spacing:.5px;}
+.hm-btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
+.hm-btn{display:block;padding:11px 14px;border-radius:8px;text-decoration:none;text-align:center;font-weight:800;font-size:11px;letter-spacing:1px;transition:all .2s;}
+.hm-btn-wa{background:#1a3a1a;border:1px solid #25d366;color:#25d366;}
+.hm-btn-wa:hover{box-shadow:0 0 16px #25d36644;}
+.hm-btn-ig{background:linear-gradient(90deg,#833ab4,#fd1d1d,#fcb045);color:#fff;}
+.hm-btn-close{display:block;width:100%;margin-top:8px;padding:10px;background:transparent;border:1px solid #00f5ff22;border-radius:8px;color:#4488aa;cursor:pointer;font-size:12px;letter-spacing:2px;}
+.hm-btn-close:hover{border-color:#00f5ff44;color:var(--cyan);}
+.reviews-block{margin-top:16px;border-top:1px solid #00f5ff11;padding-top:14px;}
+.reviews-title{font-size:10px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;opacity:.7;}
+.review-item{background:#00f5ff06;border:1px solid #00f5ff0f;border-radius:10px;padding:12px;margin-bottom:8px;}
+.review-stars{color:#ffd700;font-size:11px;margin-bottom:4px;}
+.review-text{font-size:12px;color:#8899aa;line-height:1.6;margin-bottom:4px;font-style:italic;}
+.review-author{font-size:10px;color:#4488aa;letter-spacing:1px;}
   </style>
   <script src="/assets/js/sipa-auth.js"></script>
 </head>
@@ -156,6 +201,9 @@ footer p{font-size:11px;color:#334455;letter-spacing:2px;}
 
 <nav class="nav-tabs">
   <button class="nav-tab active" onclick="showSection('paintings')" id="tab-paintings">Paintings</button>
+  <button class="nav-tab" onclick="showSection('candles')" id="tab-candles">🕯️ Candles</button>
+  <button class="nav-tab" onclick="showSection('oils')" id="tab-oils">✨ Oils</button>
+  <button class="nav-tab" onclick="showSection('soaps')" id="tab-soaps">🫧 Soaps</button>
   <button class="nav-tab" onclick="showSection('digital')" id="tab-digital">Digital</button>
   <button class="nav-tab" onclick="showSection('about')" id="tab-about">About</button>
 </nav>
@@ -294,7 +342,62 @@ footer p{font-size:11px;color:#334455;letter-spacing:2px;}
   </div>
 </div>
 
+
+<!-- ══════════ CANDLES ══════════ -->
+<div class="product-section" id="sec-candles">
+  <div class="section-header">
+    <div class="section-title">🕯️ Handmade Candles · Свечи</div>
+    <div class="section-sub">Soy wax · Crystals · Essential oils · Handmade in Eilat</div>
+  </div>
+  <div class="hm-grid" id="hm-candles-grid"></div>
+</div>
+
+<!-- ══════════ OILS ══════════ -->
+<div class="product-section" id="sec-oils">
+  <div class="section-header">
+    <div class="section-title">✨ Ritual Oils · Масла</div>
+    <div class="section-sub">Argan base · Crystal-infused · Intention-charged</div>
+  </div>
+  <div class="hm-grid" id="hm-oils-grid"></div>
+</div>
+
+<!-- ══════════ SOAPS ══════════ -->
+<div class="product-section" id="sec-soaps">
+  <div class="section-header">
+    <div class="section-title">🫧 Handmade Soaps · Мыло</div>
+    <div class="section-sub">Natural base · Mineral salts · Essential oils · Herbs & crystals</div>
+  </div>
+  <div class="hm-grid" id="hm-soaps-grid"></div>
+</div>
+
 </main>
+
+<!-- ══════════ HANDMADE PRODUCT MODAL ══════════ -->
+<div class="hm-modal-overlay" id="hmModal" onclick="if(event.target===this)closeHmModal()">
+  <div class="hm-modal-box">
+    <img class="hm-modal-img" id="hm-modal-img" src="" alt="" onerror="this.style.display='none'">
+    <div class="hm-modal-icon" id="hm-modal-icon"></div>
+    <div class="hm-modal-name" id="hm-modal-name"></div>
+    <div class="hm-modal-cat" id="hm-modal-cat"></div>
+    <div class="hm-modal-stars">★★★★★</div>
+    <div class="hm-modal-price" id="hm-modal-price"></div>
+    <div class="hm-label">INTENTION</div>
+    <div class="hm-text" id="hm-modal-intention"></div>
+    <div class="hm-label">COMPOSITION</div>
+    <div class="hm-text" id="hm-modal-composition"></div>
+    <div class="hm-label">PROPERTIES</div>
+    <div class="hm-tags" id="hm-modal-tags"></div>
+    <div class="hm-btn-grid">
+      <a class="hm-btn hm-btn-wa" id="hm-modal-wa" href="#" target="_blank" rel="noopener">💬 Order via WhatsApp</a>
+      <a class="hm-btn hm-btn-ig" href="https://instagram.com/soul.in.psyabstract" target="_blank" rel="noopener">📷 Instagram DM</a>
+    </div>
+    <div class="reviews-block">
+      <div class="reviews-title">Customer reviews · Отзывы</div>
+      <div id="hm-modal-reviews"></div>
+    </div>
+    <button class="hm-btn-close" onclick="closeHmModal()">✕ CLOSE</button>
+  </div>
+</div>
 
 <!-- ══════════ BUY MODAL ══════════ -->
 <div class="modal-overlay" id="buyModal" onclick="if(event.target===this)closeModal()">
@@ -319,6 +422,13 @@ footer p{font-size:11px;color:#334455;letter-spacing:2px;}
 <footer>
   <p>Aelin AquaSoul · Soul In PsyAbstract · © 2026 All rights reserved</p>
   <p style="margin-top:6px;">"In the moment of panic, she still does the right thing."</p>
+  <p style="margin-top:10px;">
+    <a href="privacy.html">Privacy Policy</a>
+    &nbsp;·&nbsp;
+    <a href="terms.html">Terms of Service</a>
+    &nbsp;·&nbsp;
+    <a href="https://wa.me/972525074743" target="_blank" rel="noopener">WhatsApp</a>
+  </p>
 </footer>
 
 <script src="assets/js/data.js"></script>
@@ -424,10 +534,130 @@ function closeModal() {
   document.getElementById('buyModal').classList.remove('open');
 }
 
-document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape'){ closeModal(); closeHmModal(); } });
 
 // Init
 renderGrid('all');
+</script>
+
+<script>
+// ── HANDMADE PRODUCTS DATA ────────────────────────────────────
+const HM_IMAGES = {
+  'neon-spiral':    'assets/img/products/01_candle_neon_spiral.png',
+  'love-flow':      'assets/img/products/02_candle_love_flow.png',
+  'labyrinth':      'assets/img/products/03_candle_labyrinth_of_success.png',
+  'aquasoul':       'assets/img/products/04_candle_aquasoul_cleanse.png',
+  'heartwave':      'assets/img/products/05_candle_heartwave_abundance.png',
+  'deep-ocean':     'assets/img/products/06_candle_deep_ocean_harmony.png',
+  'uv-bloom':       'assets/img/products/07_candle_uv_bloom_protection.png',
+  'cosmic-cherry':  'assets/img/products/08_candle_cosmic_cherry_bloom.png',
+  'shadow-light':   'assets/img/products/09_candle_shadow_light_balance.png',
+  'soul-freq':      'assets/img/products/10_candle_soul_frequency_gratitude.png',
+  'light-armor':    'assets/img/products/11_oil_invisible_light_armor.png',
+  'self-love':      'assets/img/products/12_oil_self_love_galaxy.png',
+  'success-magnet': 'assets/img/products/13_oil_success_magnet.png',
+  'forest':         'assets/img/products/14_oil_breath_of_forest.png',
+  'velvet-dream':   'assets/img/products/15_oil_velvet_dream_portal.png',
+  'dual-detox':     'assets/img/products/16_soap_dual_reality_detox.png',
+  'pink-nebula':    'assets/img/products/17_soap_pink_nebula_tenderness.png',
+  'solar-pulse':    'assets/img/products/18_soap_solar_pulse_energy.png',
+  'black-salt':     'assets/img/products/19_soap_black_salt_shield.png',
+  'vanilla-silk':   'assets/img/products/20_soap_vanilla_silk_luxury.png',
+};
+
+const HM_PRODUCTS = {
+  candles: [
+    {id:'neon-spiral',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'PROTECTION',name:'Neon Spiral Shield',intention:'My space spins in a spiral of invincible light, repelling any foreign influence.',composition:'Red soy wax 250g · Lavender · Rosemary · Pine · Olive leaves, sage · Crystal: labradorite',tags:['Protection','Energy Shield','Labradorite','Boundaries'],stars:5,reviews_count:12},
+    {id:'love-flow',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'LOVE',name:'PsyAbstract Love Flow',intention:'I open my heart to the universal flow, allowing love to enter and pour freely.',composition:'Pink soy wax 250g · Rose · Ylang-ylang · Vanilla cream · Rose petals, peonies · Crystal: rose quartz',tags:['Love','Attraction','Rose Quartz','Heart Chakra'],stars:5,reviews_count:18},
+    {id:'labyrinth',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'SUCCESS',name:'Labyrinth of Success',intention:'I easily find my way through the labyrinth, every door opens to my prosperity.',composition:'Green soy wax 250g · Bergamot · Orange · Sandalwood · Bay leaf · Crystal: aventurine',tags:['Success','Prosperity','Aventurine','Financial Flow'],stars:5,reviews_count:9},
+    {id:'aquasoul',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'CLEANSING',name:'AquaSoul Cleanse',intention:'As pure water washes stone, this light rinses away all heavy traces.',composition:'White vanilla soy wax 250g · Lemon · Eucalyptus · Lemongrass · Snow lotus · Crystal: clear quartz',tags:['Cleansing','Purification','Clear Quartz','Renewal'],stars:5,reviews_count:7},
+    {id:'heartwave',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'HARMONY',name:'Heartwave Abundance',intention:'The wave of abundance finds me where harmony reigns and brings gifts desired by my soul.',composition:'Coffee beige soy wax 250g · Choco Arome · Orange · Island · Star anise, bay leaf · Crystal: tiger\'s eye',tags:['Harmony','Abundance','Tigers Eye','Client Attraction'],stars:5,reviews_count:14},
+    {id:'deep-ocean',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'HARMONY',name:'Deep Ocean Harmony',intention:'I dive into the boundless calm of the ocean, where thoughts become crystal clear.',composition:'White vanilla soy wax 250g · Deep Ocean · Lavender · Sea stones decor · Crystal: amazonite',tags:['Harmony','Calm','Amazonite','Meditation'],stars:5,reviews_count:11},
+    {id:'uv-bloom',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'PROTECTION · HEALTH',name:'UV Bloom Protection',intention:'Under the invisible light of this bloom my aura flourishes with health.',composition:'White vanilla soy wax 250g · Lavender · Lemongrass · Lilac · Lavender, rose petals · Crystal: amethyst',tags:['Protection','Health','Amethyst','UV-Reactive'],stars:5,reviews_count:16},
+    {id:'cosmic-cherry',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'SELF-LOVE',name:'Cosmic Cherry Bloom',intention:'I bloom like cherry in the spring universe, embracing my unique beauty.',composition:'Pink soy wax 250g · Cherry · Jasmine · Vanilla · Rose petals, forget-me-not, peonies · Crystal: rose quartz',tags:['Self-Love','Acceptance','Rose Quartz','Confidence'],stars:5,reviews_count:20},
+    {id:'shadow-light',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'MEDITATION',name:'Shadow & Light Balance',intention:'In the dance of light and shadow I find wholeness, embracing all facets of my soul.',composition:'White+red soy wax layers 250g · Sandalwood · Royal Home · Bergamot · Wormwood, sage · Crystal: fluorite',tags:['Meditation','Balance','Fluorite','Integration'],stars:5,reviews_count:8},
+    {id:'soul-freq',icon:'🕯️',price:'60 / 120 / 220 ₪',cat:'GRATITUDE',name:'Soul Frequency Gratitude',intention:'My gratitude vibrates at the frequency of abundance and the universe responds with radiance.',composition:'Coffee beige soy wax 250g · Orange · Coffee · Geranium · Chrysanthemums, star anise · Crystal: garnet',tags:['Gratitude','Abundance','Garnet','Joy'],stars:5,reviews_count:13},
+  ],
+  oils: [
+    {id:'light-armor',icon:'✨',price:'90 / 220 ₪',cat:'PROTECTION',name:'Invisible Light Armor',intention:'This oil is your invisible shield. Wear it as armor made of light.',composition:'Argan base 10ml · Lavender · Rosemary · Pine · Crystal: tiger\'s eye · Apply to wrists and pulse points',tags:['Protection','Shield','Tigers Eye','Daily Oil'],stars:5,reviews_count:15},
+    {id:'self-love',icon:'✨',price:'90 / 220 ₪',cat:'LOVE',name:'Self-Love Galaxy',intention:'I am a whole universe worthy of love, every touch reminds me of this.',composition:'Argan base 10ml · Rose · Bergamot · Sandalwood · Crystal: rose quartz',tags:['Self-Love','Acceptance','Rose Quartz','Self-Worth'],stars:5,reviews_count:22},
+    {id:'success-magnet',icon:'✨',price:'90 / 220 ₪',cat:'SUCCESS',name:'Success Magnet',intention:'I magnetize the space around me for luck and effortless victories.',composition:'Argan base 10ml · Bergamot · Orange · Royal Home · Crystal: aventurine',tags:['Success','Luck','Aventurine','Negotiations'],stars:5,reviews_count:10},
+    {id:'forest',icon:'✨',price:'90 / 220 ₪',cat:'HEALTH',name:'Breath of the Forest',intention:'With every breath lightness fills my body and the forest\'s power cleanses it.',composition:'Argan base 10ml · Eucalyptus · Lemon eucalyptus · Pine · Crystal: clear quartz',tags:['Health','Breathing','Clear Quartz','Immunity'],stars:5,reviews_count:17},
+    {id:'velvet-dream',icon:'✨',price:'90 / 220 ₪',cat:'SLEEP · HARMONY',name:'Velvet Dream Portal',intention:'I dive into the velvet depths of dreams where healing and answers await.',composition:'Argan base 10ml · Lavender · Ylang-ylang · Vanilla · Crystal: amethyst · Apply to temples before sleep',tags:['Sleep','Healing','Amethyst','Lucid Dreams'],stars:5,reviews_count:19},
+  ],
+  soaps: [
+    {id:'dual-detox',icon:'🫧',price:'45 / 80 ₪',cat:'CLEANSING · DETOX',name:'Dual Reality Detox',intention:'This soap erases the boundary between physical and energetic heaviness.',composition:'Senteur de Marseille 100g · Black salt 15g · Eucalyptus · Lemongrass · Nettle, sage · Crystal: fluorite',tags:['Detox','Cleansing','Fluorite','Black Salt'],stars:5,reviews_count:8},
+    {id:'pink-nebula',icon:'🫧',price:'45 / 80 ₪',cat:'TENDERNESS · LOVE',name:'Pink Nebula Tenderness',intention:'Every lather is a cloud from a pink nebula enveloping your skin with love.',composition:'Rubes Care Olive Oil 100g · Pink salt 10g · Rose · Lavender · Rose petals, peonies · Crystal: rose quartz',tags:['Tenderness','Love','Rose Quartz','Sensitive Skin'],stars:5,reviews_count:14},
+    {id:'solar-pulse',icon:'🫧',price:'45 / 80 ₪',cat:'ENERGY',name:'Solar Pulse Energy',intention:'The morning shower becomes a launch of the solar engine charging you with power.',composition:'Senteur de Marseille 100g · Coffee · Orange · Lemon · Chrysanthemums, star anise · Crystal: garnet',tags:['Energy','Vitality','Garnet','Citrus'],stars:5,reviews_count:11},
+    {id:'black-salt',icon:'🫧',price:'45 / 80 ₪',cat:'PROTECTION · CLEANSING',name:'Black Salt Shield',intention:'With every rinse water carries away the day\'s dust and all clinging foreign energies.',composition:'Senteur de Marseille 100g · Black salt 20g · Lemongrass · Lavender · Pine · Thyme, wormwood · Crystal: labradorite',tags:['Protection','Cleansing','Labradorite','Black Salt'],stars:5,reviews_count:9},
+    {id:'vanilla-silk',icon:'🫧',price:'45 / 80 ₪',cat:'LUXURY · HARMONY',name:'Vanilla Silk Luxury',intention:'This silken piece of aromas is your personal ceremony of luxury, here and now.',composition:'Rubes Care Olive Oil 100g · Vanilla cream · Sandalwood · Ylang-ylang · Globe amaranth, rose petals, magnolia · Crystal: amethyst',tags:['Luxury','Harmony','Amethyst','Spa Care'],stars:5,reviews_count:16},
+  ],
+};
+
+const HM_REVIEWS = [
+  {stars:'★★★★★',text:'Incredible quality, the candle burned beautifully for hours. The crystal inside was a magical surprise!',author:'— Elena M., Israel'},
+  {stars:'★★★★★',text:'The scent is divine and the intention card inside really resonated with me. Will order again!',author:'— Sarah K., Germany'},
+  {stars:'★★★★★',text:'Handmade with so much love. You can feel the energy in every product. Fast shipping too!',author:'— Mia R., USA'},
+];
+
+let currentHmProduct = null;
+
+function renderHmGrid(type) {
+  const products = HM_PRODUCTS[type] || [];
+  const grid = document.getElementById(`hm-${type}-grid`);
+  if(!grid) return;
+  grid.innerHTML = products.map(p => {
+    const img = HM_IMAGES[p.id];
+    const stars = '★'.repeat(p.stars) + '☆'.repeat(5 - p.stars);
+    return `<div class="hm-card" onclick="openHmModal('${p.id}','${type}')">
+      ${img ? `<img class="hm-img" src="${img}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">` : `<div class="hm-img" style="display:flex;align-items:center;justify-content:center;font-size:60px;">${p.icon}</div>`}
+      <div class="hm-body">
+        <div class="hm-icon">${p.icon}</div>
+        <div class="hm-name">${p.name}</div>
+        <div class="hm-cat">${p.cat}</div>
+        <div class="hm-stars">${stars}</div>
+        <div class="hm-reviews">${p.reviews_count} reviews</div>
+        <div class="hm-price">${p.price}</div>
+        <div class="hm-hint">↑ tap for details</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openHmModal(id, type) {
+  const products = HM_PRODUCTS[type] || [];
+  const p = products.find(x => x.id === id);
+  if(!p) return;
+  currentHmProduct = p;
+  const img = HM_IMAGES[id];
+  const imgEl = document.getElementById('hm-modal-img');
+  if(img){ imgEl.src = img; imgEl.alt = p.name; imgEl.style.display = 'block'; }
+  else { imgEl.style.display = 'none'; }
+  document.getElementById('hm-modal-icon').textContent = p.icon;
+  document.getElementById('hm-modal-name').textContent = p.name;
+  document.getElementById('hm-modal-cat').textContent = p.cat;
+  document.getElementById('hm-modal-price').textContent = p.price;
+  document.getElementById('hm-modal-intention').textContent = p.intention;
+  document.getElementById('hm-modal-composition').textContent = p.composition;
+  document.getElementById('hm-modal-tags').innerHTML = p.tags.map(t => `<span class="hm-tag">${t}</span>`).join('');
+  const waMsg = encodeURIComponent(`Hi! I'd like to order: ${p.name} (${p.price})`);
+  document.getElementById('hm-modal-wa').href = `https://wa.me/972525074743?text=${waMsg}`;
+  document.getElementById('hm-modal-reviews').innerHTML = HM_REVIEWS.map(r =>
+    `<div class="review-item"><div class="review-stars">${r.stars}</div><div class="review-text">"${r.text}"</div><div class="review-author">${r.author}</div></div>`
+  ).join('');
+  document.getElementById('hmModal').classList.add('open');
+  if(typeof posthog !== 'undefined') posthog.capture('hm_modal_open', {id, type});
+}
+
+function closeHmModal() {
+  document.getElementById('hmModal').classList.remove('open');
+  currentHmProduct = null;
+}
+
+// Init handmade grids
+renderHmGrid('candles');
+renderHmGrid('oils');
+renderHmGrid('soaps');
 </script>
 
 <script>
